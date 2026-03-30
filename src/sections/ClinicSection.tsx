@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * ClinicSection — "Unsere Klinik" gallery band.
  * Black background, gold divider, centered heading + subtitle and
@@ -5,6 +7,9 @@
  */
 
 export default function ClinicSection() {
+  const DEFAULT_FALLBACK_IMAGE =
+    "/placeholder-dental.svg";
+
   const images = [
     "https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=1200&h=800&fit=crop&q=80",
     "https://images.unsplash.com/photo-1535916707207-35f97e715e1b?w=1200&h=800&fit=crop&q=80",
@@ -19,20 +24,20 @@ export default function ClinicSection() {
     >
       <div className="section-padding-x section-padding-y mx-auto max-w-[90rem]">
         <div className="mb-8 text-center">
-          <p className="font-serif text-2xl font-semibold text-white">
+          <p className="font-serif text-xl md:text-2xl font-semibold text-white">
             Unsere Klinik
           </p>
-          <p className="mt-2 text-sm text-[var(--text-muted-strong)]">
+          <p className="mt-2 text-xs md:text-sm text-[var(--text-muted-strong)]">
             Qualität und Vielfalt für Ihre Gesundheit
           </p>
         </div>
 
-        <div className="-mx-4 overflow-x-auto pb-2">
-          <div className="flex min-w-max gap-4 px-4">
+        <div className="no-scrollbar overflow-x-auto pb-2 snap-x snap-mandatory">
+          <div className="flex min-w-max gap-4 px-2 md:px-4">
             {images.map((src) => (
               <div
                 key={src}
-                className="relative h-[220px] w-[320px] flex-shrink-0 rounded-xl bg-[var(--bg-soft)] shadow-card md:h-[280px] md:w-[420px]"
+                className="snap-start no-scrollbar relative h-[210px] w-[280px] flex-shrink-0 overflow-hidden rounded-2xl bg-[var(--bg-soft)] shadow-card ring-1 ring-[var(--border-subtle)] md:h-[270px] md:w-[420px]"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -40,7 +45,14 @@ export default function ClinicSection() {
                   alt="Clinic interior"
                   loading="lazy"
                   decoding="async"
-                  className="h-full w-full rounded-xl object-cover object-center"
+                  onError={(e) => {
+                    // Avoid infinite loops if the fallback also fails.
+                    const img = e.currentTarget;
+                    if (img.dataset.fallbackApplied === "true") return;
+                    img.dataset.fallbackApplied = "true";
+                    img.src = DEFAULT_FALLBACK_IMAGE;
+                  }}
+                  className="h-full w-full rounded-2xl object-cover object-center"
                 />
               </div>
             ))}

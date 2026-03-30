@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * ImageContentSection — Alternating image + text (services / orthodontics).
  * Enhanced: card-style shadow, subtle image overlay, hover lift, elegant typography.
@@ -12,6 +14,8 @@ export interface ImageContentSectionProps {
   items: string[];
   /** Image src (URL or path from /public) */
   imageSrc: string;
+  /** Optional fallback if `imageSrc` fails to load */
+  imageFallbackSrc?: string;
   /** Image alt text */
   imageAlt: string;
   /** true = image left, text right; false = text left, image right */
@@ -20,18 +24,24 @@ export interface ImageContentSectionProps {
   id?: string;
 }
 
+const DEFAULT_FALLBACK_IMAGE =
+  "/placeholder-dental.svg";
+
 export default function ImageContentSection({
   heading,
   description,
   items,
   imageSrc,
+  imageFallbackSrc,
   imageAlt,
   imageFirst = true,
   id,
 }: ImageContentSectionProps) {
+  const fallback = imageFallbackSrc ?? DEFAULT_FALLBACK_IMAGE;
+
   const contentBlock = (
     <div
-      className="content-block-hover flex min-h-[320px] flex-col justify-center bg-[var(--bg-dark-panel)] px-6 py-12 md:min-h-[400px] md:px-12 md:py-16"
+      className="content-block-hover flex min-h-[300px] flex-col justify-center bg-[var(--bg-dark-panel)] px-6 py-10 md:min-h-[400px] md:px-12 md:py-16"
     >
       <h3
         className="font-serif text-xl font-semibold tracking-[var(--tracking-heading)] text-white md:text-2xl"
@@ -63,13 +73,20 @@ export default function ImageContentSection({
   );
 
   const imageBlock = (
-    <div className="group relative min-h-[280px] w-full overflow-hidden bg-[var(--bg-charcoal)] md:min-h-[400px]">
+    <div className="group relative min-h-[260px] w-full overflow-hidden bg-[var(--bg-charcoal)] md:min-h-[400px]">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={imageSrc}
         alt={imageAlt}
         loading="lazy"
         decoding="async"
+        onError={(e) => {
+          // Avoid infinite loops if the fallback also fails.
+          const img = e.currentTarget;
+          if (img.dataset.fallbackApplied === "true") return;
+          img.dataset.fallbackApplied = "true";
+          img.src = fallback;
+        }}
         className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
         style={{ transitionDuration: "var(--transition-hover)" }}
       />
@@ -84,7 +101,7 @@ export default function ImageContentSection({
   return (
     <section
       id={id}
-      className="card-hover group/card grid grid-cols-1 md:grid-cols-2"
+      className="card-hover group/card grid grid-cols-1 md:grid-cols-2 overflow-hidden rounded-2xl border border-[var(--border-subtle)] shadow-card"
       aria-labelledby={id ? `heading-${id}` : undefined}
     >
       {imageFirst ? (
