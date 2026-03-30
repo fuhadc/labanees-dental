@@ -1,189 +1,283 @@
 @import "tailwindcss";
 
-@theme {
-  /* ─── Azzawi-Inspired Light Palette ─── */
-  --color-background: #FFFFFF;
-  --color-surface: #F8F5EF;
-  --color-navy: #0D1B2A;
-  --color-navy-light: #1A2F45;
-  --color-primary: #C5A55A;
-  --color-primary-hover: #D4B96A;
-  --color-accent: #0ea5e9;
-  --color-textMain: #0D1B2A;
-  --color-textMuted: #6B7A8D;
-  --color-border: #E8E2D9;
+/* ============================================
+   LABANEES DENTAL CLINIC — DESIGN SYSTEM
+   Reference-inspired: soft greys, elegant serif headings,
+   generous spacing, subtle depth, premium healthcare aesthetic
+   ============================================ */
 
-  --font-sans: var(--font-inter), sans-serif;
-  --font-display: var(--font-cormorant), serif;
+:root {
+  /* Primary palette — black + gold premium aesthetic */
+  --bg-dark: #050609;
+  --bg-dark-panel: #080b10;
+  --bg-charcoal: #10131a;
+  --bg-soft: #151922;
+  --bg-muted: #1f2933; /* subtle blue-grey for contrast blocks */
+  --text-primary: #ffffff;
+  --text-muted: #b8b8b8;
+  --text-muted-strong: #cccccc;
+
+  /* Accents — warm gold */
+  --accent-warm: #d4af37; /* primary gold */
+  --accent-warm-soft: rgba(212, 175, 55, 0.45);
+  --accent-divider: rgba(212, 175, 55, 0.4);
+  --border-subtle: rgba(212, 175, 55, 0.22);
+  --border-strong: rgba(212, 175, 55, 0.5);
+  --hero-overlay: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+
+  /* Typography — elegant serif for headings, clean sans body */
+  --font-sans: var(--font-geist-sans), "Inter", "Open Sans", system-ui, sans-serif;
+  --font-serif: var(--font-serif, "Playfair Display"), "Georgia", "Times New Roman", serif;
+  --text-hero-label: clamp(0.75rem, 1.5vw, 0.875rem);
+  --text-hero: clamp(2.25rem, 5vw, 4rem);
+  --text-hero-tagline: clamp(0.9375rem, 1.75vw, 1.125rem);
+  --text-section: clamp(1.5rem, 3.5vw, 2.25rem);
+  --text-subsection: clamp(1.25rem, 2.5vw, 1.5rem);
+  --text-body: clamp(0.9375rem, 1.5vw, 1.0625rem);
+  --text-nav: clamp(0.75rem, 1.25vw, 0.875rem);
+  --leading-relaxed: 1.65;
+  --leading-tight: 1.25;
+  --tracking-heading: 0.02em;
+
+  /* Spacing — generous vertical rhythm, clean grid */
+  --space-section-y: clamp(3.5rem, 9vw, 6rem);
+  --space-content-x: clamp(1.5rem, 4vw, 3rem);
+  --space-content-y: clamp(2rem, 5vw, 3.5rem);
+  --space-elements: 1rem;
+  --space-tight: 0.5rem;
+
+  /* Depth & motion — subtle premium UI */
+  --shadow-card: 0 4px 28px rgba(0, 0, 0, 0.5);
+  --shadow-card-hover: 0 18px 40px rgba(0, 0, 0, 0.72);
+  --shadow-soft: 0 2px 16px rgba(0, 0, 0, 0.4);
+  --radius-card: 0.375rem;
+  --radius-pill: 9999px;
+  --transition-smooth: 0.25s ease;
+  --transition-hover: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layout */
+  --content-max-width: 90rem;
+  --border-radius: var(--radius-card);
 }
 
-@layer base {
-
-  html,
-  body {
-    scroll-behavior: smooth;
-    @apply bg-background text-textMain font-sans antialiased overflow-x-hidden;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-display tracking-tight text-navy;
-  }
-
-  [data-gsap] {
-    will-change: transform, opacity;
-  }
+@theme inline {
+  --color-background: var(--bg-dark);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-sans);
 }
 
-@layer utilities {
-  .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, #C5A55A 0%, #0D1B2A 100%);
-  }
-
-  .text-navy {
-    color: var(--color-navy);
-  }
-
-  .bg-navy {
-    background-color: var(--color-navy);
-  }
-
-  .bg-navy-light {
-    background-color: var(--color-navy-light);
-  }
-
-  .border-navy {
-    border-color: var(--color-navy);
-  }
-
-  .section-fade {
-    opacity: 0;
-    animation: sectionFadeIn 0.9s ease forwards;
-  }
+body {
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.01em;
 }
 
-/* ─── CTA Gold Pulse Glow ─── */
-@keyframes ctaPulse {
-
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(197, 165, 90, 0.5);
-  }
-
-  50% {
-    box-shadow: 0 0 0 10px rgba(197, 165, 90, 0);
-  }
+/* Utility for dark content panels */
+.bg-dark-panel {
+  background-color: var(--bg-dark-panel);
 }
 
-.cta-pulse {
-  animation: ctaPulse 2.5s ease-in-out infinite;
+/* Section rhythm */
+.section-padding-y {
+  padding-top: var(--space-section-y);
+  padding-bottom: var(--space-section-y);
 }
 
-/* ─── Light sweep on TiltCard ─── */
-@keyframes sweepShine {
-  0% {
-    transform: translateX(-150%) skewX(-20deg);
-  }
-
-  100% {
-    transform: translateX(250%) skewX(-20deg);
-  }
+.section-padding-x {
+  padding-left: var(--space-content-x);
+  padding-right: var(--space-content-x);
 }
 
-.sweep-shine {
-  background: linear-gradient(90deg,
-      transparent 0%,
-      rgba(197, 165, 90, 0.12) 50%,
-      transparent 100%);
-  transform: translateX(-150%) skewX(-20deg);
+.content-padding {
+  padding: var(--space-content-y) var(--space-content-x);
 }
 
-.group:hover .sweep-shine {
-  animation: sweepShine 0.7s ease forwards;
+/* Elegant section divider — thin line under headings (reference style) */
+.section-divider {
+  width: 4rem;
+  height: 1px;
+  background: var(--accent-divider);
+  margin-top: 1rem;
 }
 
-/* ─── Section fade-in ─── */
-@keyframes sectionFadeIn {
+.section-divider-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Card-style elevation for service blocks */
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+.shadow-card-hover:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Smooth section transitions */
+.section-transition {
+  transition: box-shadow var(--transition-hover), transform var(--transition-hover);
+}
+
+/* Content block hover — subtle elevation (reference card style) */
+.content-block-hover {
+  transition: box-shadow var(--transition-smooth);
+}
+.content-block-hover:hover {
+  box-shadow: var(--shadow-card);
+}
+
+/* =========================================================
+   SCROLL REVEAL ANIMATION SYSTEM
+   Lightweight, GPU-friendly (opacity + transform only)
+   Variants: fade-up, fade-left, fade-right, zoom-in
+   ========================================================= */
+
+[data-animate] {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  will-change: opacity, transform;
+  --reveal-duration: 0.7s; /* scroll reveals: 600–800ms */
+  --reveal-delay: 0ms;
+  --reveal-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+[data-animate].reveal-visible {
+  animation-duration: var(--reveal-duration);
+  animation-fill-mode: both;
+  animation-timing-function: var(--reveal-ease);
+  animation-delay: var(--reveal-delay);
+}
+
+/* Variants mapped via data-animate attribute */
+[data-animate="fade-up"].reveal-visible {
+  animation-name: fade-up;
+}
+
+[data-animate="fade-left"].reveal-visible {
+  animation-name: fade-left;
+}
+
+[data-animate="fade-right"].reveal-visible {
+  animation-name: fade-right;
+}
+
+[data-animate="zoom-in"].reveal-visible {
+  animation-name: zoom-in;
+}
+
+@keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 24px, 0);
   }
-
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
-/* ─── WhatsApp pulse ring ─── */
-@keyframes wpPulse {
-  0% {
-    transform: scale(1);
-    opacity: 0.6;
-  }
-
-  100% {
-    transform: scale(1.8);
+@keyframes fade-left {
+  from {
     opacity: 0;
+    transform: translate3d(-24px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
-.wp-pulse-ring {
-  position: absolute;
-  inset: -4px;
-  border-radius: 9999px;
-  border: 2px solid rgba(37, 211, 102, 0.5);
-  animation: wpPulse 2s ease-out infinite;
-  pointer-events: none;
+@keyframes fade-right {
+  from {
+    opacity: 0;
+    transform: translate3d(24px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
-/* ─── Before/After Slider ─── */
-.ba-slider {
-  position: relative;
-  overflow: hidden;
-  cursor: ew-resize;
-  user-select: none;
-  -webkit-user-select: none;
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.ba-handle {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: #C5A55A;
-  transform: translateX(-50%);
-  z-index: 10;
-  transition: none;
+/* =========================================================
+   CARD & BUTTON MICRO-INTERACTIONS
+   ========================================================= */
+
+.card-hover {
+  transition:
+    transform 300ms var(--transition-hover),
+    box-shadow 300ms var(--transition-hover);
+  will-change: transform, box-shadow;
 }
 
-.ba-handle::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #C5A55A;
-  box-shadow: 0 4px 20px rgba(197, 165, 90, 0.5);
+.card-hover:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: var(--shadow-card-hover);
 }
 
-.ba-handle::after {
-  content: '◀ ▶';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 10px;
-  color: white;
-  white-space: nowrap;
-  letter-spacing: 2px;
-  z-index: 1;
+.btn-animated {
+  display: inline-block;
+  transition:
+    transform 200ms var(--transition-hover),
+    box-shadow 200ms var(--transition-hover),
+    background-color 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease;
+  will-change: transform, box-shadow;
 }
+
+.btn-animated:hover {
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-animated:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: none;
+}
+
+/* Hero background parallax target */
+[data-hero-parallax="true"] {
+  transform: translate3d(0, 0, 0) scale(1.05);
+  will-change: transform;
+}
+
+/* Respect prefers-reduced-motion: turn complex animations into simple fades */
+@media (prefers-reduced-motion: reduce) {
+  [data-animate],
+  [data-animate].reveal-visible {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .card-hover,
+  .btn-animated {
+    transition:
+      background-color 150ms ease,
+      color 150ms ease,
+      border-color 150ms ease;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
