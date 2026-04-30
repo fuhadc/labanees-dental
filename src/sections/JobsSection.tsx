@@ -1,8 +1,6 @@
-/**
- * JobsSection — simple recruitment band with description and CTA.
- * Provides an anchor for the "Jobs" nav item.
- */
+"use client";
 
+import { motion } from "framer-motion";
 import SectionHeader from "@/components/SectionHeader";
 
 export default function JobsSection() {
@@ -10,19 +8,33 @@ export default function JobsSection() {
     <section id="jobs" aria-label="Careers" className="bg-[var(--bg-dark)]">
       <SectionHeader title="Jobs & Careers" align="center" />
 
-      <div className="section-padding-x section-padding-y mx-auto max-w-[60rem] text-center">
-        <p className="text-sm leading-relaxed text-[var(--text-muted-strong)]">
-          We are always interested in meeting talented dentists, specialists,
-          dental assistants and front-desk coordinators who share our passion
-          for precise, patient-centred care. If you would like to join Lebanese
-          Dental Clinic, please send your CV and a short introduction to{" "}
-          <span className="text-[var(--accent-warm)]">careers@labaneesclinic.com</span>.
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="section-padding-x section-padding-y mx-auto max-w-3xl text-center"
+      >
+        <p 
+          className="text-lg font-light leading-relaxed text-white/40 italic"
+          style={{ fontFamily: "var(--font-sans)" }}
+        >
+          We are constantly seeking visionary dental professionals and clinical coordinators 
+          who share our dedication to absolute precision and patient-centered excellence.
         </p>
-        <p className="mt-4 text-xs text-[var(--text-muted)]">
-          All applications are treated confidentially. We will get in touch if
-          your profile matches a suitable position.
-        </p>
-      </div>
+        <div className="mt-12 space-y-4">
+          <p className="text-[10px] uppercase tracking-[0.4em] text-white/20 font-medium">
+            Direct Inquiry
+          </p>
+          <motion.p 
+            whileHover={{ scale: 1.05 }}
+            className="font-display text-base uppercase tracking-[0.3em] text-[var(--accent-warm)] cursor-pointer"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            careers@labanees.com
+          </motion.p>
+        </div>
+      </motion.div>
     </section>
   );
 }

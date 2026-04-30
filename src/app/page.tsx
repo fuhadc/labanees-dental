@@ -23,10 +23,10 @@ export default function Home() {
 
       {/* Hero — full-width with optional background image + overlay */}
       <HeroBanner
-        title="Transform Your Smile with Precision & Elegance"
-        tagline="Advanced Dental Implants & Cosmetic Dentistry in Muscat"
-        backgroundImage="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1920&h=1080&fit=crop&q=85"
-        overlayOpacity={0.55}
+        label="Welcome to Labanees"
+        title="Where Precision Meets the Art of Dentistry"
+        tagline="Advanced cosmetic dentistry and high-precision implantology in the heart of Muscat."
+        backgroundImage="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&h=1600&fit=crop&q=90"
       />
 
       {/* Welcome — full-width intro block */}
@@ -55,10 +55,10 @@ export default function Home() {
 
       {/* Footer — CTA + copyright */}
       <Footer
-        ctaText="Online Appointment"
+        ctaText="Book Appointment"
         ctaHref="#booking"
-        contactLine="18th November Street, Muscat, Oman | +968 9670 0335 | 9:00 AM – 8:00 PM (Daily)"
-        copyright={`© ${new Date().getFullYear()} Lebanese Dental Clinic. All rights reserved.`}
+        contactLine="18th November St, Muscat | +968 9670 0335 | info@labanees.com"
+        copyright={`© ${new Date().getFullYear()} Labanees Dental. All rights reserved.`}
       />
     </div>
   );

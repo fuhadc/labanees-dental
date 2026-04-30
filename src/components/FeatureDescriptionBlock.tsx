@@ -1,13 +1,11 @@
-/**
- * FeatureDescriptionBlock — About/Welcome full-width text block.
- * Enhanced: elegant serif heading, divider, generous spacing, subtle background (reference).
- */
+"use client";
+
+import { motion, Variants } from "framer-motion";
 
 export interface FeatureDescriptionBlockProps {
   heading: string;
   description: string;
   items?: string[];
-  /** Optional id for anchor */
   id?: string;
   className?: string;
 }
@@ -19,42 +17,83 @@ export default function FeatureDescriptionBlock({
   id,
   className = "",
 }: FeatureDescriptionBlockProps) {
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
+
   return (
-    <section
+    <motion.section
       id={id}
-      className={`bg-[var(--bg-dark-panel)] content-padding ${className}`}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={containerVariants}
+      className={`bg-[var(--bg-dark)] py-24 md:py-40 section-padding-x ${className}`}
       aria-labelledby={id ? `block-heading-${id}` : undefined}
-      data-animate="fade-up"
-      data-animate-duration={700}
     >
-      <h2
-        id={id ? `block-heading-${id}` : undefined}
-        className="font-serif text-[length:var(--text-section)] font-semibold tracking-[var(--tracking-heading)] text-white"
-        style={{ fontFamily: "var(--font-serif)" }}
-      >
-        {heading}
-      </h2>
-      <div className="mt-3 h-px w-16 bg-[var(--accent-divider)]" aria-hidden />
-      <p
-        className="mt-6 max-w-3xl text-[length:var(--text-body)] font-light text-white/95"
-        style={{ lineHeight: "var(--leading-relaxed)" }}
-      >
-        {description}
-      </p>
-      {items.length > 0 && (
-        <ul className="mt-8 space-y-3">
-          {items.map((item, i) => (
-            <li
-              key={i}
-              className="flex items-start gap-3 text-[length:var(--text-body)] font-light text-white/90"
-              style={{ lineHeight: "var(--leading-relaxed)" }}
-            >
-              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent-divider)]" />
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
+      <div className="max-w-[var(--content-max-width)] mx-auto flex flex-col items-center text-center">
+        <motion.h2
+          id={id ? `block-heading-${id}` : undefined}
+          variants={itemVariants}
+          className="font-serif text-4xl md:text-5xl lg:text-7xl font-medium tracking-tight text-white italic"
+          style={{ fontFamily: "var(--font-serif)" }}
+        >
+          {heading}
+        </motion.h2>
+        
+        <motion.div 
+          initial={{ width: 0 }}
+          whileInView={{ width: 120 }}
+          transition={{ duration: 1.2, delay: 0.5 }}
+          className="mt-10 h-px bg-gradient-to-r from-transparent via-[var(--accent-warm)] to-transparent" 
+        />
+
+        <motion.p
+          variants={itemVariants}
+          className="mt-12 max-w-3xl text-lg md:text-xl font-light text-white/40 leading-relaxed tracking-wide italic"
+          style={{ fontFamily: "var(--font-sans)" }}
+        >
+          {description}
+        </motion.p>
+
+        {items.length > 0 && (
+          <ul className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 w-full max-w-5xl">
+            {items.map((item, i) => (
+              <motion.li
+                key={i}
+                variants={itemVariants}
+                className="flex flex-col items-center gap-6 text-sm font-light text-white/30 group"
+              >
+                <div className="relative">
+                  <motion.div 
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    transition={{ duration: 0.8, delay: 0.8 + (i * 0.1) }}
+                    className="h-px w-10 bg-[var(--accent-warm)] opacity-50 group-hover:w-16 transition-all duration-500 origin-center" 
+                  />
+                </div>
+                <span className="tracking-[0.3em] uppercase text-[10px] group-hover:text-[var(--accent-warm)] transition-colors duration-500">{item}</span>
+              </motion.li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </motion.section>
   );
 }

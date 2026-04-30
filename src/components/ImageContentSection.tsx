@@ -1,31 +1,19 @@
 "use client";
 
-/**
- * ImageContentSection — Alternating image + text (services / orthodontics).
- * Enhanced: card-style shadow, subtle image overlay, hover lift, elegant typography.
- */
+import { motion, Variants } from "framer-motion";
 
 export interface ImageContentSectionProps {
-  /** Section heading (e.g. "GENERAL DENTISTRY") */
   heading: string;
-  /** Short intro paragraph */
   description: string;
-  /** Bullet list items */
   items: string[];
-  /** Image src (URL or path from /public) */
   imageSrc: string;
-  /** Optional fallback if `imageSrc` fails to load */
   imageFallbackSrc?: string;
-  /** Image alt text */
   imageAlt: string;
-  /** true = image left, text right; false = text left, image right */
   imageFirst?: boolean;
-  /** Optional section id for anchor */
   id?: string;
 }
 
-const DEFAULT_FALLBACK_IMAGE =
-  "/placeholder-dental.svg";
+const DEFAULT_FALLBACK_IMAGE = "/placeholder-dental.svg";
 
 export default function ImageContentSection({
   heading,
@@ -39,80 +27,109 @@ export default function ImageContentSection({
 }: ImageContentSectionProps) {
   const fallback = imageFallbackSrc ?? DEFAULT_FALLBACK_IMAGE;
 
+  const contentVariants: Variants = {
+    hidden: { opacity: 0, x: imageFirst ? 50 : -50 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: { duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }
+    },
+  };
+
+  const imageVariants: Variants = {
+    hidden: { opacity: 0, scale: 1.1 },
+    visible: { 
+      opacity: 1, 
+      scale: 1,
+      transition: { duration: 1.5, ease: [0.22, 1, 0.36, 1] }
+    },
+  };
+
   const contentBlock = (
-    <div
-      className="content-block-hover flex min-h-[300px] flex-col justify-center bg-[var(--bg-dark-panel)] px-6 py-10 md:min-h-[400px] md:px-12 md:py-16"
+    <motion.div
+      variants={contentVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      className="flex min-h-[300px] flex-col justify-center bg-[var(--bg-dark-panel)] px-8 py-16 md:min-h-[550px] md:px-24 md:py-24"
     >
-      <h3
-        className="font-serif text-xl font-semibold tracking-[var(--tracking-heading)] text-white md:text-2xl"
+      <motion.h3
+        className="font-serif text-3xl font-medium tracking-tight text-white italic md:text-5xl"
         style={{ fontFamily: "var(--font-serif)" }}
       >
         {heading}
-      </h3>
+      </motion.h3>
+      <motion.div 
+        initial={{ width: 0 }}
+        whileInView={{ width: 64 }}
+        transition={{ duration: 1, delay: 0.5 }}
+        className="mt-6 h-px bg-[var(--accent-warm)]" 
+      />
       <p
-        className="mt-4 text-[length:var(--text-body)] font-light text-white/95"
-        style={{ lineHeight: "var(--leading-relaxed)" }}
+        className="mt-10 text-base md:text-lg font-light text-white/50 leading-relaxed max-w-md"
+        style={{ fontFamily: "var(--font-sans)" }}
       >
         {description}
       </p>
       {items.length > 0 && (
-        <ul className="mt-6 space-y-2.5">
+        <ul className="mt-10 space-y-4">
           {items.map((item, i) => (
-            <li
+            <motion.li
               key={i}
-              className="flex items-start gap-2.5 text-[length:var(--text-body)] font-light text-white/90"
-              style={{ lineHeight: "var(--leading-relaxed)" }}
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.6 + (i * 0.1) }}
+              className="flex items-start gap-4 text-sm font-light text-white/40"
             >
-              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/40" />
+              <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-[var(--accent-warm)] opacity-50" />
               <span>{item}</span>
-            </li>
+            </motion.li>
           ))}
         </ul>
       )}
-    </div>
+    </motion.div>
   );
 
   const imageBlock = (
-    <div className="group relative min-h-[260px] w-full overflow-hidden bg-[var(--bg-charcoal)] md:min-h-[400px]">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+    <motion.div 
+      variants={imageVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      className="group relative min-h-[300px] w-full overflow-hidden bg-[var(--bg-charcoal)] md:min-h-[550px]"
+    >
+      <motion.img
         src={imageSrc}
         alt={imageAlt}
         loading="lazy"
-        decoding="async"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
         onError={(e) => {
-          // Avoid infinite loops if the fallback also fails.
           const img = e.currentTarget;
           if (img.dataset.fallbackApplied === "true") return;
           img.dataset.fallbackApplied = "true";
           img.src = fallback;
         }}
-        className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
-        style={{ transitionDuration: "var(--transition-hover)" }}
+        className="h-full w-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-1000"
       />
-      {/* Subtle overlay for depth (reference: image overlays on service cards) */}
-      <div
-        className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none"
-        aria-hidden
-      />
-    </div>
+      <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-dark)]/40 via-transparent to-transparent pointer-events-none" />
+    </motion.div>
   );
 
   return (
     <section
       id={id}
-      className="card-hover group/card grid grid-cols-1 md:grid-cols-2 overflow-hidden rounded-2xl border border-[var(--border-subtle)] shadow-card"
-      aria-labelledby={id ? `heading-${id}` : undefined}
+      className="grid grid-cols-1 md:grid-cols-2 overflow-hidden border-b border-white/5"
     >
       {imageFirst ? (
         <>
-          {imageBlock}
-          {contentBlock}
+          <div className="order-1 md:order-1">{imageBlock}</div>
+          <div className="order-2 md:order-2">{contentBlock}</div>
         </>
       ) : (
         <>
-          {contentBlock}
-          {imageBlock}
+          <div className="order-2 md:order-1">{contentBlock}</div>
+          <div className="order-1 md:order-2">{imageBlock}</div>
         </>
       )}
     </section>

@@ -1,7 +1,4 @@
-/**
- * ServicesSection — Alternating image + content blocks for each service.
- * Enhanced: section header with elegant serif + divider (reference "What We Do").
- */
+"use client";
 
 import ImageContentSection from "@/components/ImageContentSection";
 import SectionHeader from "@/components/SectionHeader";
@@ -13,67 +10,42 @@ const IMG = (id: string, w = 800, h = 600) =>
 const services = [
   {
     id: "dental-implants",
-    heading: "Permanent, Natural-Looking Dental Implants",
+    heading: "Dental Implants",
     description:
-      "Restore your smile with advanced dental implant solutions. Our precision-engineered implants provide a permanent replacement for missing teeth that look, feel, and function like natural teeth.",
-    items: [
-      "Long-lasting solution — implants can last a lifetime",
-      "Natural appearance customized to match your teeth",
-      "Preserves bone health and facial structure",
-      "Comfortable and stable without slipping",
-    ],
-    imageSrc: IMG("1598256989806-d3a38b3d6732"),
+      "Precision-engineered restorations that restore function and natural aesthetics with permanent results.",
+    items: [],
+    imageSrc: IMG("1606811971618-4486d14f3f99"),
     imageAlt: "Dental implant and restoration",
     imageFirst: true,
   },
   {
-    id: "teeth-whitening",
-    heading: "Teeth Whitening",
-    description:
-      "Professional whitening treatments for a brighter, radiant smile.",
-    items: [],
-    imageSrc: IMG("1629909613654-28e377c37b09"),
-    imageAlt: "Bright, confident smile after whitening",
-    imageFirst: false,
-  },
-  {
     id: "hollywood-smile",
-    heading: "Hollywood Smile",
+    heading: "The Hollywood Smile",
     description:
-      "Complete smile makeovers for a dazzling appearance.",
+      "A bespoke smile makeover designed to enhance your natural features with perfection and symmetry.",
     items: [],
-    imageSrc: IMG("1629909613654-28e377c37b09"),
+    imageSrc: IMG("1588776814546-1ffcf47267a5"),
     imageAlt: "Hollywood smile makeover",
-    imageFirst: true,
-  },
-  {
-    id: "root-canal",
-    heading: "Root Canal Treatment",
-    description:
-      "Pain-free endodontic procedures to restore damaged teeth.",
-    items: [],
-    imageSrc: IMG("1606811841689-23dfddce3e95"),
-    imageAlt: "Root canal treatment",
     imageFirst: false,
   },
   {
     id: "veneers",
-    heading: "Veneers",
+    heading: "Porcelain Veneers",
     description:
-      "Ultra-thin porcelain shells for a flawless natural-looking smile.",
+      "Ultra-thin artisan porcelain shells crafted for a flawless, radiant, and natural-looking transformation.",
     items: [],
-    imageSrc: IMG("1629909613654-28e377c37b09"),
+    imageSrc: IMG("1516062423079-7ca13cdc7f5a"),
     imageAlt: "Dental veneers for a natural smile",
     imageFirst: true,
   },
   {
-    id: "cleaning-polishing",
-    heading: "Cleaning & Polishing",
+    id: "root-canal",
+    heading: "Endodontic Care",
     description:
-      "Professional dental hygiene services for optimal oral health.",
+      "Advanced, pain-free treatments focused on preserving your natural teeth with clinical precision.",
     items: [],
-    imageSrc: IMG("1666887360870-fab16552365f"),
-    imageAlt: "Professional dental cleaning",
+    imageSrc: IMG("1606811841689-23dfddce3e95"),
+    imageAlt: "Root canal treatment",
     imageFirst: false,
   },
 ];
@@ -82,23 +54,17 @@ export default function ServicesSection() {
   return (
     <section id="services" aria-label="Our services">
       <SectionHeader title="What We Do" withDivider align="center" />
-      {services.map((service, index) => (
-        <div
+      {services.map((service) => (
+        <ImageContentSection
           key={service.id}
-          data-animate={index % 2 === 0 ? "fade-right" : "fade-left"}
-          data-animate-delay={index * 100}
-          data-animate-duration={700}
-        >
-          <ImageContentSection
-            id={service.id}
-            heading={service.heading}
-            description={service.description}
-            items={service.items}
-            imageSrc={service.imageSrc}
-            imageAlt={service.imageAlt}
-            imageFirst={service.imageFirst}
-          />
-        </div>
+          id={service.id}
+          heading={service.heading}
+          description={service.description}
+          items={service.items}
+          imageSrc={service.imageSrc}
+          imageAlt={service.imageAlt}
+          imageFirst={service.imageFirst}
+        />
       ))}
     </section>
   );

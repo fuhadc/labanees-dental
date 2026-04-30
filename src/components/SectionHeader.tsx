@@ -1,13 +1,10 @@
-/**
- * SectionHeader — Full-width dark panel with elegant serif heading.
- * Enhanced: thin divider, generous spacing, reference-inspired typography.
- */
+"use client";
+
+import { motion } from "framer-motion";
 
 export interface SectionHeaderProps {
   title: string;
-  /** Optional thin divider line below title */
   withDivider?: boolean;
-  /** Center (default) or left */
   align?: "center" | "left";
   className?: string;
 }
@@ -19,23 +16,28 @@ export default function SectionHeader({
   className = "",
 }: SectionHeaderProps) {
   return (
-    <div
-      className={`bg-[var(--bg-dark-panel)] border-y border-[var(--border-subtle)] content-padding ${align === "center" ? "text-center" : "text-left"} ${className}`}
-      data-animate="fade-up"
-      data-animate-duration={700}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1, ease: [0.21, 0.45, 0.32, 0.9] }}
+      className={`bg-[var(--bg-dark-panel)] border-y border-white/5 content-padding ${align === "center" ? "text-center" : "text-left"} ${className}`}
     >
-      <h2
-        className="font-serif text-[length:var(--text-section)] font-semibold tracking-[var(--tracking-heading)] text-white"
+      <motion.h2
+        className="font-serif text-[length:var(--text-section)] font-medium tracking-tight text-white italic"
         style={{ fontFamily: "var(--font-serif)" }}
       >
         {title}
-      </h2>
+      </motion.h2>
       {withDivider && (
-        <div
-          className={`mt-4 h-px w-16 bg-[var(--accent-divider)] ${align === "center" ? "mx-auto" : ""}`}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 1.2, delay: 0.3 }}
+          className={`mt-6 h-px w-32 bg-gradient-to-r from-transparent via-[var(--accent-warm)] to-transparent ${align === "center" ? "mx-auto" : ""}`}
           aria-hidden
         />
       )}
-    </div>
+    </motion.div>
   );
 }
