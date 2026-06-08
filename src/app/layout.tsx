@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond, Syne } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import "./globals.css";
-import { ScrollObserver, CustomCursor, SmoothScroll, BackgroundEffects, ScrollProgress, MobileNav, FloatingAction, PageWrapper } from "@/components";
+import { ScrollObserver, CustomCursor, SmoothScroll, BackgroundEffects, ScrollProgress, FloatingAction, PageWrapper } from "@/components";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -40,7 +40,6 @@ export default function RootLayout({
             <CustomCursor />
             <BackgroundEffects />
             <ScrollObserver />
-            <MobileNav />
             <FloatingAction />
             <PageWrapper>
               {children}

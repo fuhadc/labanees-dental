@@ -16,7 +16,6 @@ export { default as BackgroundEffects } from "./BackgroundEffects";
 export { default as Magnetic } from "./Magnetic";
 export { default as BeforeAfterSlider } from "./BeforeAfterSlider";
 export { default as ScrollProgress } from "./ScrollProgress";
-export { default as MobileNav } from "./MobileNav";
 export { default as FloatingAction } from "./FloatingAction";
 export { default as PageWrapper } from "./PageWrapper";
 export { default as ScrollRadial } from "./ScrollRadial";
