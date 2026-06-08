@@ -980,7 +980,7 @@ body:has(.hero-cinematic) header:not([data-scrolled="true"]) {
 /* —— Mobile (< 640px) —— */
 @media (max-width: 639px) {
   :root {
-    --header-height: 5rem;
+    --header-height: 5.5rem;
     --showcase-image-max-h: clamp(200px, 42dvh, 380px);
     --showcase-gap: 1.25rem;
   }
@@ -1093,7 +1093,11 @@ body:has(.hero-cinematic) header:not([data-scrolled="true"]) {
 /* —— Hero responsive enhancements —— */
 @media (max-width: 639px) {
   :root {
-    --header-height: 5rem;
+    --header-height: 5.5rem;
+  }
+
+  .hero-media-image {
+    background-position: center 72%;
   }
 
   .hero-inner {
@@ -1152,8 +1156,8 @@ body:has(.hero-cinematic) header:not([data-scrolled="true"]) {
 
   .hero-media-overlay {
     background:
-      linear-gradient(to top, rgba(5, 6, 9, 0.97) 0%, rgba(5, 6, 9, 0.75) 45%, rgba(5, 6, 9, 0.5) 100%),
-      radial-gradient(ellipse 100% 80% at 50% 30%, rgba(212, 175, 55, 0.1), transparent 60%);
+      linear-gradient(to top, rgba(5, 6, 9, 0.97) 0%, rgba(5, 6, 9, 0.55) 42%, rgba(5, 6, 9, 0.25) 100%),
+      radial-gradient(ellipse 100% 70% at 50% 35%, rgba(212, 175, 55, 0.12), transparent 60%);
   }
 }
 
@@ -1238,5 +1242,14 @@ body:has(.hero-cinematic) header:not([data-scrolled="true"]) {
 
 .no-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome/Safari */
+}
+
+/* Make sections and page layouts transparent so the WebGL background shows through */
+div.min-h-screen.bg-\[var\(--bg-dark\)\],
+section.bg-\[var\(--bg-dark\)\],
+section[class*="bg-\[var\(--bg-dark\)\]"],
+.hero-cinematic,
+.showcase-standard {
+  background-color: transparent !important;
 }
 

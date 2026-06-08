@@ -186,7 +186,7 @@ export default function AppleStickyShowcase() {
   return (
     <section
       aria-label="Treatment showcase"
-      className="showcase-standard relative bg-[var(--bg-dark)]"
+      className="showcase-standard relative bg-transparent"
       {...sectionDataAttrs}
     >
       <div className="showcase-ambient pointer-events-none absolute inset-x-0 top-0" aria-hidden />

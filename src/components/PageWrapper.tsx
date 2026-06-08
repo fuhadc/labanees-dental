@@ -1,5 +1,5 @@
 "use client";
 
 export default function PageWrapper({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return <div className="relative z-10">{children}</div>;
 }

@@ -7,7 +7,7 @@ export default function ClinicSection() {
   const DEFAULT_FALLBACK_IMAGE = "/placeholder-dental.svg";
 
   return (
-    <section id="clinic" aria-label="Our clinic interior" className="bg-[var(--bg-dark)]">
+    <section id="clinic" aria-label="Our clinic interior" className="bg-transparent">
       <div className="section-padding-x section-padding-y mx-auto max-w-[90rem]">
         <BoxReveal
           origin="bottom"

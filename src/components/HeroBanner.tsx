@@ -71,11 +71,11 @@ export default function HeroBanner({
   return (
     <section
       ref={ref}
-      className="hero-cinematic relative -mt-[var(--header-height)] h-[100dvh] max-h-[100dvh] min-h-0 overflow-hidden bg-[var(--bg-dark)]"
+      className="hero-cinematic relative h-[100dvh] max-h-[100dvh] min-h-0 overflow-hidden bg-[var(--bg-dark)]"
       aria-labelledby="hero-title"
     >
       {/* Background */}
-      <div className="hero-media pointer-events-none absolute inset-0">
+      <div className="hero-media pointer-events-none absolute inset-0 opacity-60 md:opacity-45">
         {backgroundImage ? (
           <motion.div
             className={`hero-media-image absolute inset-0 bg-cover bg-center ${reduced ? "" : "hero-media-image--alive"}`}
@@ -106,7 +106,7 @@ export default function HeroBanner({
 
       {/* Content */}
       <motion.div
-        className="relative z-10 flex h-full min-h-0 flex-col justify-end pt-[var(--header-height)]"
+        className="relative z-10 flex h-full min-h-0 flex-col justify-end pt-[calc(var(--header-height)+env(safe-area-inset-top,0px))]"
         style={reduced ? undefined : { y: contentY, opacity: contentOpacity }}
       >
         <div className="hero-inner mx-auto w-full max-w-[var(--content-max-width)]">

@@ -20,7 +20,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[var(--bg-dark)] text-white">
+    <div className="min-h-screen bg-transparent text-white">
       <Header />
 
       <HeroBanner

@@ -5,7 +5,7 @@ import { BoxReveal } from "@/components/BoxReveal";
 
 export default function JobsSection() {
   return (
-    <section id="jobs" aria-label="Careers" className="bg-[var(--bg-dark)]">
+    <section id="jobs" aria-label="Careers" className="bg-transparent">
       <SectionHeader title="Jobs & Careers" align="center" />
 
       <div className="section-padding-x section-padding-y mx-auto max-w-3xl">

@@ -39,7 +39,7 @@ export default function ReviewsSection() {
     <section
       id="before-after"
       aria-label="Patient Stories & Google Reviews"
-      className="bg-[var(--bg-dark)]"
+      className="bg-transparent"
     >
       <SectionHeader title="Patient Stories" align="center" />
 

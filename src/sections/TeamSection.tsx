@@ -26,7 +26,7 @@ const team = [
 
 export default function TeamSection() {
   return (
-    <section id="team" aria-label="Our doctors" className="bg-[var(--bg-dark)]">
+    <section id="team" aria-label="Our doctors" className="bg-transparent">
       <SectionHeader title="Meet the Team" align="center" />
 
       <div className="section-padding-x section-padding-y mx-auto max-w-[90rem]">

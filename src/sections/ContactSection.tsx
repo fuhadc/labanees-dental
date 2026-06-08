@@ -7,7 +7,7 @@ export default function ContactSection() {
     <section
       id="contact"
       aria-label="Contact & Appointment"
-      className="section-padding-x section-padding-y bg-[var(--bg-dark)]"
+      className="section-padding-x section-padding-y bg-transparent"
     >
       <div className="mx-auto flex max-w-[90rem] flex-col gap-8 lg:flex-row lg:items-start">
         <div className="flex flex-1 flex-col gap-8">

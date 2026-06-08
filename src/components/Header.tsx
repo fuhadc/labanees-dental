@@ -48,16 +48,19 @@ export default function Header() {
   return (
     <header
       data-scrolled={scrolled ? "true" : "false"}
-      className={`sticky top-0 z-50 w-full border-b transition-[padding,background,box-shadow,border-color] duration-500 ${
+      className={`fixed inset-x-0 top-0 z-50 w-full border-b transition-[padding,background,box-shadow,border-color] duration-500 ${
         scrolled
           ? "glass-nav border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.35)]"
           : "border-transparent"
       }`}
-      style={{ transitionTimingFunction: "var(--ease-sflow)" }}
+      style={{
+        transitionTimingFunction: "var(--ease-sflow)",
+        paddingTop: "env(safe-area-inset-top, 0px)",
+      }}
     >
       <div
         className={`section-padding-x flex items-center justify-between gap-6 transition-[padding] duration-300 ${
-          scrolled ? "py-5" : "py-8"
+          scrolled ? "py-4" : "py-5 md:py-8"
         }`}
       >
         <div className="mx-auto flex max-w-[var(--content-max-width)] w-full items-center justify-between">
