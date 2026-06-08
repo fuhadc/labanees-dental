@@ -2,6 +2,7 @@
 
 import SectionHeader from "@/components/SectionHeader";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
+import { BEFORE_AFTER_TEETH } from "@/lib/before-after-images";
 import AnimatedNumber from "@/components/AnimatedNumber";
 import { BoxReveal, BoxRevealItem, BoxRevealStagger } from "@/components/BoxReveal";
 
@@ -75,8 +76,10 @@ export default function ReviewsSection() {
 
           <BoxReveal origin="right" delay={0.08} className="relative p-4 md:p-6">
             <BeforeAfterSlider
-              beforeImage="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=2070&auto=format&fit=crop"
-              afterImage="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=2070&auto=format&fit=crop"
+              beforeImage={BEFORE_AFTER_TEETH.before.src}
+              afterImage={BEFORE_AFTER_TEETH.after.src}
+              beforeAlt={BEFORE_AFTER_TEETH.before.alt}
+              afterAlt={BEFORE_AFTER_TEETH.after.alt}
             />
           </BoxReveal>
         </div>

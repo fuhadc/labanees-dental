@@ -7,7 +7,7 @@ import { spring, transition } from "@/lib/motion";
 
 const navLinks = [
   { label: "Home", href: "#" },
-  { label: "Results", href: "#before-after" },
+  { label: "Before / After", href: "#before-after" },
   { label: "Treatments", href: "#services" },
   { label: "Orthodontics", href: "#orthodontics" },
   { label: "Team", href: "#team" },

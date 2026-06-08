@@ -1,19 +1,36 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 
 interface BeforeAfterSliderProps {
   beforeImage: string;
   afterImage: string;
+  beforeAlt?: string;
+  afterAlt?: string;
 }
 
 export default function BeforeAfterSlider({
   beforeImage,
   afterImage,
+  beforeAlt = "Before treatment",
+  afterAlt = "After treatment",
 }: BeforeAfterSliderProps) {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isResizing, setIsResizing] = useState(false);
+  const [containerWidth, setContainerWidth] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const measure = useCallback(() => {
+    if (containerRef.current) {
+      setContainerWidth(containerRef.current.offsetWidth);
+    }
+  }, []);
+
+  useEffect(() => {
+    measure();
+    window.addEventListener("resize", measure, { passive: true });
+    return () => window.removeEventListener("resize", measure);
+  }, [measure]);
 
   const handleCursorMove = (clientX: number) => {
     if (!containerRef.current) return;
@@ -35,10 +52,18 @@ export default function BeforeAfterSlider({
   const handleStart = () => setIsResizing(true);
   const handleEnd = () => setIsResizing(false);
 
+  const imageStyle = {
+    width: containerWidth > 0 ? containerWidth : "100%",
+    maxWidth: "none" as const,
+    height: "100%",
+    objectFit: "cover" as const,
+    objectPosition: "center 42%",
+  };
+
   return (
     <div
       ref={containerRef}
-      className="relative aspect-video w-full overflow-hidden border border-white/10 select-none cursor-col-resize group"
+      className="relative aspect-[3/2] w-full overflow-hidden border border-white/10 select-none cursor-col-resize group sm:aspect-[16/10]"
       onMouseMove={handleMouseMove}
       onTouchMove={handleTouchMove}
       onMouseDown={handleStart}
@@ -46,31 +71,38 @@ export default function BeforeAfterSlider({
       onMouseUp={handleEnd}
       onMouseLeave={handleEnd}
       onTouchEnd={handleEnd}
+      role="img"
+      aria-label={`${beforeAlt}. Drag to compare with ${afterAlt}.`}
     >
+      {/* After — restored teeth */}
       <div className="absolute inset-0">
         <img
           src={afterImage}
-          alt="After"
+          alt={afterAlt}
           className="h-full w-full object-cover"
+          style={{ objectPosition: "center 42%" }}
           draggable={false}
+          loading="lazy"
         />
-        <div className="absolute bottom-4 right-4 bg-black/60 px-3 py-1 text-[10px] uppercase tracking-widest text-white border border-white/10">
+        <div className="absolute bottom-4 right-4 border border-white/10 bg-black/60 px-3 py-1 text-[10px] uppercase tracking-widest text-white">
           After
         </div>
       </div>
 
+      {/* Before — pre-treatment teeth */}
       <div
         className="absolute inset-0 z-10 overflow-hidden border-r border-[var(--accent-warm)]"
         style={{ width: `${sliderPosition}%` }}
       >
         <img
           src={beforeImage}
-          alt="Before"
-          className="absolute inset-0 h-full w-full object-cover"
-          style={{ width: `${100 / (sliderPosition / 100)}%`, maxWidth: "none" }}
+          alt={beforeAlt}
+          className="absolute left-0 top-0 h-full"
+          style={imageStyle}
           draggable={false}
+          loading="lazy"
         />
-        <div className="absolute bottom-4 left-4 bg-black/60 px-3 py-1 text-[10px] uppercase tracking-widest text-white border border-white/10">
+        <div className="absolute bottom-4 left-4 border border-white/10 bg-black/60 px-3 py-1 text-[10px] uppercase tracking-widest text-white">
           Before
         </div>
       </div>
@@ -79,7 +111,7 @@ export default function BeforeAfterSlider({
         className="absolute inset-y-0 z-20 w-px bg-[var(--accent-warm)]"
         style={{ left: `${sliderPosition}%` }}
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-11 w-11 rounded-full border border-[var(--accent-warm)] bg-black/80 flex items-center justify-center text-[var(--accent-warm)]">
+        <div className="absolute top-1/2 left-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--accent-warm)] bg-black/80 text-[var(--accent-warm)]">
           <svg
             width="20"
             height="20"
@@ -89,6 +121,7 @@ export default function BeforeAfterSlider({
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
+            aria-hidden
           >
             <path d="m18 8 4 4-4 4M6 8l-4 4 4 4" />
           </svg>

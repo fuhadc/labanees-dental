@@ -13,7 +13,21 @@ export const CLINIC_PHOTOS = {
     src: "/clinic/IMG_1529.jpg",
     alt: "Labanees Dental lobby and reception area in Muscat",
   },
+  mainLobby: {
+    src: "/clinic/IMG_1575.jpg",
+    alt: "Spacious Labanees Dental lobby with natural light and greenery",
+  },
+  imagingSuite: {
+    src: "/clinic/IMG_1582.jpg",
+    alt: "Advanced panoramic dental imaging technology at Labanees Dental",
+  },
 } as const;
+
+/** Pair shown in section-bridge scroll transitions */
+export const BRIDGE_TRANSITION_PHOTOS = [
+  CLINIC_PHOTOS.mainLobby,
+  CLINIC_PHOTOS.imagingSuite,
+] as const;
 
 export const CLINIC_GALLERY = [
   CLINIC_PHOTOS.lobby,
