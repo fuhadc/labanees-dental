@@ -7,6 +7,7 @@ import { Header, HeroBanner, Footer } from "@/components";
 import AppleStickyShowcase from "@/components/AppleStickyShowcase";
 import SectionDivider from "@/components/SectionDivider";
 import { SectionZoom, SectionBridge } from "@/components/apple";
+import { HERO_CLINIC_IMAGE } from "@/lib/clinic-images";
 import {
   WelcomeSection,
   ClinicSection,
@@ -27,7 +28,7 @@ export default function Home() {
         label="Welcome to Labanees"
         title="Where Precision Meets the Art of Dentistry"
         tagline="Advanced cosmetic dentistry and high-precision implantology in the heart of Muscat."
-        backgroundImage="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&h=1600&fit=crop&q=90"
+        backgroundImage={HERO_CLINIC_IMAGE}
       />
 
       <SectionBridge label="About" />

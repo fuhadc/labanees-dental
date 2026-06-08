@@ -7,7 +7,7 @@ import { spring, transition } from "@/lib/motion";
 
 const navLinks = [
   { label: "Home", href: "#" },
-  { label: "Before / After", href: "#before-after" },
+  { label: "Results", href: "#before-after" },
   { label: "Treatments", href: "#services" },
   { label: "Orthodontics", href: "#orthodontics" },
   { label: "Team", href: "#team" },
@@ -76,14 +76,14 @@ export default function Header() {
             </span>
           </a>
           <nav
-            className="hidden items-center gap-12 md:flex"
+            className="hidden items-center gap-5 lg:gap-7 xl:gap-9 md:flex"
             aria-label="Main navigation"
           >
             {navLinks.map(({ label, href }) => (
               <Magnetic key={label}>
                 <a
                   href={href}
-                  className="link-underline font-display text-[10px] font-medium uppercase tracking-[0.3em] text-white/40 transition-all duration-500 hover:text-[var(--accent-warm)] hover:tracking-[0.4em] py-2 px-1"
+                  className="link-underline whitespace-nowrap font-display text-[10px] font-medium uppercase tracking-[0.22em] text-white/40 transition-all duration-500 hover:text-[var(--accent-warm)] hover:tracking-[0.28em] py-2 px-0.5 lg:tracking-[0.26em]"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {label}

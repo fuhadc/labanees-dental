@@ -13,28 +13,26 @@ import { BoxReveal } from "@/components/BoxReveal";
 import { MorphPanel, ScrollImageSequence } from "@/components/apple";
 import { SCROLL_OFFSET, sequenceFrameOpacity } from "@/lib/apple-scroll";
 import { getShowcaseScrollVh, useViewport } from "@/hooks/useViewport";
+import { CLINIC_PHOTOS } from "@/lib/clinic-images";
 
 const slides = [
   {
-    title: "Digital Smile Design",
-    body: "Every treatment is planned with precision imaging and artisan finishing — flagship clarity for modern dentistry.",
-    image:
-      "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=1400&h=1000&fit=crop&q=85",
-    alt: "Digital smile design",
+    title: "A Warm Welcome",
+    body: "Step into our Muscat reception — refined interiors, calm lighting, and a team ready to greet you from the moment you arrive.",
+    image: CLINIC_PHOTOS.reception.src,
+    alt: CLINIC_PHOTOS.reception.alt,
   },
   {
-    title: "Painless Implantology",
-    body: "Advanced surgical protocols and sedation options for a calm, premium experience from consultation to restoration.",
-    image:
-      "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1400&h=1000&fit=crop&q=85",
-    alt: "Dental implantology",
+    title: "Quiet Comfort",
+    body: "Unwind in our waiting lounge — spacious seating, soft light, and a serene atmosphere designed around your peace of mind.",
+    image: CLINIC_PHOTOS.waitingLounge.src,
+    alt: CLINIC_PHOTOS.waitingLounge.alt,
   },
   {
-    title: "Quiet Luxury Care",
-    body: "A serene Muscat sanctuary where technology, comfort, and meticulous detail define every visit.",
-    image:
-      "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1400&h=1000&fit=crop&q=85",
-    alt: "Luxury dental care",
+    title: "The Labanees Experience",
+    body: "Our flagship lobby reflects the standard we bring to every treatment — precision, artistry, and quiet luxury throughout.",
+    image: CLINIC_PHOTOS.lobby.src,
+    alt: CLINIC_PHOTOS.lobby.alt,
   },
 ];
 

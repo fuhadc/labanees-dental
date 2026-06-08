@@ -95,7 +95,7 @@ export default function HeroBanner({
           aria-hidden
         />
         <div className="hero-grain absolute inset-0" aria-hidden />
-        <div className="hero-frame absolute inset-4 sm:inset-6 lg:inset-8" aria-hidden />
+        <div className="hero-frame" aria-hidden />
       </div>
 
       {/* Ambient orbs */}
@@ -109,7 +109,7 @@ export default function HeroBanner({
         className="relative z-10 flex h-full min-h-0 flex-col justify-end pt-[var(--header-height)]"
         style={reduced ? undefined : { y: contentY, opacity: contentOpacity }}
       >
-        <div className="section-padding-x mx-auto w-full max-w-[var(--content-max-width)] pb-8 sm:pb-10 lg:pb-14">
+        <div className="hero-inner mx-auto w-full max-w-[var(--content-max-width)]">
           <motion.div
             variants={reduced ? undefined : container}
             initial={reduced ? false : "hidden"}
@@ -120,7 +120,7 @@ export default function HeroBanner({
               {label && (
                 <motion.div variants={item} className="hero-eyebrow">
                   <span className="hero-eyebrow-line" aria-hidden />
-                  <span className="font-display text-[10px] font-medium uppercase tracking-[0.55em] text-[var(--accent-warm)]">
+                  <span className="hero-eyebrow-text font-display font-medium uppercase text-[var(--accent-warm)]">
                     {label}
                   </span>
                 </motion.div>

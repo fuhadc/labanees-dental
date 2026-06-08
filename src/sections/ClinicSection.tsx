@@ -1,15 +1,10 @@
 "use client";
 
 import { BoxReveal, BoxRevealGrid, BoxRevealItem } from "@/components/BoxReveal";
+import { CLINIC_GALLERY } from "@/lib/clinic-images";
 
 export default function ClinicSection() {
   const DEFAULT_FALLBACK_IMAGE = "/placeholder-dental.svg";
-
-  const images = [
-    "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&h=800&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=1200&h=800&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1551076805-e1869033e561?w=1200&h=800&fit=crop&q=80",
-  ];
 
   return (
     <section id="clinic" aria-label="Our clinic interior" className="bg-[var(--bg-dark)]">
@@ -35,14 +30,14 @@ export default function ClinicSection() {
 
         <div className="no-scrollbar overflow-x-auto pb-4 snap-x snap-mandatory">
           <BoxRevealGrid className="flex min-w-max gap-6 px-2">
-            {images.map((src) => (
+            {CLINIC_GALLERY.map((photo) => (
               <BoxRevealItem
-                key={src}
+                key={photo.src}
                 className="relative h-[300px] w-[min(85vw,350px)] shrink-0 snap-center overflow-hidden p-0 md:h-[450px] md:w-[650px]"
               >
                 <img
-                  src={src}
-                  alt="Clinic interior"
+                  src={photo.src}
+                  alt={photo.alt}
                   loading="lazy"
                   onError={(e) => {
                     const img = e.currentTarget;
