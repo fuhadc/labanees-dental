@@ -1,10 +1,12 @@
 /**
  * Lebanese Dental Clinic — Home page
- * Layout: Hero → Welcome → Services (alternating image/text) → Orthodontics → Footer
- * Design: dark panels (#333), white text, minimal typography, clinical aesthetic
+ * Apple-style scroll motion: parallax, zoom sections, image sequences, liquid glass
  */
 
 import { Header, HeroBanner, Footer } from "@/components";
+import AppleStickyShowcase from "@/components/AppleStickyShowcase";
+import SectionDivider from "@/components/SectionDivider";
+import { SectionZoom, SectionBridge } from "@/components/apple";
 import {
   WelcomeSection,
   ClinicSection,
@@ -21,7 +23,6 @@ export default function Home() {
     <div className="min-h-screen bg-[var(--bg-dark)] text-white">
       <Header />
 
-      {/* Hero — full-width with optional background image + overlay */}
       <HeroBanner
         label="Welcome to Labanees"
         title="Where Precision Meets the Art of Dentistry"
@@ -29,31 +30,47 @@ export default function Home() {
         backgroundImage="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&h=1600&fit=crop&q=90"
       />
 
-      {/* Welcome — full-width intro block */}
-      <WelcomeSection />
+      <SectionBridge label="About" />
+      <SectionZoom id="about">
+        <WelcomeSection />
+      </SectionZoom>
 
-      {/* Unsere Klinik — interior gallery */}
-      <ClinicSection />
+      <AppleStickyShowcase />
 
-      {/* Services — alternating image-left / text-right sections */}
-      <ServicesSection />
+      <SectionBridge label="Our Space" />
+      <SectionZoom>
+        <ClinicSection />
+      </SectionZoom>
 
-      {/* Orthodontics — section header + alternating subsections */}
-      <OrthodonticsSection />
+      <SectionDivider label="Treatments" />
+      <SectionZoom id="services">
+        <ServicesSection />
+      </SectionZoom>
 
-      {/* Before / After & Google-style reviews */}
-      <ReviewsSection />
+      <SectionBridge label="Orthodontics" />
+      <SectionZoom id="orthodontics">
+        <OrthodonticsSection />
+      </SectionZoom>
 
-      {/* Team overview */}
-      <TeamSection />
+      <SectionDivider label="Results" />
+      <SectionZoom>
+        <ReviewsSection />
+      </SectionZoom>
 
-      {/* Jobs / careers band */}
-      <JobsSection />
+      <SectionDivider label="Specialists" />
+      <SectionZoom id="team">
+        <TeamSection />
+      </SectionZoom>
 
-      {/* Contact + online appointment form */}
-      <ContactSection />
+      <SectionZoom id="jobs">
+        <JobsSection />
+      </SectionZoom>
 
-      {/* Footer — CTA + copyright */}
+      <SectionBridge label="Visit Us" />
+      <SectionZoom id="contact">
+        <ContactSection />
+      </SectionZoom>
+
       <Footer
         ctaText="Book Appointment"
         ctaHref="#booking"

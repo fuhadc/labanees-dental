@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { spring } from "@/lib/motion";
 
 export default function FloatingAction() {
   return (
@@ -11,7 +12,7 @@ export default function FloatingAction() {
         rel="noopener noreferrer"
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: "spring", delay: 1 }}
+        transition={{ ...spring.soft, delay: 0.8 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         className="flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xl"

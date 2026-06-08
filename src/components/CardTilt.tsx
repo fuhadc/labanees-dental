@@ -1,16 +1,23 @@
 "use client";
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { spring } from "@/lib/motion";
 
-export default function CardTilt({ children, className = "" }: { children: React.ReactNode, className?: string }) {
+export default function CardTilt({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const mouseXSpring = useSpring(x);
-  const mouseYSpring = useSpring(y);
+  const mouseXSpring = useSpring(x, spring.tilt);
+  const mouseYSpring = useSpring(y, spring.tilt);
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["8deg", "-8deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-8deg", "8deg"]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -18,10 +25,8 @@ export default function CardTilt({ children, className = "" }: { children: React
     const height = rect.height;
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-    x.set(xPct);
-    y.set(yPct);
+    x.set(mouseX / width - 0.5);
+    y.set(mouseY / height - 0.5);
   };
 
   const handleMouseLeave = () => {
@@ -40,7 +45,7 @@ export default function CardTilt({ children, className = "" }: { children: React
       }}
       className={`relative ${className}`}
     >
-      <div style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d" }}>
+      <div style={{ transform: "translateZ(40px)", transformStyle: "preserve-3d" }}>
         {children}
       </div>
     </motion.div>

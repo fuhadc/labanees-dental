@@ -3,7 +3,6 @@
 import ImageContentSection from "@/components/ImageContentSection";
 import SectionHeader from "@/components/SectionHeader";
 
-// Curated Unsplash images for orthodontics
 const IMG = (id: string, w = 800, h = 600) =>
   `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&q=80`;
 
@@ -32,18 +31,13 @@ const orthoSubsections = [
 
 export default function OrthodonticsSection() {
   return (
-    <section id="orthodontics" aria-label="Orthodontics">
+    <section id="orthodontics" aria-label="Orthodontics" className="space-y-8">
       <SectionHeader title="Orthodontics" withDivider align="center" />
-      {orthoSubsections.map((sub) => (
+      {orthoSubsections.map((sub, index) => (
         <ImageContentSection
           key={sub.id}
-          id={sub.id}
-          heading={sub.heading}
-          description={sub.description}
-          items={sub.items}
-          imageSrc={sub.imageSrc}
-          imageAlt={sub.imageAlt}
-          imageFirst={sub.imageFirst}
+          sectionIndex={index}
+          {...sub}
         />
       ))}
     </section>

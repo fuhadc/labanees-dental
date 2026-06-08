@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
+import { BoxReveal, BoxRevealItem, BoxRevealStagger } from "@/components/BoxReveal";
 
 export interface FeatureDescriptionBlockProps {
   heading: string;
@@ -17,83 +17,50 @@ export default function FeatureDescriptionBlock({
   id,
   className = "",
 }: FeatureDescriptionBlockProps) {
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-
   return (
-    <motion.section
+    <section
       id={id}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      variants={containerVariants}
-      className={`bg-[var(--bg-dark)] py-24 md:py-40 section-padding-x ${className}`}
+      className={`section-padding-x section-padding-y ${className}`}
       aria-labelledby={id ? `block-heading-${id}` : undefined}
     >
-      <div className="max-w-[var(--content-max-width)] mx-auto flex flex-col items-center text-center">
-        <motion.h2
-          id={id ? `block-heading-${id}` : undefined}
-          variants={itemVariants}
-          className="font-serif text-4xl md:text-5xl lg:text-7xl font-medium tracking-tight text-white italic"
-          style={{ fontFamily: "var(--font-serif)" }}
+      <div className="mx-auto max-w-[var(--content-max-width)]">
+        <BoxReveal
+          origin="bottom"
+          className="flex flex-col items-center px-8 py-16 text-center md:px-16 md:py-24"
         >
-          {heading}
-        </motion.h2>
-        
-        <motion.div 
-          initial={{ width: 0 }}
-          whileInView={{ width: 120 }}
-          transition={{ duration: 1.2, delay: 0.5 }}
-          className="mt-10 h-px bg-gradient-to-r from-transparent via-[var(--accent-warm)] to-transparent" 
-        />
-
-        <motion.p
-          variants={itemVariants}
-          className="mt-12 max-w-3xl text-lg md:text-xl font-light text-white/40 leading-relaxed tracking-wide italic"
-          style={{ fontFamily: "var(--font-sans)" }}
-        >
-          {description}
-        </motion.p>
+          <h2
+            id={id ? `block-heading-${id}` : undefined}
+            className="font-serif text-4xl font-medium tracking-tight text-white italic md:text-5xl lg:text-7xl"
+            style={{ fontFamily: "var(--font-serif)" }}
+          >
+            {heading}
+          </h2>
+          <div className="mt-10 h-px w-[120px] bg-gradient-to-r from-transparent via-[var(--accent-warm)] to-transparent" />
+          <p
+            className="mt-12 max-w-3xl text-lg font-light leading-relaxed tracking-wide text-white/40 italic md:text-xl"
+            style={{ fontFamily: "var(--font-sans)" }}
+          >
+            {description}
+          </p>
+        </BoxReveal>
 
         {items.length > 0 && (
-          <ul className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 w-full max-w-5xl">
+          <BoxRevealStagger className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {items.map((item, i) => (
-              <motion.li
-                key={i}
-                variants={itemVariants}
-                className="flex flex-col items-center gap-6 text-sm font-light text-white/30 group"
+              <BoxRevealItem
+                key={item}
+                stagger
+                className="flex flex-col items-center gap-6 px-6 py-10 text-center"
               >
-                <div className="relative">
-                  <motion.div 
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    transition={{ duration: 0.8, delay: 0.8 + (i * 0.1) }}
-                    className="h-px w-10 bg-[var(--accent-warm)] opacity-50 group-hover:w-16 transition-all duration-500 origin-center" 
-                  />
-                </div>
-                <span className="tracking-[0.3em] uppercase text-[10px] group-hover:text-[var(--accent-warm)] transition-colors duration-500">{item}</span>
-              </motion.li>
+                <div className="h-px w-10 bg-[var(--accent-warm)]/50" />
+                <span className="text-[10px] font-light uppercase tracking-[0.3em] text-white/30">
+                  {item}
+                </span>
+              </BoxRevealItem>
             ))}
-          </ul>
+          </BoxRevealStagger>
         )}
       </div>
-    </motion.section>
+    </section>
   );
 }

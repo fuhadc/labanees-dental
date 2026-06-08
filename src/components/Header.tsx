@@ -3,6 +3,7 @@
 import { useEffect, useId, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Magnetic from "./Magnetic";
+import { spring, transition } from "@/lib/motion";
 
 const navLinks = [
   { label: "Home", href: "#" },
@@ -16,7 +17,15 @@ const navLinks = [
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const mobileMenuId = useId();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -38,8 +47,20 @@ export default function Header() {
   }, [isMenuOpen]);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[var(--bg-dark)]/80 backdrop-blur-xl border-b border-white/5">
-      <div className="section-padding-x flex items-center justify-between gap-6 py-8">
+    <header
+      data-scrolled={scrolled ? "true" : "false"}
+      className={`sticky top-0 z-50 w-full border-b transition-[padding,background,box-shadow,border-color] duration-500 ${
+        scrolled
+          ? "glass-nav border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.35)]"
+          : "border-transparent"
+      }`}
+      style={{ transitionTimingFunction: "var(--ease-sflow)" }}
+    >
+      <div
+        className={`section-padding-x flex items-center justify-between gap-6 transition-[padding] duration-300 ${
+          scrolled ? "py-5" : "py-8"
+        }`}
+      >
         <div className="mx-auto flex max-w-[var(--content-max-width)] w-full items-center justify-between">
           <a
             href="#"
@@ -62,7 +83,7 @@ export default function Header() {
               <Magnetic key={label}>
                 <a
                   href={href}
-                  className="font-display text-[10px] font-medium uppercase tracking-[0.3em] text-white/40 transition-all duration-500 hover:text-[var(--accent-warm)] hover:tracking-[0.4em] py-2 px-1"
+                  className="link-underline font-display text-[10px] font-medium uppercase tracking-[0.3em] text-white/40 transition-all duration-500 hover:text-[var(--accent-warm)] hover:tracking-[0.4em] py-2 px-1"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {label}
@@ -108,14 +129,17 @@ export default function Header() {
           >
             <motion.span
               animate={isMenuOpen ? { rotate: 45, y: 10 } : { rotate: 0, y: 0 }}
+              transition={spring.nav}
               className="h-0.5 w-6 bg-white/90 origin-center"
             />
             <motion.span
-              animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-              className="h-0.5 w-6 bg-white/90"
+              animate={isMenuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+              transition={spring.nav}
+              className="h-0.5 w-6 bg-white/90 origin-center"
             />
             <motion.span
               animate={isMenuOpen ? { rotate: -45, y: -10 } : { rotate: 0, y: 0 }}
+              transition={spring.nav}
               className="h-0.5 w-6 bg-white/90 origin-center"
             />
           </button>
@@ -129,6 +153,7 @@ export default function Header() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={transition.medium}
             className="fixed inset-0 z-[1000] h-screen w-full bg-[var(--bg-dark)] md:hidden"
           >
             {/* Animated Background Decor */}
@@ -160,10 +185,10 @@ export default function Header() {
                   <motion.a
                     key={label}
                     href={href}
-                    initial={{ x: -20, opacity: 0 }}
+                    initial={{ x: -16, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
-                    exit={{ x: -20, opacity: 0 }}
-                    transition={{ delay: 0.1 + (idx * 0.05), duration: 0.5 }}
+                    exit={{ x: -16, opacity: 0 }}
+                    transition={{ ...transition.medium, delay: 0.08 + idx * 0.04 }}
                     onClick={() => setIsMenuOpen(false)}
                     className="group flex items-center gap-6"
                   >
@@ -181,10 +206,10 @@ export default function Header() {
               </nav>
 
               <motion.div 
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ delay: 0.6 }}
+                exit={{ opacity: 0, y: 16 }}
+                transition={{ ...transition.medium, delay: 0.45 }}
                 className="mt-auto pt-12 border-t border-white/5"
               >
                 <div className="grid grid-cols-2 gap-8">

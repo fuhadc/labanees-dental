@@ -3,7 +3,6 @@
 import ImageContentSection from "@/components/ImageContentSection";
 import SectionHeader from "@/components/SectionHeader";
 
-// Curated Unsplash images — professional dental/clinical aesthetic
 const IMG = (id: string, w = 800, h = 600) =>
   `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&q=80`;
 
@@ -52,18 +51,13 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <section id="services" aria-label="Our services">
+    <section id="services" aria-label="Our services" className="space-y-8">
       <SectionHeader title="What We Do" withDivider align="center" />
-      {services.map((service) => (
+      {services.map((service, index) => (
         <ImageContentSection
           key={service.id}
-          id={service.id}
-          heading={service.heading}
-          description={service.description}
-          items={service.items}
-          imageSrc={service.imageSrc}
-          imageAlt={service.imageAlt}
-          imageFirst={service.imageFirst}
+          sectionIndex={index}
+          {...service}
         />
       ))}
     </section>

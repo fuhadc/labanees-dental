@@ -1,6 +1,8 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
+import { BoxReveal } from "@/components/BoxReveal";
+import ScrollParallax from "@/components/ScrollParallax";
+import type { BoxOrigin } from "@/lib/motion";
 
 export interface ImageContentSectionProps {
   heading: string;
@@ -11,6 +13,7 @@ export interface ImageContentSectionProps {
   imageAlt: string;
   imageFirst?: boolean;
   id?: string;
+  sectionIndex?: number;
 }
 
 const DEFAULT_FALLBACK_IMAGE = "/placeholder-dental.svg";
@@ -24,49 +27,27 @@ export default function ImageContentSection({
   imageAlt,
   imageFirst = true,
   id,
+  sectionIndex = 0,
 }: ImageContentSectionProps) {
   const fallback = imageFallbackSrc ?? DEFAULT_FALLBACK_IMAGE;
-
-  const contentVariants: Variants = {
-    hidden: { opacity: 0, x: imageFirst ? 50 : -50 },
-    visible: { 
-      opacity: 1, 
-      x: 0,
-      transition: { duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }
-    },
-  };
-
-  const imageVariants: Variants = {
-    hidden: { opacity: 0, scale: 1.1 },
-    visible: { 
-      opacity: 1, 
-      scale: 1,
-      transition: { duration: 1.5, ease: [0.22, 1, 0.36, 1] }
-    },
-  };
+  const imageOrigin: BoxOrigin = imageFirst ? "left" : "right";
+  const contentOrigin: BoxOrigin = imageFirst ? "right" : "left";
 
   const contentBlock = (
-    <motion.div
-      variants={contentVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      className="flex min-h-[300px] flex-col justify-center bg-[var(--bg-dark-panel)] px-8 py-16 md:min-h-[550px] md:px-24 md:py-24"
+    <BoxReveal
+      origin={contentOrigin}
+      delay={sectionIndex * 0.06}
+      className="flex min-h-[300px] flex-col justify-center px-8 py-16 md:min-h-[550px] md:px-16 md:py-20"
     >
-      <motion.h3
+      <h3
         className="font-serif text-3xl font-medium tracking-tight text-white italic md:text-5xl"
         style={{ fontFamily: "var(--font-serif)" }}
       >
         {heading}
-      </motion.h3>
-      <motion.div 
-        initial={{ width: 0 }}
-        whileInView={{ width: 64 }}
-        transition={{ duration: 1, delay: 0.5 }}
-        className="mt-6 h-px bg-[var(--accent-warm)]" 
-      />
+      </h3>
+      <div className="mt-6 h-px w-16 bg-[var(--accent-warm)]" />
       <p
-        className="mt-10 text-base md:text-lg font-light text-white/50 leading-relaxed max-w-md"
+        className="mt-10 max-w-md text-base font-light leading-relaxed text-white/50 md:text-lg"
         style={{ fontFamily: "var(--font-sans)" }}
       >
         {description}
@@ -74,62 +55,58 @@ export default function ImageContentSection({
       {items.length > 0 && (
         <ul className="mt-10 space-y-4">
           {items.map((item, i) => (
-            <motion.li
+            <li
               key={i}
-              initial={{ opacity: 0, x: -10 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 + (i * 0.1) }}
               className="flex items-start gap-4 text-sm font-light text-white/40"
             >
-              <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-[var(--accent-warm)] opacity-50" />
+              <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-[var(--accent-warm)]" />
               <span>{item}</span>
-            </motion.li>
+            </li>
           ))}
         </ul>
       )}
-    </motion.div>
+    </BoxReveal>
   );
 
   const imageBlock = (
-    <motion.div 
-      variants={imageVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      className="group relative min-h-[300px] w-full overflow-hidden bg-[var(--bg-charcoal)] md:min-h-[550px]"
-    >
-      <motion.img
+    <ScrollParallax distance={24} className="min-h-[300px] md:min-h-[550px]">
+      <BoxReveal
+        origin={imageOrigin}
+        delay={sectionIndex * 0.06 + 0.05}
+        className="group relative h-full min-h-[300px] overflow-hidden p-0 md:min-h-[550px]"
+        framed
+      >
+        <img
         src={imageSrc}
         alt={imageAlt}
         loading="lazy"
-        whileHover={{ scale: 1.05 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
         onError={(e) => {
           const img = e.currentTarget;
           if (img.dataset.fallbackApplied === "true") return;
           img.dataset.fallbackApplied = "true";
           img.src = fallback;
         }}
-        className="h-full w-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-1000"
+        className="h-full min-h-[300px] w-full object-cover object-center grayscale transition-[filter,transform] duration-500 group-hover:scale-[1.02] group-hover:grayscale-0 md:min-h-[550px]"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-dark)]/40 via-transparent to-transparent pointer-events-none" />
-    </motion.div>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--bg-dark)]/50 via-transparent to-transparent" />
+      </BoxReveal>
+    </ScrollParallax>
   );
 
   return (
     <section
       id={id}
-      className="grid grid-cols-1 md:grid-cols-2 overflow-hidden border-b border-white/5"
+      className="section-padding-x section-padding-y mx-auto grid max-w-[90rem] grid-cols-1 gap-6 md:grid-cols-2"
     >
       {imageFirst ? (
         <>
-          <div className="order-1 md:order-1">{imageBlock}</div>
-          <div className="order-2 md:order-2">{contentBlock}</div>
+          {imageBlock}
+          {contentBlock}
         </>
       ) : (
         <>
-          <div className="order-2 md:order-1">{contentBlock}</div>
-          <div className="order-1 md:order-2">{imageBlock}</div>
+          {contentBlock}
+          {imageBlock}
         </>
       )}
     </section>

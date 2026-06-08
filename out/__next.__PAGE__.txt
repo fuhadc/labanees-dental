@@ -1,16 +1,20 @@
 1:"$Sreact.fragment"
-2:I[2971,["/_next/static/chunks/11085ed3ea1e9eaa.js","/_next/static/chunks/c01bd44d463f0819.js"],"default"]
-3:I[94497,["/_next/static/chunks/11085ed3ea1e9eaa.js","/_next/static/chunks/c01bd44d463f0819.js"],"default"]
-4:I[17460,["/_next/static/chunks/11085ed3ea1e9eaa.js","/_next/static/chunks/c01bd44d463f0819.js"],"default"]
-5:I[57962,["/_next/static/chunks/11085ed3ea1e9eaa.js","/_next/static/chunks/c01bd44d463f0819.js"],"default"]
-6:I[55919,["/_next/static/chunks/11085ed3ea1e9eaa.js","/_next/static/chunks/c01bd44d463f0819.js"],"default"]
-7:I[40189,["/_next/static/chunks/11085ed3ea1e9eaa.js","/_next/static/chunks/c01bd44d463f0819.js"],"default"]
-8:I[49513,["/_next/static/chunks/11085ed3ea1e9eaa.js","/_next/static/chunks/c01bd44d463f0819.js"],"default"]
-9:I[2325,["/_next/static/chunks/11085ed3ea1e9eaa.js","/_next/static/chunks/c01bd44d463f0819.js"],"default"]
-a:I[50262,["/_next/static/chunks/11085ed3ea1e9eaa.js","/_next/static/chunks/c01bd44d463f0819.js"],"default"]
-b:I[92488,["/_next/static/chunks/11085ed3ea1e9eaa.js","/_next/static/chunks/c01bd44d463f0819.js"],"default"]
-c:I[13642,["/_next/static/chunks/11085ed3ea1e9eaa.js","/_next/static/chunks/c01bd44d463f0819.js"],"default"]
-d:I[97367,["/_next/static/chunks/2f236954d6a65e12.js"],"OutletBoundary"]
-e:"$Sreact.suspense"
-0:{"buildId":"1yMW2dkIXcfY8Hk3sZjgO","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"min-h-screen bg-[var(--bg-dark)] text-white","children":[["$","$L2",null,{}],["$","$L3",null,{"label":"Welcome to Labanees","title":"Where Precision Meets the Art of Dentistry","tagline":"Advanced cosmetic dentistry and high-precision implantology in the heart of Muscat.","backgroundImage":"https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&h=1600&fit=crop&q=90"}],["$","$L4",null,{}],["$","$L5",null,{}],["$","$L6",null,{}],["$","$L7",null,{}],["$","$L8",null,{}],["$","$L9",null,{}],["$","$La",null,{}],["$","$Lb",null,{}],["$","$Lc",null,{"ctaText":"Book Appointment","ctaHref":"#booking","contactLine":"18th November St, Muscat | +968 9670 0335 | info@labanees.com","copyright":"© 2026 Labanees Dental. All rights reserved."}]]}],[["$","script","script-0",{"src":"/_next/static/chunks/c01bd44d463f0819.js","async":true}]],["$","$Ld",null,{"children":["$","$e",null,{"name":"Next.MetadataOutlet","children":"$@f"}]}]]}],"loading":null,"isPartial":false}
-f:null
+2:I[2971,["/_next/static/chunks/db123481ea5127c5.js","/_next/static/chunks/79f498a1092ab4c4.js","/_next/static/chunks/c1a3b9089e730b65.js"],"default"]
+3:I[94497,["/_next/static/chunks/db123481ea5127c5.js","/_next/static/chunks/79f498a1092ab4c4.js","/_next/static/chunks/c1a3b9089e730b65.js"],"default"]
+4:I[79024,["/_next/static/chunks/db123481ea5127c5.js","/_next/static/chunks/79f498a1092ab4c4.js","/_next/static/chunks/c1a3b9089e730b65.js"],"default"]
+5:I[92418,["/_next/static/chunks/db123481ea5127c5.js","/_next/static/chunks/79f498a1092ab4c4.js","/_next/static/chunks/c1a3b9089e730b65.js"],"default"]
+6:I[17460,["/_next/static/chunks/db123481ea5127c5.js","/_next/static/chunks/79f498a1092ab4c4.js","/_next/static/chunks/c1a3b9089e730b65.js"],"default"]
+7:I[63509,["/_next/static/chunks/db123481ea5127c5.js","/_next/static/chunks/79f498a1092ab4c4.js","/_next/static/chunks/c1a3b9089e730b65.js"],"default"]
+8:I[57962,["/_next/static/chunks/db123481ea5127c5.js","/_next/static/chunks/79f498a1092ab4c4.js","/_next/static/chunks/c1a3b9089e730b65.js"],"default"]
+9:I[16142,["/_next/static/chunks/db123481ea5127c5.js","/_next/static/chunks/79f498a1092ab4c4.js","/_next/static/chunks/c1a3b9089e730b65.js"],"default"]
+a:I[55919,["/_next/static/chunks/db123481ea5127c5.js","/_next/static/chunks/79f498a1092ab4c4.js","/_next/static/chunks/c1a3b9089e730b65.js"],"default"]
+b:I[40189,["/_next/static/chunks/db123481ea5127c5.js","/_next/static/chunks/79f498a1092ab4c4.js","/_next/static/chunks/c1a3b9089e730b65.js"],"default"]
+c:I[49513,["/_next/static/chunks/db123481ea5127c5.js","/_next/static/chunks/79f498a1092ab4c4.js","/_next/static/chunks/c1a3b9089e730b65.js"],"default"]
+d:I[2325,["/_next/static/chunks/db123481ea5127c5.js","/_next/static/chunks/79f498a1092ab4c4.js","/_next/static/chunks/c1a3b9089e730b65.js"],"default"]
+e:I[50262,["/_next/static/chunks/db123481ea5127c5.js","/_next/static/chunks/79f498a1092ab4c4.js","/_next/static/chunks/c1a3b9089e730b65.js"],"default"]
+f:I[92488,["/_next/static/chunks/db123481ea5127c5.js","/_next/static/chunks/79f498a1092ab4c4.js","/_next/static/chunks/c1a3b9089e730b65.js"],"default"]
+10:I[13642,["/_next/static/chunks/db123481ea5127c5.js","/_next/static/chunks/79f498a1092ab4c4.js","/_next/static/chunks/c1a3b9089e730b65.js"],"default"]
+11:I[97367,["/_next/static/chunks/2f236954d6a65e12.js"],"OutletBoundary"]
+12:"$Sreact.suspense"
+0:{"buildId":"m7noh5WbGlU2CLjwDZC5b","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"min-h-screen bg-[var(--bg-dark)] text-white","children":[["$","$L2",null,{}],["$","$L3",null,{"label":"Welcome to Labanees","title":"Where Precision Meets the Art of Dentistry","tagline":"Advanced cosmetic dentistry and high-precision implantology in the heart of Muscat.","backgroundImage":"https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&h=1600&fit=crop&q=90"}],["$","$L4",null,{"label":"About"}],["$","$L5",null,{"id":"about","children":["$","$L6",null,{}]}],["$","$L7",null,{}],["$","$L4",null,{"label":"Our Space"}],["$","$L5",null,{"children":["$","$L8",null,{}]}],["$","$L9",null,{"label":"Treatments"}],["$","$L5",null,{"id":"services","children":["$","$La",null,{}]}],["$","$L4",null,{"label":"Orthodontics"}],["$","$L5",null,{"id":"orthodontics","children":["$","$Lb",null,{}]}],["$","$L9",null,{"label":"Results"}],["$","$L5",null,{"children":["$","$Lc",null,{}]}],["$","$L9",null,{"label":"Specialists"}],["$","$L5",null,{"id":"team","children":["$","$Ld",null,{}]}],["$","$L5",null,{"id":"jobs","children":["$","$Le",null,{}]}],["$","$L4",null,{"label":"Visit Us"}],["$","$L5",null,{"id":"contact","children":["$","$Lf",null,{}]}],["$","$L10",null,{"ctaText":"Book Appointment","ctaHref":"#booking","contactLine":"18th November St, Muscat | +968 9670 0335 | info@labanees.com","copyright":"© 2026 Labanees Dental. All rights reserved."}]]}],[["$","script","script-0",{"src":"/_next/static/chunks/c1a3b9089e730b65.js","async":true}]],["$","$L11",null,{"children":["$","$12",null,{"name":"Next.MetadataOutlet","children":"$@13"}]}]]}],"loading":null,"isPartial":false}
+13:null

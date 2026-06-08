@@ -2,6 +2,7 @@
 
 import { useRef, useState, ReactNode } from "react";
 import { motion } from "framer-motion";
+import { spring } from "@/lib/motion";
 
 export default function Magnetic({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -12,7 +13,7 @@ export default function Magnetic({ children }: { children: ReactNode }) {
     const { height, width, left, top } = ref.current!.getBoundingClientRect();
     const middleX = clientX - (left + width / 2);
     const middleY = clientY - (top + height / 2);
-    setPosition({ x: middleX * 0.2, y: middleY * 0.2 });
+    setPosition({ x: middleX * 0.15, y: middleY * 0.15 });
   };
 
   const reset = () => {
@@ -28,7 +29,7 @@ export default function Magnetic({ children }: { children: ReactNode }) {
       onMouseMove={handleMouseMove}
       onMouseLeave={reset}
       animate={{ x, y }}
-      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+      transition={spring.magnetic}
     >
       {children}
     </motion.div>

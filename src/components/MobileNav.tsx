@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { spring } from "@/lib/motion";
 
 const navItems = [
   { label: "Home", href: "#", icon: "H" },
@@ -37,7 +38,7 @@ export default function MobileNav() {
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
-          transition={{ type: "spring", damping: 25, stiffness: 200 }}
+          transition={spring.nav}
           className="fixed bottom-6 left-1/2 z-[100] w-[90%] -translate-x-1/2 md:hidden"
         >
           <div className="flex items-center justify-between gap-2 rounded-full border border-white/10 bg-black/60 px-4 py-3 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.8)]">

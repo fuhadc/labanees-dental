@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display, Inter, Cormorant_Garamond, Syne } from "next/font/google";
+import { Inter, Cormorant_Garamond, Syne } from "next/font/google";
+import { MotionConfig } from "framer-motion";
 import "./globals.css";
-import { ScrollObserver, CustomCursor, SmoothScroll, BackgroundEffects, ScrollProgress, MobileNav, FloatingAction, PageWrapper, ScrollRadial } from "@/components";
+import { ScrollObserver, CustomCursor, SmoothScroll, BackgroundEffects, ScrollProgress, MobileNav, FloatingAction, PageWrapper } from "@/components";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -33,18 +34,19 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${cormorant.variable} ${syne.variable}`}>
       <body className="min-h-screen bg-[var(--bg-dark)] text-white antialiased font-sans">
-        <SmoothScroll>
-          <ScrollProgress />
-          <CustomCursor />
-          <BackgroundEffects />
-          <ScrollObserver />
-          <MobileNav />
-          <FloatingAction />
-          <ScrollRadial />
-          <PageWrapper>
-            {children}
-          </PageWrapper>
-        </SmoothScroll>
+        <MotionConfig reducedMotion="user" transition={{ ease: [0.77, 0, 0.175, 1], duration: 0.85 }}>
+          <SmoothScroll>
+            <ScrollProgress />
+            <CustomCursor />
+            <BackgroundEffects />
+            <ScrollObserver />
+            <MobileNav />
+            <FloatingAction />
+            <PageWrapper>
+              {children}
+            </PageWrapper>
+          </SmoothScroll>
+        </MotionConfig>
       </body>
     </html>
   );
