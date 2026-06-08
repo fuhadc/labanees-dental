@@ -113,7 +113,13 @@ function SequenceVisual({
             progress={progress}
           />
         ))}
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-dark)]/50 via-transparent to-[var(--accent-warm)]/5" />
+        <div
+          className={`absolute inset-0 bg-gradient-to-t ${
+            embed
+              ? "from-[var(--bg-dark)]/15 via-transparent to-transparent"
+              : "from-[var(--bg-dark)]/50 via-transparent to-[var(--accent-warm)]/5"
+          }`}
+        />
         {children}
       </motion.div>
     </div>

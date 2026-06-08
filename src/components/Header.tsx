@@ -9,7 +9,6 @@ const navLinks = [
   { label: "Home", href: "#" },
   { label: "Before / After", href: "#before-after" },
   { label: "Treatments", href: "#services" },
-  { label: "Orthodontics", href: "#orthodontics" },
   { label: "Team", href: "#team" },
   { label: "Jobs", href: "#jobs" },
   { label: "Contact", href: "#contact" },

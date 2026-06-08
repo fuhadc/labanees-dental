@@ -922,8 +922,14 @@ body:has(.hero-cinematic) header:not([data-scrolled="true"]) {
 .showcase-image-wrap .glass-liquid {
   width: var(--showcase-image-max-w);
   max-height: var(--showcase-image-max-h);
+  min-height: clamp(220px, 38vh, 520px);
   margin-inline: auto;
   aspect-ratio: 16 / 10;
+}
+
+.showcase-copy-slot {
+  min-height: clamp(9rem, 28vw, 13rem);
+  width: 100%;
 }
 
 .showcase-title-slot {
@@ -1032,6 +1038,10 @@ body:has(.hero-cinematic) header:not([data-scrolled="true"]) {
     padding-top: 0.5rem;
   }
 
+  .showcase-copy-slot {
+    min-height: 7.5rem;
+  }
+
   .showcase-title-slot {
     min-height: 2.75rem;
   }
@@ -1063,6 +1073,10 @@ body:has(.hero-cinematic) header:not([data-scrolled="true"]) {
 @container showcase (max-width: 380px) {
   .showcase-slide-title {
     font-size: clamp(1.5rem, 8cqi, 2rem);
+  }
+
+  .showcase-copy-slot {
+    min-height: 8rem;
   }
 
   .showcase-body-slot {

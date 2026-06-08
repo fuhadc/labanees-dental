@@ -5,12 +5,6 @@ import { BoxRevealGrid, BoxRevealItem } from "@/components/BoxReveal";
 
 const team = [
   {
-    name: "Dr. Wael Faisal",
-    role: "Orthodontist",
-    focus: "Specializing in advanced Invisalign® and functional orthodontics.",
-    imageSrc: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=500&fit=crop&q=80",
-  },
-  {
     name: "Dr. Sahar Albeini",
     role: "Cosmetic Dentist",
     focus: "Expert in bespoke smile design and high-precision veneers.",

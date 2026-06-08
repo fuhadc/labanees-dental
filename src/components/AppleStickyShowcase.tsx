@@ -51,20 +51,24 @@ function SlideLine({
   children: React.ReactNode;
   shift?: number;
 }) {
-  const opacity = useTransform(progress, (v) => sequenceFrameOpacity(v, index, total, 0.48));
+  const opacity = useTransform(progress, (v) => sequenceFrameOpacity(v, index, total, 0.08));
   const y = useTransform(progress, (v) => {
-    const o = sequenceFrameOpacity(v, index, total, 0.48);
+    const o = sequenceFrameOpacity(v, index, total, 0.08);
     return (1 - o) * shift;
   });
   const scale = useTransform(progress, (v) => {
-    const o = sequenceFrameOpacity(v, index, total, 0.48);
+    const o = sequenceFrameOpacity(v, index, total, 0.08);
     return 0.92 + o * 0.08;
+  });
+  const visibility = useTransform(progress, (v) => {
+    const o = sequenceFrameOpacity(v, index, total, 0.08);
+    return o < 0.04 ? "hidden" : "visible";
   });
 
   return (
     <motion.div
       className={`absolute inset-x-0 top-0 flex flex-col items-center px-[var(--showcase-pad-x)] ${className}`}
-      style={{ opacity, y, scale }}
+      style={{ opacity, y, scale, visibility }}
     >
       {children}
     </motion.div>
@@ -80,32 +84,20 @@ function SlideCopy({
 }) {
   return (
     <div className="showcase-copy mx-auto w-full max-w-3xl text-center">
-      <div className="showcase-title-slot relative">
+      <div className="showcase-copy-slot relative">
         {slides.map((slide, i) => (
           <SlideLine
-            key={`title-${slide.title}`}
+            key={slide.title}
             index={i}
             total={slides.length}
             progress={progress}
             shift={shift}
-            className="showcase-slide-title font-serif italic text-white"
-          >
-            {slide.title}
-          </SlideLine>
-        ))}
-      </div>
-
-      <div className="showcase-body-slot relative">
-        {slides.map((slide, i) => (
-          <SlideLine
-            key={`body-${slide.title}`}
-            index={i}
-            total={slides.length}
-            progress={progress}
-            shift={shift * 0.75}
             className="showcase-slide-body font-light text-white/50"
           >
-            <p className="showcase-slide-index font-display uppercase text-[var(--accent-warm)]/75">
+            <h3 className="showcase-slide-title font-serif italic text-white">
+              {slide.title}
+            </h3>
+            <p className="showcase-slide-index mt-5 font-display uppercase text-[var(--accent-warm)]/75 sm:mt-6">
               0{i + 1}
             </p>
             <p className="showcase-slide-text mt-4 text-pretty sm:mt-5">{slide.body}</p>
@@ -148,22 +140,16 @@ function SlideProgressDot({
   );
 }
 
-function ShowcaseHeader({ progress }: { progress: MotionValue<number> }) {
-  const opacity = useTransform(progress, [0, 0.15, 0.85, 1], [1, 1, 0.45, 0]);
-  const y = useTransform(progress, [0, 1], [0, -48]);
-
+function ShowcaseHeaderStatic() {
   return (
-    <motion.header
-      style={{ opacity, y }}
-      className="showcase-header mx-auto text-center"
-    >
+    <header className="showcase-header mx-auto text-center">
       <p className="showcase-eyebrow font-display uppercase text-[var(--accent-warm)]">
         The Labanees Standard
       </p>
       <h2 className="showcase-header-title mt-6 font-serif font-medium italic text-white sm:mt-8">
         Crafted like a flagship experience.
       </h2>
-    </motion.header>
+    </header>
   );
 }
 
@@ -235,28 +221,30 @@ export default function AppleStickyShowcase() {
             </div>
           </>
         ) : (
-          <div
-            ref={scrollRef}
-            className="showcase-scroll-track relative"
-            style={{ height: `${scrollTrackVh}vh` }}
-          >
-            <ShowcaseHeader progress={progress} />
+          <>
+            <ShowcaseHeaderStatic />
 
-            <div className="showcase-sticky-pin">
-              <div className="showcase-stage">
-                <ScrollImageSequence
-                  embed
-                  progress={progress}
-                  scrollTargetRef={scrollRef}
-                  images={slides.map((s) => ({ src: s.image, alt: s.alt }))}
-                  className="showcase-image-wrap w-full"
-                  stickyClassName="flex justify-center"
-                />
+            <div
+              ref={scrollRef}
+              className="showcase-scroll-track relative"
+              style={{ height: `${scrollTrackVh}vh` }}
+            >
+              <div className="showcase-sticky-pin">
+                <div className="showcase-stage">
+                  <ScrollImageSequence
+                    embed
+                    progress={progress}
+                    scrollTargetRef={scrollRef}
+                    images={slides.map((s) => ({ src: s.image, alt: s.alt }))}
+                    className="showcase-image-wrap w-full"
+                    stickyClassName="flex justify-center"
+                  />
 
-                <SlideCopy progress={progress} shift={motionShift} />
+                  <SlideCopy progress={progress} shift={motionShift} />
+                </div>
               </div>
             </div>
-          </div>
+          </>
         )}
       </div>
     </section>

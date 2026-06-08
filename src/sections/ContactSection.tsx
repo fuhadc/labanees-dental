@@ -176,7 +176,6 @@ export default function ContactSection() {
                 </option>
                 <option className="bg-[var(--bg-dark)]">General Dentistry</option>
                 <option className="bg-[var(--bg-dark)]">Cosmetic / Veneers</option>
-                <option className="bg-[var(--bg-dark)]">Invisalign / Braces</option>
                 <option className="bg-[var(--bg-dark)]">Implants / Surgery</option>
                 <option className="bg-[var(--bg-dark)]">Dermatology / Skin</option>
                 <option className="bg-[var(--bg-dark)]">Laser Treatments</option>

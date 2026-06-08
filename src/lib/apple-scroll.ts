@@ -24,13 +24,16 @@ export function sequenceFrameOpacity(
   progress: number,
   index: number,
   total: number,
-  softness = 0.55,
+  blend = 0.4,
 ): number {
   if (total <= 1) return 1;
-  const segment = 1 / total;
-  const center = (index + 0.5) * segment;
-  const half = segment * softness;
-  const dist = Math.abs(progress - center);
+
+  // Peaks at start, middle, end for 3 frames — frame 0 fully visible at progress 0
+  const peak = index / (total - 1);
+  const dist = Math.abs(progress - peak);
+  const range = 1 / (total - 1);
+  const half = range * (0.5 + blend);
+
   if (dist >= half) return 0;
   return 1 - dist / half;
 }

@@ -3,12 +3,12 @@
 export const BEFORE_AFTER_TEETH = {
   /** Natural tone / pre-treatment teeth close-up */
   before: {
-    src: "https://images.unsplash.com/photo-1600172454400-035f9349d6eb?auto=format&fit=crop&w=1800&h=1200&q=88",
-    alt: "Teeth before treatment — natural discoloration",
+    src: "/clinic/before_teeth.webp",
+    alt: "Patient's teeth before cosmetic veneer treatment showing natural discoloration and minor misalignment",
   },
   /** Bright, even smile after cosmetic treatment */
   after: {
-    src: "https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?auto=format&fit=crop&w=1800&h=1200&q=88",
-    alt: "Teeth after treatment — whitened, restored smile",
+    src: "/clinic/after_teeth.webp",
+    alt: "Patient's teeth after premium porcelain veneer treatment showing a bright, straight, and perfectly white smile",
   },
 } as const;

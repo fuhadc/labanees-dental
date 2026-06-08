@@ -6,13 +6,12 @@
 import { Header, HeroBanner, Footer } from "@/components";
 import AppleStickyShowcase from "@/components/AppleStickyShowcase";
 import SectionDivider from "@/components/SectionDivider";
-import { SectionZoom, SectionBridge } from "@/components/apple";
+import { SectionZoom } from "@/components/apple";
 import { HERO_CLINIC_IMAGE } from "@/lib/clinic-images";
 import {
   WelcomeSection,
   ClinicSection,
   ServicesSection,
-  OrthodonticsSection,
   ReviewsSection,
   TeamSection,
   JobsSection,
@@ -31,14 +30,14 @@ export default function Home() {
         backgroundImage={HERO_CLINIC_IMAGE}
       />
 
-      <SectionBridge label="About" />
+      <SectionDivider label="About" />
       <SectionZoom id="about">
         <WelcomeSection />
       </SectionZoom>
 
       <AppleStickyShowcase />
 
-      <SectionBridge label="Our Space" />
+      <SectionDivider label="Our Space" />
       <SectionZoom>
         <ClinicSection />
       </SectionZoom>
@@ -46,11 +45,6 @@ export default function Home() {
       <SectionDivider label="Treatments" />
       <SectionZoom id="services">
         <ServicesSection />
-      </SectionZoom>
-
-      <SectionBridge label="Orthodontics" />
-      <SectionZoom id="orthodontics">
-        <OrthodonticsSection />
       </SectionZoom>
 
       <SectionDivider label="Results" />
@@ -67,7 +61,7 @@ export default function Home() {
         <JobsSection />
       </SectionZoom>
 
-      <SectionBridge label="Visit Us" />
+      <SectionDivider label="Visit Us" />
       <SectionZoom id="contact">
         <ContactSection />
       </SectionZoom>
