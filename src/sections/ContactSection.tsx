@@ -1,17 +1,16 @@
 "use client";
 
+import SectionHeader from "@/components/SectionHeader";
 import { BoxReveal } from "@/components/BoxReveal";
 
 export default function ContactSection() {
   return (
-    <section
-      id="contact"
-      aria-label="Contact & Appointment"
-      className="section-padding-x section-padding-y bg-transparent"
-    >
-      <div className="mx-auto flex max-w-[90rem] flex-col gap-8 lg:flex-row lg:items-start">
+    <section aria-label="Contact & Appointment" className="bg-transparent">
+      <SectionHeader title="Visit Us" align="center" />
+
+      <div className="page-container pb-[var(--space-section-y)] flex flex-col gap-8 lg:flex-row lg:items-start">
         <div className="flex flex-1 flex-col gap-8">
-          <BoxReveal origin="left" className="px-8 py-12 md:px-12">
+          <BoxReveal origin="left" className="box-inner-padding">
             <p className="font-display text-[10px] uppercase tracking-[0.5em] text-[var(--accent-warm)]">
               Connect With Us
             </p>
@@ -25,7 +24,7 @@ export default function ContactSection() {
             </p>
           </BoxReveal>
 
-          <BoxReveal origin="left" delay={0.06} className="px-8 py-10 md:px-12">
+          <BoxReveal origin="left" delay={0.06} className="box-inner-padding">
             <dl className="grid grid-cols-1 gap-10 sm:grid-cols-2">
               <div className="flex flex-col gap-3">
                 <dt className="font-display text-[9px] uppercase tracking-[0.4em] text-[var(--accent-warm)]/50">
@@ -81,7 +80,7 @@ export default function ContactSection() {
             className="relative h-[400px] overflow-hidden p-0"
           >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14626.685235555555!2d58.393435!3d23.5855!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e91ff0033350335%3A0x3e91ff0033350335!2sLebanese%20Dental%20Clinic!5e0!3m2!1sen!2som!4v1714310000000!5m2!1sen!2som"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.8!2d58.3941595!3d23.5982289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e91ff500e62d40f%3A0x63a51fcb6a361947!2sLebanese%20Dental%20Clinic!5e0!3m2!1sen!2som!4v1714310000000!5m2!1sen!2som"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -97,7 +96,7 @@ export default function ContactSection() {
           id="booking"
           origin="right"
           delay={0.08}
-          className="flex-1 px-8 py-12 md:px-12 md:py-16"
+          className="box-inner-padding flex-1"
         >
           <p className="font-display text-[10px] uppercase tracking-[0.4em] text-[var(--accent-warm)]">
             Appointment Inquiry

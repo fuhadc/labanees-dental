@@ -96,7 +96,7 @@ export default function HeroScrollProduct() {
         <div className="mx-auto h-64 max-w-3xl rounded-full bg-[var(--accent-warm)]/10 blur-[100px]" />
       </ParallaxLayer>
 
-      <div className="section-padding-x relative z-10 mx-auto max-w-[var(--content-max-width)] py-8">
+      <div className="page-container relative z-10 mx-auto max-w-[var(--content-max-width)] py-8">
         <div className="mb-8 max-w-lg px-2 lg:absolute lg:left-[var(--space-content-x)] lg:top-1/2 lg:z-20 lg:-translate-y-1/2">
           <p
             className="font-display text-[10px] uppercase tracking-[0.5em] text-[var(--accent-warm)]"

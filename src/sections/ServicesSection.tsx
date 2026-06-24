@@ -51,7 +51,7 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <section id="services" aria-label="Our services" className="space-y-8">
+    <section aria-label="Our services" className="space-y-4 md:space-y-6">
       <SectionHeader title="What We Do" withDivider align="center" />
       {services.map((service, index) => (
         <ImageContentSection

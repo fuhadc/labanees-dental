@@ -14,7 +14,7 @@ const team = [
     name: "Dr. Salma Al Jahdhami",
     role: "Oral Surgeon",
     focus: "Focused on surgical implantology and complex oral procedures.",
-    imageSrc: "https://images.unsplash.com/photo-1537367636733-c242943e652c?auto=format&fit=crop&q=80&w=400&h=500",
+    imageSrc: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400&h=500",
   },
   {
     name: "Dr. May Eljaberi",
@@ -26,15 +26,15 @@ const team = [
 
 export default function TeamSection() {
   return (
-    <section id="team" aria-label="Our doctors" className="bg-transparent">
+    <section aria-label="Our doctors" className="bg-transparent">
       <SectionHeader title="Meet the Team" align="center" />
 
-      <div className="section-padding-x section-padding-y mx-auto max-w-[90rem]">
-        <BoxRevealGrid className="flex gap-6 overflow-x-auto pb-4 snap-x md:grid md:grid-cols-2 md:overflow-visible lg:grid-cols-4 no-scrollbar">
+      <div className="page-container pb-[var(--space-section-y)]">
+        <BoxRevealGrid className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {team.map((doctor) => (
             <BoxRevealItem
               key={doctor.name}
-              className="flex w-[min(85vw,320px)] shrink-0 snap-center flex-col px-6 py-8 md:w-auto"
+              className="box-inner-padding flex flex-col"
             >
               <div className="relative mb-6 aspect-[4/5] w-full overflow-hidden border border-white/5 bg-[var(--bg-soft)]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}

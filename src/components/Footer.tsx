@@ -17,15 +17,15 @@ export default function Footer({
   copyright = `© ${new Date().getFullYear()} Labanees Dental. All rights reserved.`,
 }: FooterProps) {
   return (
-    <footer className="relative overflow-hidden border-t border-white/5 bg-[var(--bg-dark)] py-24 md:py-36">
+    <footer className="relative overflow-hidden border-t border-white/5 bg-[var(--bg-dark)] section-padding-y">
       <div className="pointer-events-none absolute inset-0 flex select-none items-center justify-center opacity-[0.02]">
         <span className="whitespace-nowrap font-serif text-[20vw] italic leading-none tracking-tighter">
           Crafting Perfection
         </span>
       </div>
 
-      <div className="relative z-10 mx-auto flex max-w-[var(--content-max-width)] flex-col items-center section-padding-x text-center">
-        <BoxReveal origin="bottom" className="w-full max-w-2xl px-10 py-14">
+      <div className="page-container relative z-10 flex flex-col items-center text-center">
+        <BoxReveal origin="bottom" className="box-inner-padding w-full max-w-2xl">
           {ctaText && (
             <Magnetic>
               <a

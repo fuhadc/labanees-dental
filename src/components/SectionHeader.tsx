@@ -18,7 +18,7 @@ export default function SectionHeader({
   return (
     <BoxReveal
       origin="bottom"
-      className={`content-padding ${align === "center" ? "text-center" : "text-left"} ${className}`}
+      className={`page-container pt-[var(--space-section-y)] pb-8 ${align === "center" ? "text-center" : "text-left"} ${className}`}
     >
       <h2
         className="font-serif text-[length:var(--text-section)] font-medium tracking-tight text-white italic"

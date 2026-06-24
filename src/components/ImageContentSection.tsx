@@ -37,7 +37,7 @@ export default function ImageContentSection({
     <BoxReveal
       origin={contentOrigin}
       delay={sectionIndex * 0.06}
-      className="flex min-h-[300px] flex-col justify-center px-8 py-16 md:min-h-[550px] md:px-16 md:py-20"
+      className="box-inner-padding flex h-full min-h-[280px] flex-col justify-center md:min-h-[420px]"
     >
       <h3
         className="font-serif text-3xl font-medium tracking-tight text-white italic md:text-5xl"
@@ -69,11 +69,11 @@ export default function ImageContentSection({
   );
 
   const imageBlock = (
-    <ScrollParallax distance={24} className="min-h-[300px] md:min-h-[550px]">
+    <ScrollParallax distance={24} className="h-full min-h-[280px] md:min-h-[420px]">
       <BoxReveal
         origin={imageOrigin}
         delay={sectionIndex * 0.06 + 0.05}
-        className="group relative h-full min-h-[300px] overflow-hidden p-0 md:min-h-[550px]"
+        className="group relative h-full min-h-[280px] overflow-hidden p-0 md:min-h-[420px]"
         framed
       >
         <img
@@ -86,7 +86,7 @@ export default function ImageContentSection({
           img.dataset.fallbackApplied = "true";
           img.src = fallback;
         }}
-        className="h-full min-h-[300px] w-full object-cover object-center grayscale transition-[filter,transform] duration-500 group-hover:scale-[1.02] group-hover:grayscale-0 md:min-h-[550px]"
+        className="h-full min-h-[280px] w-full object-cover object-center grayscale transition-[filter,transform] duration-500 group-hover:scale-[1.02] group-hover:grayscale-0 md:min-h-[420px]"
       />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--bg-dark)]/50 via-transparent to-transparent" />
       </BoxReveal>
@@ -96,7 +96,7 @@ export default function ImageContentSection({
   return (
     <section
       id={id}
-      className="section-padding-x section-padding-y mx-auto grid max-w-[90rem] grid-cols-1 gap-6 md:grid-cols-2"
+      className="page-container grid grid-cols-1 gap-6 py-12 md:grid-cols-2 md:items-stretch md:py-16"
     >
       {imageFirst ? (
         <>

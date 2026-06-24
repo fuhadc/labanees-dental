@@ -18,16 +18,11 @@ export default function FeatureDescriptionBlock({
   className = "",
 }: FeatureDescriptionBlockProps) {
   return (
-    <section
-      id={id}
-      className={`section-padding-x section-padding-y ${className}`}
-      aria-labelledby={id ? `block-heading-${id}` : undefined}
-    >
-      <div className="mx-auto max-w-[var(--content-max-width)]">
-        <BoxReveal
-          origin="bottom"
-          className="flex flex-col items-center px-8 py-16 text-center md:px-16 md:py-24"
-        >
+    <section className={`page-container section-padding-y ${className}`}>
+      <BoxReveal
+        origin="bottom"
+        className="box-inner-padding flex flex-col items-center text-center"
+      >
           <h2
             id={id ? `block-heading-${id}` : undefined}
             className="font-serif text-4xl font-medium tracking-tight text-white italic md:text-5xl lg:text-7xl"
@@ -46,11 +41,11 @@ export default function FeatureDescriptionBlock({
 
         {items.length > 0 && (
           <BoxRevealStagger className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {items.map((item, i) => (
+            {items.map((item) => (
               <BoxRevealItem
                 key={item}
                 stagger
-                className="flex flex-col items-center gap-6 px-6 py-10 text-center"
+                className="box-inner-padding-compact flex flex-col items-center gap-4 text-center"
               >
                 <div className="h-px w-10 bg-[var(--accent-warm)]/50" />
                 <span className="text-[10px] font-light uppercase tracking-[0.3em] text-white/30">
@@ -60,7 +55,6 @@ export default function FeatureDescriptionBlock({
             ))}
           </BoxRevealStagger>
         )}
-      </div>
     </section>
   );
 }

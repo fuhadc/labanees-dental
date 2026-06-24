@@ -32,8 +32,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${cormorant.variable} ${syne.variable}`}>
-      <body className="min-h-screen bg-[var(--bg-dark)] text-white antialiased font-sans">
+    <html
+      lang="en"
+      className={`${inter.variable} ${cormorant.variable} ${syne.variable}`}
+      suppressHydrationWarning
+    >
+      <body
+        className="min-h-screen bg-[var(--bg-dark)] text-white antialiased font-sans"
+        suppressHydrationWarning
+      >
         <MotionConfig reducedMotion="user" transition={{ ease: [0.77, 0, 0.175, 1], duration: 0.85 }}>
           <SmoothScroll>
             <ScrollProgress />

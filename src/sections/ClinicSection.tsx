@@ -7,11 +7,11 @@ export default function ClinicSection() {
   const DEFAULT_FALLBACK_IMAGE = "/placeholder-dental.svg";
 
   return (
-    <section id="clinic" aria-label="Our clinic interior" className="bg-transparent">
-      <div className="section-padding-x section-padding-y mx-auto max-w-[90rem]">
+    <section aria-label="Our clinic interior" className="bg-transparent">
+      <div className="page-container section-padding-y">
         <BoxReveal
           origin="bottom"
-          className="mb-12 px-8 py-14 text-center md:px-12"
+          className="box-inner-padding mb-12 text-center"
         >
           <p
             className="font-serif text-4xl font-medium text-white italic md:text-5xl lg:text-6xl"
@@ -29,7 +29,7 @@ export default function ClinicSection() {
         </BoxReveal>
 
         <div className="no-scrollbar overflow-x-auto pb-4 snap-x snap-mandatory">
-          <BoxRevealGrid className="flex min-w-max gap-6 px-2">
+          <BoxRevealGrid className="flex min-w-max gap-6">
             {CLINIC_GALLERY.map((photo) => (
               <BoxRevealItem
                 key={photo.src}

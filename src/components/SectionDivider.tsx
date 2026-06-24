@@ -14,7 +14,7 @@ export default function SectionDivider({ label }: SectionDividerProps) {
       accent={false}
       className="flex items-center justify-center py-8 md:py-10"
     >
-      <div className="relative flex w-full max-w-[90rem] items-center justify-center px-[var(--space-content-x)]">
+      <div className="page-container flex w-full items-center justify-center">
         <div className="absolute left-[8%] right-[8%] h-px bg-gradient-to-r from-transparent via-[var(--accent-warm)]/35 to-transparent" />
         {label && (
           <span

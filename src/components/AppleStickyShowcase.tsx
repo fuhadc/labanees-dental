@@ -191,7 +191,7 @@ export default function AppleStickyShowcase() {
     >
       <div className="showcase-ambient pointer-events-none absolute inset-x-0 top-0" aria-hidden />
 
-      <div className="showcase-shell section-padding-x relative z-10 mx-auto">
+      <div className="showcase-shell relative z-10 mx-auto">
         {reduced ? (
           <>
             <BoxReveal origin="bottom" className="showcase-header mx-auto text-center">

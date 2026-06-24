@@ -5,11 +5,11 @@ import { BoxReveal } from "@/components/BoxReveal";
 
 export default function JobsSection() {
   return (
-    <section id="jobs" aria-label="Careers" className="bg-transparent">
+    <section aria-label="Careers" className="bg-transparent">
       <SectionHeader title="Jobs & Careers" align="center" />
 
-      <div className="section-padding-x section-padding-y mx-auto max-w-3xl">
-        <BoxReveal origin="bottom" className="px-8 py-14 text-center md:px-14">
+      <div className="page-container max-w-3xl pb-[var(--space-section-y)]">
+        <BoxReveal origin="bottom" className="box-inner-padding text-center">
           <p className="text-lg font-light italic leading-relaxed text-white/40">
             We are constantly seeking visionary dental professionals and clinical coordinators who
             share our dedication to absolute precision and patient-centered excellence.

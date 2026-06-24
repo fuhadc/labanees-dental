@@ -59,11 +59,11 @@ export default function Header() {
       }}
     >
       <div
-        className={`section-padding-x flex items-center justify-between gap-6 transition-[padding] duration-300 ${
+        className={`page-container flex items-center justify-between gap-6 transition-[padding] duration-300 ${
           scrolled ? "py-4" : "py-5 md:py-8"
         }`}
       >
-        <div className="mx-auto flex max-w-[var(--content-max-width)] w-full items-center justify-between">
+        <div className="flex w-full items-center justify-between">
           <a
             href="#"
             className="flex items-center gap-3 group"
@@ -171,7 +171,7 @@ export default function Header() {
               />
             </div>
 
-            <div className="relative flex flex-col h-full section-padding-x py-24">
+            <div className="page-container relative flex h-full flex-col py-24">
               <div className="flex items-center justify-between mb-20">
                 <span className="font-serif text-xl italic text-white/40">Labanees</span>
                 <button
