@@ -4,6 +4,7 @@ import { BoxReveal } from "@/components/BoxReveal";
 
 export interface SectionHeaderProps {
   title: string;
+  eyebrow?: string;
   withDivider?: boolean;
   align?: "center" | "left";
   className?: string;
@@ -11,27 +12,25 @@ export interface SectionHeaderProps {
 
 export default function SectionHeader({
   title,
+  eyebrow,
   withDivider = true,
   align = "center",
   className = "",
 }: SectionHeaderProps) {
+  const alignClass = align === "center" ? "" : "section-heading-block--left";
+
   return (
     <BoxReveal
       origin="bottom"
-      className={`page-container pt-[var(--space-section-y)] pb-8 ${align === "center" ? "text-center" : "text-left"} ${className}`}
+      framed={false}
+      accent={false}
+      className={`page-container pt-[var(--space-section-y)] pb-8 ${className}`}
     >
-      <h2
-        className="font-serif text-[length:var(--text-section)] font-medium tracking-tight text-white italic"
-        style={{ fontFamily: "var(--font-serif)" }}
-      >
-        {title}
-      </h2>
-      {withDivider && (
-        <div
-          className={`mt-6 h-px w-32 bg-gradient-to-r from-transparent via-[var(--accent-warm)] to-transparent ${align === "center" ? "mx-auto" : ""}`}
-          aria-hidden
-        />
-      )}
+      <div className={`section-heading-block ${alignClass}`}>
+        <h2 className="section-heading">{title}</h2>
+        {withDivider && <div className="section-heading-divider" aria-hidden />}
+        {eyebrow ? <p className="section-heading-eyebrow">{eyebrow}</p> : null}
+      </div>
     </BoxReveal>
   );
 }

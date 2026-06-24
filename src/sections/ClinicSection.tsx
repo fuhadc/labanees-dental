@@ -1,6 +1,7 @@
 "use client";
 
-import { BoxReveal, BoxRevealGrid, BoxRevealItem } from "@/components/BoxReveal";
+import { BoxRevealGrid, BoxRevealItem } from "@/components/BoxReveal";
+import SectionHeader from "@/components/SectionHeader";
 import { CLINIC_GALLERY } from "@/lib/clinic-images";
 
 export default function ClinicSection() {
@@ -8,26 +9,13 @@ export default function ClinicSection() {
 
   return (
     <section aria-label="Our clinic interior" className="bg-transparent">
-      <div className="page-container section-padding-y">
-        <BoxReveal
-          origin="bottom"
-          className="box-inner-padding mb-12 text-center"
-        >
-          <p
-            className="font-serif text-4xl font-medium text-white italic md:text-5xl lg:text-6xl"
-            style={{ fontFamily: "var(--font-serif)" }}
-          >
-            The Sanctuary
-          </p>
-          <div className="mx-auto mt-6 h-px w-[60px] bg-[var(--accent-warm)]" />
-          <p
-            className="mt-6 font-display text-[10px] uppercase tracking-[0.4em] text-[var(--accent-warm)]/60"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            Refining the patient experience
-          </p>
-        </BoxReveal>
+      <SectionHeader
+        title="The Sanctuary"
+        eyebrow="Refining the patient experience"
+        withDivider
+      />
 
+      <div className="page-container pb-[var(--space-section-y)]">
         <div className="no-scrollbar overflow-x-auto pb-4 snap-x snap-mandatory">
           <BoxRevealGrid className="flex min-w-max gap-6">
             {CLINIC_GALLERY.map((photo) => (

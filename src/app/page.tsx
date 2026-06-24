@@ -14,7 +14,6 @@ import {
   ServicesSection,
   ReviewsSection,
   TeamSection,
-  JobsSection,
   ContactSection,
 } from "@/sections";
 
@@ -57,10 +56,6 @@ export default function Home() {
       <SectionDivider label="Specialists" />
       <SectionZoom id="team">
         <TeamSection />
-      </SectionZoom>
-
-      <SectionZoom id="jobs">
-        <JobsSection />
       </SectionZoom>
 
       <SectionZoom id="contact">
