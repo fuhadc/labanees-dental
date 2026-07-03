@@ -1226,3 +1226,109 @@ section[class*="bg-\[var\(--bg-dark\)\]"],
   background-color: transparent !important;
 }
 
+/* —— Elfsight Google Reviews Theme Overrides (Charcoal + Gold Accent) —— */
+[class*="elfsight-app-"],
+.google-reviews-widget,
+[class*="WidgetBackground"],
+[class*="Layout__Container"] {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* Container backgrounds */
+[class*="ReviewItem__Container"],
+[class*="Item__Container"],
+[class*="Card__Container"],
+[class*="Balloon__Container"] {
+  background-color: #0b0c10 !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 4px !important;
+}
+
+/* Gold stars, icons, buttons and active states */
+[class*="Star__Icon"],
+[class*="StarList"],
+[class*="star"],
+[class*="star-svg"],
+[class*="Button__Container"],
+[class*="WriteButton"],
+[class*="ShowAllButton"],
+[class*="ArrowButton"],
+[class*="SliderControl"] svg,
+[class*="Control__Arrow"] {
+  fill: #c5a374 !important;
+  color: #c5a374 !important;
+}
+
+/* Custom button border and backgrounds */
+[class*="Button__Container"],
+[class*="WriteButton"],
+[class*="ShowAllButton"] {
+  background-color: transparent !important;
+  border: 1px solid rgba(197, 160, 89, 0.4) !important;
+  color: #ffffff !important;
+  border-radius: 2px !important;
+  transition: all 0.3s ease !important;
+}
+
+[class*="Button__Container"]:hover,
+[class*="WriteButton"]:hover,
+[class*="ShowAllButton"]:hover {
+  background-color: #c5a374 !important;
+  color: #000000 !important;
+  border-color: #c5a374 !important;
+}
+
+/* Arrow button borders */
+[class*="ArrowButton"],
+[class*="SliderControl"] {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-radius: 50% !important;
+}
+
+[class*="ArrowButton"]:hover,
+[class*="SliderControl"]:hover {
+  border-color: rgba(197, 160, 89, 0.4) !important;
+  background-color: rgba(197, 160, 89, 0.05) !important;
+}
+
+/* Text colors: Primary (White) */
+[class*="ReviewText__Container"],
+[class*="ReviewText"],
+[class*="Header__Title"],
+[class*="Header__Name"],
+[class*="ReviewerName"],
+[class*="Title__Container"],
+[class*="RatingNumber"] {
+  color: #ffffff !important;
+  font-family: var(--font-serif), Cormorant, Georgia, serif !important;
+}
+
+/* Text colors: Secondary/Muted (Gold or Muted White) */
+[class*="ReviewDate"],
+[class*="DateValue"],
+[class*="RatingValue"],
+[class*="RatingLabel"],
+[class*="ReviewerSubtitle"],
+[class*="ReviewerInfo"],
+[class*="Header__Sub"],
+[class*="Header__Rating"],
+[class*="Source__Link"] {
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-family: var(--font-sans), Montserrat, sans-serif !important;
+}
+
+/* Hide Elfsight logo if possible or style it subtly */
+[class*="BadgeLink"],
+[class*="Badge__Inner"] {
+  opacity: 0.15 !important;
+  filter: grayscale(1) !important;
+  transition: opacity 0.3s ease !important;
+}
+[class*="BadgeLink"]:hover {
+  opacity: 0.8 !important;
+}
+
+
