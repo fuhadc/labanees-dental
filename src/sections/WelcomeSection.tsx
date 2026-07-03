@@ -8,7 +8,6 @@
 import FeatureDescriptionBlock from "@/components/FeatureDescriptionBlock";
 
 const welcomeItems = [
-  "Women-Owned & Operated",
   "Quiet Luxury Aesthetic",
   "High-Precision Implantology",
   "Artisan Smile Design",
@@ -18,7 +17,7 @@ export default function WelcomeSection() {
   return (
     <FeatureDescriptionBlock
       heading="Redefining the Clinical Experience"
-      description="Lebanese Dental Clinic (Labanees Dental) is a premium dental facility in Muscat dedicated to professional excellence and patient comfort. Our women-owned clinic specializes in advanced aesthetic dentistry and painless implant procedures, utilizing cutting-edge technology to deliver meticulous results in a serene, high-end environment."
+      description="Lebanese Dental Clinic (Labanees Dental) is a premium dental facility in Muscat dedicated to professional excellence and patient comfort. Our clinic specializes in advanced aesthetic dentistry and painless implant procedures, utilizing cutting-edge technology to deliver meticulous results in a serene, high-end environment."
       items={welcomeItems}
     />
   );

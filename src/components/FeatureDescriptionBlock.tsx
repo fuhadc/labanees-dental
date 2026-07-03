@@ -40,7 +40,11 @@ export default function FeatureDescriptionBlock({
         </BoxReveal>
 
         {items.length > 0 && (
-          <BoxRevealStagger className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <BoxRevealStagger
+            className={`mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 ${
+              items.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"
+            }`}
+          >
             {items.map((item) => (
               <BoxRevealItem
                 key={item}

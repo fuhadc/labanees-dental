@@ -60,15 +60,15 @@ function SlideLine({
     const o = sequenceFrameOpacity(v, index, total, 0.08);
     return 0.92 + o * 0.08;
   });
-  const visibility = useTransform(progress, (v) => {
+  const pointerEvents = useTransform(progress, (v) => {
     const o = sequenceFrameOpacity(v, index, total, 0.08);
-    return o < 0.04 ? "hidden" : "visible";
+    return o < 0.04 ? "none" : "auto";
   });
 
   return (
     <motion.div
       className={`absolute inset-x-0 top-0 flex flex-col items-center px-[var(--showcase-pad-x)] ${className}`}
-      style={{ opacity, y, scale, visibility }}
+      style={{ opacity, y, scale, pointerEvents }}
     >
       {children}
     </motion.div>

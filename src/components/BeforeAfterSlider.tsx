@@ -17,20 +17,7 @@ export default function BeforeAfterSlider({
 }: BeforeAfterSliderProps) {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isResizing, setIsResizing] = useState(false);
-  const [containerWidth, setContainerWidth] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const measure = useCallback(() => {
-    if (containerRef.current) {
-      setContainerWidth(containerRef.current.offsetWidth);
-    }
-  }, []);
-
-  useEffect(() => {
-    measure();
-    window.addEventListener("resize", measure, { passive: true });
-    return () => window.removeEventListener("resize", measure);
-  }, [measure]);
 
   const handleCursorMove = (clientX: number) => {
     if (!containerRef.current) return;
@@ -53,7 +40,7 @@ export default function BeforeAfterSlider({
   const handleEnd = () => setIsResizing(false);
 
   const imageStyle = {
-    width: containerWidth > 0 ? containerWidth : "100%",
+    width: "100cqw",
     maxWidth: "none" as const,
     height: "100%",
     objectFit: "cover" as const,
@@ -64,6 +51,7 @@ export default function BeforeAfterSlider({
     <div
       ref={containerRef}
       className="relative aspect-[3/2] w-full overflow-hidden border border-white/10 select-none cursor-col-resize group sm:aspect-[16/10]"
+      style={{ containerType: "inline-size" }}
       onMouseMove={handleMouseMove}
       onTouchMove={handleTouchMove}
       onMouseDown={handleStart}

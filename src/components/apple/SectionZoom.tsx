@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { SCROLL_OFFSET } from "@/lib/apple-scroll";
+import { useViewport } from "@/hooks/useViewport";
 
 interface SectionZoomProps {
   children: React.ReactNode;
@@ -14,6 +15,13 @@ interface SectionZoomProps {
 export default function SectionZoom({ children, className = "", id }: SectionZoomProps) {
   const ref = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  const viewport = useViewport();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: SCROLL_OFFSET.sectionPass,
@@ -24,23 +32,19 @@ export default function SectionZoom({ children, className = "", id }: SectionZoo
     mass: 0.5,
   });
 
-  const scale = useTransform(progress, [0, 0.2, 0.5, 0.8, 1], [0.86, 0.94, 1, 0.98, 0.9]);
-  const opacity = useTransform(progress, [0, 0.12, 0.88, 1], [0.35, 1, 1, 0.5]);
-  const y = useTransform(progress, [0, 0.25, 0.75, 1], [48, 0, 0, -32]);
+  // Forgiving parameters: ensures sections are readable and fully opaque early, and don't shrink/fade out aggressively
+  const scale = useTransform(progress, [0, 0.15, 0.5, 0.85, 1], [0.96, 1, 1, 1, 0.98]);
+  const opacity = useTransform(progress, [0, 0.08, 0.92, 1], [0.75, 1, 1, 0.85]);
+  const y = useTransform(progress, [0, 0.15, 0.85, 1], [24, 0, 0, -12]);
 
-  if (reduced) {
-    return (
-      <section id={id} ref={ref} className={className}>
-        {children}
-      </section>
-    );
-  }
+  // Disable scroll animations on mobile, tablet, or short screens to avoid components staying hidden
+  const shouldAnimate = mounted && !reduced && viewport.isDesktop && !viewport.isShort;
 
   return (
     <motion.section
       id={id}
       ref={ref}
-      style={{ scale, opacity, y }}
+      style={shouldAnimate ? { scale, opacity, y } : undefined}
       className={`section-zoom ${className}`.trim()}
     >
       {children}
