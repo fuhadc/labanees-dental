@@ -1,23 +1,19 @@
 import type { Metadata } from "next";
-import { Inter, Cormorant_Garamond, Syne } from "next/font/google";
+import { Montserrat, Playfair_Display } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import "./globals.css";
 import { ScrollObserver, CustomCursor, SmoothScroll, BackgroundEffects, ScrollProgress, FloatingAction, PageWrapper } from "@/components";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const syne = Syne({
-  variable: "--font-syne",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -34,7 +30,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${cormorant.variable} ${syne.variable}`}
+      className={`${montserrat.variable} ${playfair.variable}`}
       suppressHydrationWarning
     >
       <body

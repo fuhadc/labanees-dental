@@ -24,3 +24,7 @@ node_modules
 
 # Local Netlify folder
 .netlify
+
+# TypeScript build info cache
+tsconfig.tsbuildinfo
+

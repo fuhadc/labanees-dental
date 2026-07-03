@@ -7,7 +7,7 @@ import { Header, HeroBanner, Footer } from "@/components";
 import AppleStickyShowcase from "@/components/AppleStickyShowcase";
 import SectionDivider from "@/components/SectionDivider";
 import { SectionZoom } from "@/components/apple";
-import { HERO_CLINIC_IMAGE, CLINIC_PHOTOS } from "@/lib/clinic-images";
+import { CLINIC_PHOTOS } from "@/lib/clinic-images";
 import {
   WelcomeSection,
   ClinicSection,
@@ -23,12 +23,7 @@ export default function Home() {
       <Header />
 
       <HeroBanner
-        brandLine="LABANEES"
-        brandAccent="DENTAL"
-        tagline="A premium dental clinic in Muscat dedicated to advanced aesthetic dentistry, painless implantology, and quiet luxury — crafted with precision in the heart of Oman."
-        backgroundImage={HERO_CLINIC_IMAGE}
-        insetImage={CLINIC_PHOTOS.lobby.src}
-        insetAlt={CLINIC_PHOTOS.lobby.alt}
+        backgroundImage={CLINIC_PHOTOS.heroBg.src}
       />
 
       <SectionDivider label="About" />
@@ -39,7 +34,7 @@ export default function Home() {
       <AppleStickyShowcase />
 
       <SectionDivider label="Our Space" />
-      <SectionZoom>
+      <SectionZoom id="gallery">
         <ClinicSection />
       </SectionZoom>
 
