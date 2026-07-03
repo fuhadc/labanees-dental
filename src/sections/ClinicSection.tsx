@@ -1,11 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import { BoxRevealGrid, BoxRevealItem } from "@/components/BoxReveal";
 import SectionHeader from "@/components/SectionHeader";
 import { CLINIC_GALLERY } from "@/lib/clinic-images";
 
 export default function ClinicSection() {
   const DEFAULT_FALLBACK_IMAGE = "/placeholder-dental.svg";
+  const [activePhoto, setActivePhoto] = useState<string | null>(null);
+
+  const handlePhotoToggle = (src: string) => {
+    setActivePhoto((prev) => (prev === src ? null : src));
+  };
 
   return (
     <section aria-label="Our clinic interior" className="bg-transparent">
@@ -27,13 +33,16 @@ export default function ClinicSection() {
                   src={photo.src}
                   alt={photo.alt}
                   loading="lazy"
+                  onClick={() => handlePhotoToggle(photo.src)}
                   onError={(e) => {
                     const img = e.currentTarget;
                     if (img.dataset.fallbackApplied === "true") return;
                     img.dataset.fallbackApplied = "true";
                     img.src = DEFAULT_FALLBACK_IMAGE;
                   }}
-                  className="h-full w-full object-cover grayscale transition-[filter] duration-500 hover:grayscale-0"
+                  className={`h-full w-full object-cover cursor-pointer transition-[filter] duration-500 md:grayscale md:hover:grayscale-0 ${
+                    activePhoto === photo.src ? "grayscale-0" : "grayscale"
+                  }`}
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--bg-dark)]/60 via-transparent to-transparent" />
               </BoxRevealItem>

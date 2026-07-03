@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useScroll } from "framer-motion";
 import * as THREE from "three";
 
 export default function ThreeBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { scrollYProgress } = useScroll();
+  const [enabled, setEnabled] = useState(false);
 
   // References for rendering and physics values
   const scrollValue = useRef(0);
@@ -16,6 +17,17 @@ export default function ThreeBackground() {
   const clickProgress = useRef(1.0); // 1.0 means inactive
 
   useEffect(() => {
+    // Disable WebGL on mobile/touch screens or when reduced motion is preferred to maximize scrolling performance
+    const isMobileOrTouch = window.matchMedia("(max-width: 1023px), (pointer: coarse)").matches;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    
+    if (!isMobileOrTouch && !reduced) {
+      setEnabled(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
     // 1. Subscribe to scroll
     const unsubscribeScroll = scrollYProgress.on("change", (latest) => {
       scrollValue.current = latest;
@@ -370,7 +382,9 @@ export default function ThreeBackground() {
       particleMat.dispose();
       renderer.dispose();
     };
-  }, []);
+  }, [enabled]);
+
+  if (!enabled) return null;
 
   return (
     <canvas

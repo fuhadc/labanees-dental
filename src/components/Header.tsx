@@ -164,7 +164,7 @@ export default function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={transition.medium}
-            className="fixed inset-0 z-[1000] h-screen w-full bg-[var(--bg-dark)] md:hidden"
+            className="fixed inset-0 z-[1000] h-screen w-full bg-[var(--bg-dark)] overflow-y-auto md:hidden"
           >
             {/* Animated Background Decor */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -179,7 +179,7 @@ export default function Header() {
               />
             </div>
 
-            <div className="page-container relative flex h-full flex-col py-24">
+            <div className="page-container relative flex min-h-full flex-col py-16 md:py-24">
               <div className="flex items-center justify-between mb-20">
                 <span className="font-serif text-xl italic text-white/40">Labanees</span>
                 <button

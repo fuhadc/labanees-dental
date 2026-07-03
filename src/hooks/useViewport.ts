@@ -29,8 +29,8 @@ export function getShowcaseScrollVh(
   slideCount: number,
   isShort: boolean,
 ): number {
-  const perSlide = { mobile: 36, tablet: 46, desktop: 55 }[tier];
-  const lead = { mobile: 28, tablet: 38, desktop: 50 }[tier];
+  const perSlide = { mobile: 80, tablet: 90, desktop: 100 }[tier];
+  const lead = { mobile: 45, tablet: 50, desktop: 60 }[tier];
   const scale = isShort ? 0.82 : 1;
   return Math.round((perSlide * slideCount + lead) * scale);
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import SectionHeader from "@/components/SectionHeader";
 import { BoxRevealGrid, BoxRevealItem } from "@/components/BoxReveal";
 
@@ -25,6 +26,12 @@ const team = [
 ];
 
 export default function TeamSection() {
+  const [activeDoctor, setActiveDoctor] = useState<string | null>(null);
+
+  const handleDoctorToggle = (name: string) => {
+    setActiveDoctor((prev) => (prev === name ? null : name));
+  };
+
   return (
     <section aria-label="Our doctors" className="bg-transparent">
       <SectionHeader title="Meet the Team" align="center" />
@@ -34,25 +41,32 @@ export default function TeamSection() {
           {team.map((doctor) => (
             <BoxRevealItem
               key={doctor.name}
-              className="box-inner-padding flex flex-col"
+              className="box-inner-padding flex flex-col cursor-pointer"
             >
-              <div className="relative mb-6 aspect-[4/5] w-full overflow-hidden border border-white/5 bg-[var(--bg-soft)]">
+              <div 
+                className="relative mb-6 aspect-[4/5] w-full overflow-hidden border border-white/5 bg-[var(--bg-soft)]"
+                onClick={() => handleDoctorToggle(doctor.name)}
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={doctor.imageSrc}
                   alt={doctor.name}
-                  className="h-full w-full object-cover grayscale transition-[filter,transform] duration-500 hover:scale-[1.03] hover:grayscale-0"
+                  className={`h-full w-full object-cover transition-[filter,transform] duration-500 hover:scale-[1.03] md:grayscale md:hover:grayscale-0 ${
+                    activeDoctor === doctor.name ? "grayscale-0" : "grayscale"
+                  }`}
                 />
               </div>
               <h3
                 className="font-serif text-2xl font-medium text-white italic"
                 style={{ fontFamily: "var(--font-serif)" }}
+                onClick={() => handleDoctorToggle(doctor.name)}
               >
                 {doctor.name}
               </h3>
               <p
                 className="mt-2 font-display text-[10px] uppercase tracking-[0.4em] text-[var(--accent-warm)]"
                 style={{ fontFamily: "var(--font-display)" }}
+                onClick={() => handleDoctorToggle(doctor.name)}
               >
                 {doctor.role}
               </p>
