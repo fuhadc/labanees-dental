@@ -1,4 +1,4 @@
-import type { Transition, Variants, ViewportOptions } from "framer-motion";
+import type { Transition, Variants, UseInViewOptions, ViewportOptions } from "framer-motion";
 
 import { EASE_SFLOW, EASE_APPLE as EASE_APPLE_SCROLL } from "./apple-scroll";
 
@@ -28,11 +28,11 @@ export const spring = {
 } as const;
 
 /** Generous viewport — expand root so near-edge content still reveals */
-export const viewport: ViewportOptions = {
+export const viewport = {
   once: true,
   amount: 0.02,
   margin: "140px 0px 140px 0px",
-};
+} as const satisfies UseInViewOptions & ViewportOptions;
 
 export type BoxOrigin = "bottom" | "top" | "left" | "right" | "center";
 
