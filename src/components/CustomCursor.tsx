@@ -3,20 +3,24 @@
 import { useEffect, useState } from "react";
 import { motion, useSpring, useMotionValue } from "framer-motion";
 
+/**
+ * Subtle companion cursor for fine pointers only.
+ * Does not hide the system cursor (avoids dual-cursor / precision issues).
+ */
 export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [enabled, setEnabled] = useState(false);
 
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
-
-  const cursorXSpring = useSpring(cursorX, { damping: 30, stiffness: 280 });
-  const cursorYSpring = useSpring(cursorY, { damping: 30, stiffness: 280 });
+  const cursorXSpring = useSpring(cursorX, { damping: 32, stiffness: 260 });
+  const cursorYSpring = useSpring(cursorY, { damping: 32, stiffness: 260 });
 
   useEffect(() => {
     const coarse = window.matchMedia("(pointer: coarse)").matches;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (coarse || reduced) return;
+    const narrow = window.matchMedia("(max-width: 1023px)").matches;
+    if (coarse || reduced || narrow) return;
 
     setEnabled(true);
 
@@ -27,12 +31,14 @@ export default function CustomCursor() {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      setIsHovering(
+      const interactive =
         target.tagName === "A" ||
-          target.tagName === "BUTTON" ||
-          !!target.closest("button") ||
-          !!target.closest("a"),
-      );
+        target.tagName === "BUTTON" ||
+        target.tagName === "INPUT" ||
+        target.tagName === "TEXTAREA" ||
+        target.tagName === "SELECT" ||
+        !!target.closest("button, a, [role='button'], input, textarea, select");
+      setIsHovering(interactive);
     };
 
     window.addEventListener("mousemove", moveCursor, { passive: true });
@@ -47,27 +53,17 @@ export default function CustomCursor() {
   if (!enabled) return null;
 
   return (
-    <>
-      <motion.div
-        className="pointer-events-none fixed left-0 top-0 z-[9999] h-2 w-2 rounded-full bg-[var(--accent-warm)] mix-blend-difference"
-        style={{
-          x: cursorXSpring,
-          y: cursorYSpring,
-          translateX: "-50%",
-          translateY: "-50%",
-        }}
-      />
-      <motion.div
-        className="pointer-events-none fixed left-0 top-0 z-[9998] h-10 w-10 border border-[var(--accent-warm-soft)] rounded-full"
-        style={{
-          x: cursorXSpring,
-          y: cursorYSpring,
-          translateX: "-50%",
-          translateY: "-50%",
-        }}
-        animate={{ scale: isHovering ? 1.4 : 1 }}
-        transition={{ duration: 0.2 }}
-      />
-    </>
+    <motion.div
+      className="pointer-events-none fixed left-0 top-0 z-[9999] hidden h-8 w-8 rounded-full border border-[var(--accent-warm)]/45 lg:block"
+      style={{
+        x: cursorXSpring,
+        y: cursorYSpring,
+        translateX: "-50%",
+        translateY: "-50%",
+      }}
+      animate={{ scale: isHovering ? 1.35 : 1, opacity: isHovering ? 0.9 : 0.45 }}
+      transition={{ duration: 0.2 }}
+      aria-hidden
+    />
   );
 }

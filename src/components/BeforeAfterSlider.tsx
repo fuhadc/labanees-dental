@@ -17,57 +17,95 @@ export default function BeforeAfterSlider({
 }: BeforeAfterSliderProps) {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isResizing, setIsResizing] = useState(false);
+  const [containerWidth, setContainerWidth] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleCursorMove = (clientX: number) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const updateWidth = () => setContainerWidth(el.clientWidth);
+
+    updateWidth();
+    const observer = new ResizeObserver(updateWidth);
+    observer.observe(el);
+    window.addEventListener("orientationchange", updateWidth);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("orientationchange", updateWidth);
+    };
+  }, []);
+
+  const handleCursorMove = useCallback((clientX: number) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
     const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
     setSliderPosition((x / rect.width) * 100);
-  };
+  }, []);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleStart = useCallback(
+    (clientX: number) => {
+      setIsResizing(true);
+      handleCursorMove(clientX);
+    },
+    [handleCursorMove],
+  );
+
+  const handleEnd = useCallback(() => {
+    setIsResizing(false);
+    document.documentElement.scrollLeft = 0;
+    document.body.scrollLeft = 0;
+  }, []);
+
+  useEffect(() => {
     if (!isResizing) return;
-    handleCursorMove(e.clientX);
-  };
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isResizing) return;
-    handleCursorMove(e.touches[0].clientX);
-  };
+    const onMouseMove = (e: MouseEvent) => handleCursorMove(e.clientX);
+    const onTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+      handleCursorMove(e.touches[0].clientX);
+    };
+    const onEnd = () => handleEnd();
 
-  const handleStart = () => setIsResizing(true);
-  const handleEnd = () => setIsResizing(false);
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onEnd);
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
+    window.addEventListener("touchend", onEnd);
+    window.addEventListener("touchcancel", onEnd);
 
-  const imageStyle = {
-    width: "100cqw",
-    maxWidth: "none" as const,
-    height: "100%",
-    objectFit: "cover" as const,
-    objectPosition: "center 42%",
-  };
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onEnd);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onEnd);
+      window.removeEventListener("touchcancel", onEnd);
+    };
+  }, [isResizing, handleCursorMove, handleEnd]);
+
+  const beforeImageWidth = containerWidth > 0 ? containerWidth : undefined;
 
   return (
     <div
       ref={containerRef}
-      className="relative aspect-[3/2] w-full overflow-hidden border border-white/10 select-none cursor-col-resize group sm:aspect-[16/10]"
-      style={{ containerType: "inline-size" }}
-      onMouseMove={handleMouseMove}
-      onTouchMove={handleTouchMove}
-      onMouseDown={handleStart}
-      onTouchStart={handleStart}
-      onMouseUp={handleEnd}
-      onMouseLeave={handleEnd}
-      onTouchEnd={handleEnd}
+      className="before-after-slider relative aspect-[3/2] w-full max-w-full overflow-hidden border border-white/10 select-none cursor-col-resize touch-none"
+      onMouseDown={(e) => {
+        e.preventDefault();
+        handleStart(e.clientX);
+      }}
+      onTouchStart={(e) => {
+        handleStart(e.touches[0].clientX);
+      }}
       role="img"
       aria-label={`${beforeAlt}. Drag to compare with ${afterAlt}.`}
     >
-      {/* After — restored teeth */}
-      <div className="absolute inset-0">
+      {/* After */}
+      <div className="absolute inset-0 overflow-hidden">
         <img
           src={afterImage}
           alt={afterAlt}
-          className="h-full w-full object-cover"
+          className="h-full w-full max-w-full object-cover"
           style={{ objectPosition: "center 42%" }}
           draggable={false}
           loading="lazy"
@@ -77,16 +115,19 @@ export default function BeforeAfterSlider({
         </div>
       </div>
 
-      {/* Before — pre-treatment teeth */}
+      {/* Before — clipped to slider position */}
       <div
-        className="absolute inset-0 z-10 overflow-hidden border-r border-[var(--accent-warm)]"
+        className="absolute inset-y-0 left-0 z-10 overflow-hidden border-r border-[var(--accent-warm)]"
         style={{ width: `${sliderPosition}%` }}
       >
         <img
           src={beforeImage}
           alt={beforeAlt}
-          className="absolute left-0 top-0 h-full"
-          style={imageStyle}
+          className="absolute left-0 top-0 h-full max-w-none object-cover"
+          style={{
+            width: beforeImageWidth,
+            objectPosition: "center 42%",
+          }}
           draggable={false}
           loading="lazy"
         />
@@ -95,9 +136,11 @@ export default function BeforeAfterSlider({
         </div>
       </div>
 
+      {/* Handle */}
       <div
-        className="absolute inset-y-0 z-20 w-px bg-[var(--accent-warm)]"
+        className="pointer-events-none absolute inset-y-0 z-20 w-px bg-[var(--accent-warm)]"
         style={{ left: `${sliderPosition}%` }}
+        aria-hidden
       >
         <div className="absolute top-1/2 left-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--accent-warm)] bg-black/80 text-[var(--accent-warm)]">
           <svg

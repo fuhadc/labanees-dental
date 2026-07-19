@@ -1,19 +1,9 @@
 "use client";
 
-import { useRef } from "react";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useSpring,
-  useTransform,
-  type MotionValue,
-} from "framer-motion";
-import { BoxReveal } from "@/components/BoxReveal";
-import { MorphPanel, ScrollImageSequence } from "@/components/apple";
-import { SCROLL_OFFSET, sequenceFrameOpacity } from "@/lib/apple-scroll";
-import { getShowcaseScrollVh, useViewport } from "@/hooks/useViewport";
+import { useEffect, useEffectEvent, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { CLINIC_PHOTOS } from "@/lib/clinic-images";
+import { EASE_SFLOW } from "@/lib/apple-scroll";
 
 const slides = [
   {
@@ -34,218 +24,192 @@ const slides = [
     image: CLINIC_PHOTOS.lobby.src,
     alt: CLINIC_PHOTOS.lobby.alt,
   },
-];
+] as const;
 
-function SlideLine({
-  index,
-  total,
-  progress,
-  className,
-  children,
-  shift = 24,
-}: {
-  index: number;
-  total: number;
-  progress: MotionValue<number>;
-  className: string;
-  children: React.ReactNode;
-  shift?: number;
-}) {
-  const opacity = useTransform(progress, (v) => sequenceFrameOpacity(v, index, total, 0.08));
-  const y = useTransform(progress, (v) => {
-    const o = sequenceFrameOpacity(v, index, total, 0.08);
-    return (1 - o) * shift;
-  });
-  const scale = useTransform(progress, (v) => {
-    const o = sequenceFrameOpacity(v, index, total, 0.08);
-    return 0.92 + o * 0.08;
-  });
-  const pointerEvents = useTransform(progress, (v) => {
-    const o = sequenceFrameOpacity(v, index, total, 0.08);
-    return o < 0.04 ? "none" : "auto";
-  });
-
-  return (
-    <motion.div
-      className={`absolute inset-x-0 top-0 flex flex-col items-center px-[var(--showcase-pad-x)] ${className}`}
-      style={{ opacity, y, scale, pointerEvents }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-function SlideCopy({
-  progress,
-  shift,
-}: {
-  progress: MotionValue<number>;
-  shift: number;
-}) {
-  return (
-    <div className="showcase-copy mx-auto w-full max-w-3xl text-center">
-      <div className="showcase-copy-slot relative">
-        {slides.map((slide, i) => (
-          <SlideLine
-            key={slide.title}
-            index={i}
-            total={slides.length}
-            progress={progress}
-            shift={shift}
-            className="showcase-slide-body font-light text-white/50"
-          >
-            <h3 className="showcase-slide-title font-serif italic text-white">
-              {slide.title}
-            </h3>
-            <p className="showcase-slide-index mt-5 font-display uppercase text-[var(--accent-warm)]/75 sm:mt-6">
-              0{i + 1}
-            </p>
-            <p className="showcase-slide-text mt-4 text-pretty sm:mt-5">{slide.body}</p>
-          </SlideLine>
-        ))}
-      </div>
-
-      <div className="showcase-dots mt-8 flex items-center justify-center gap-3 sm:mt-10 sm:gap-4" aria-hidden>
-        {slides.map((_, i) => (
-          <SlideProgressDot key={i} index={i} total={slides.length} progress={progress} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function SlideProgressDot({
-  index,
-  total,
-  progress,
-}: {
-  index: number;
-  total: number;
-  progress: MotionValue<number>;
-}) {
-  const width = useTransform(progress, (v) => {
-    const o = sequenceFrameOpacity(v, index, total, 0.45);
-    return `${1 + o * 3}rem`;
-  });
-  const opacity = useTransform(progress, (v) => {
-    const o = sequenceFrameOpacity(v, index, total, 0.45);
-    return 0.25 + o * 0.75;
-  });
-
-  return (
-    <motion.span
-      className="block h-px max-w-[4.5rem] flex-1 origin-center bg-[var(--accent-warm)] sm:flex-none sm:max-w-none"
-      style={{ width, opacity }}
-    />
-  );
-}
-
-function ShowcaseHeaderStatic() {
-  return (
-    <header className="showcase-header mx-auto text-center">
-      <p className="showcase-eyebrow font-display uppercase text-[var(--accent-warm)]">
-        The Labanees Standard
-      </p>
-      <h2 className="showcase-header-title mt-6 font-serif font-medium italic text-white sm:mt-8">
-        Crafted like a flagship experience.
-      </h2>
-    </header>
-  );
-}
+const AUTO_MS = 6500;
 
 export default function AppleStickyShowcase() {
-  const scrollRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
-  const viewport = useViewport();
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
 
-  const scrollTrackVh = getShowcaseScrollVh(
-    viewport.tier,
-    slides.length,
-    viewport.isShort || viewport.isLandscape,
-  );
-
-  const motionShift = viewport.isMobile ? 14 : viewport.isShort ? 18 : 24;
-
-  const { scrollYProgress } = useScroll({
-    target: scrollRef,
-    offset: SCROLL_OFFSET.sequence,
+  const goTo = useEffectEvent((index: number) => {
+    setActive((index + slides.length) % slides.length);
   });
 
-  const progress = useSpring(scrollYProgress, {
-    stiffness: viewport.isTouch ? 120 : 100,
-    damping: viewport.isTouch ? 32 : 28,
-    mass: 0.35,
-  });
+  useEffect(() => {
+    if (reduced || paused) return;
+    const id = window.setInterval(() => goTo(active + 1), AUTO_MS);
+    return () => window.clearInterval(id);
+  }, [active, paused, reduced]);
 
-  const sectionDataAttrs = {
-    "data-vp": viewport.tier,
-    "data-short": viewport.isShort ? "true" : "false",
-    "data-landscape": viewport.isLandscape ? "true" : "false",
-  };
+  const slide = slides[active];
 
   return (
     <section
-      aria-label="Treatment showcase"
-      className="showcase-standard relative bg-transparent"
-      {...sectionDataAttrs}
+      aria-label="The Labanees Standard"
+      className="relative overflow-hidden bg-transparent"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+          setPaused(false);
+        }
+      }}
     >
-      <div className="showcase-ambient pointer-events-none absolute inset-x-0 top-0" aria-hidden />
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-[70%] bg-[radial-gradient(ellipse_90%_55%_at_50%_15%,rgba(212,175,55,0.1),transparent_65%)]"
+        aria-hidden
+      />
 
-      <div className="showcase-shell relative z-10 mx-auto">
-        {reduced ? (
-          <>
-            <BoxReveal origin="bottom" className="showcase-header mx-auto text-center">
-              <p className="showcase-eyebrow font-display uppercase text-[var(--accent-warm)]">
-                The Labanees Standard
-              </p>
-              <h2 className="showcase-header-title mt-6 font-serif italic text-white sm:mt-8">
-                Crafted like a flagship experience.
-              </h2>
-            </BoxReveal>
-            <div className="showcase-reduced-grid mx-auto">
-              {slides.map((slide) => (
-                <MorphPanel key={slide.title} glass>
-                  <div className="p-6 text-center sm:p-8">
-                    <img
-                      src={slide.image}
-                      alt={slide.alt}
-                      className="showcase-reduced-img mb-6 w-full object-cover"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <h3 className="showcase-slide-title font-serif italic">{slide.title}</h3>
-                    <p className="showcase-slide-text mx-auto mt-4 text-white/50">{slide.body}</p>
-                  </div>
-                </MorphPanel>
-              ))}
+      <div className="page-container relative z-10 section-padding-y">
+        {/* Section header — always visible */}
+        <header className="mx-auto max-w-3xl text-center">
+          <p
+            className="font-display text-[10px] uppercase tracking-[0.45em] text-[var(--accent-warm)] md:text-[11px]"
+            style={{ fontFamily: "var(--font-sans)" }}
+          >
+            The Labanees Standard
+          </p>
+          <h2
+            className="mt-5 font-serif text-[clamp(1.85rem,3.5vw+0.75rem,3.75rem)] font-medium italic leading-[1.1] text-white text-balance md:mt-6"
+            style={{ fontFamily: "var(--font-serif)" }}
+          >
+            Crafted like a flagship experience.
+          </h2>
+          <div className="mx-auto mt-6 h-px w-16 bg-[var(--accent-warm)]/70" />
+        </header>
+
+        {/* Experience stage */}
+        <div className="mt-12 grid items-stretch gap-8 lg:mt-16 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-10 xl:gap-14">
+          {/* Image */}
+          <div className="relative aspect-[4/3] overflow-hidden border border-white/10 bg-[var(--bg-dark-panel)] sm:aspect-[16/10] lg:aspect-auto lg:min-h-[420px] xl:min-h-[480px]">
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={slide.image}
+                src={slide.image}
+                alt={slide.alt}
+                className="absolute inset-0 h-full w-full object-cover"
+                initial={reduced ? false : { opacity: 0, scale: 1.04 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={reduced ? undefined : { opacity: 0, scale: 0.98 }}
+                transition={{ duration: reduced ? 0 : 0.7, ease: EASE_SFLOW }}
+                draggable={false}
+              />
+            </AnimatePresence>
+            <div
+              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/20"
+              aria-hidden
+            />
+            <span
+              className="pointer-events-none absolute left-0 top-0 h-px w-10 bg-[var(--accent-warm)]"
+              aria-hidden
+            />
+            <span
+              className="pointer-events-none absolute left-0 top-0 h-10 w-px bg-[var(--accent-warm)]"
+              aria-hidden
+            />
+            <p className="absolute bottom-5 left-5 font-display text-[10px] uppercase tracking-[0.35em] text-white/80 md:bottom-6 md:left-6">
+              0{active + 1} / 0{slides.length}
+            </p>
+          </div>
+
+          {/* Copy + step controls */}
+          <div className="flex min-h-0 flex-col justify-between gap-8 border border-white/10 bg-[var(--bg-dark-panel)] px-6 py-7 sm:px-8 sm:py-9 lg:px-9 lg:py-10">
+            <div className="relative min-h-[9.5rem] sm:min-h-[10.5rem]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={slide.title}
+                  initial={reduced ? false : { opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reduced ? undefined : { opacity: 0, y: -12 }}
+                  transition={{ duration: reduced ? 0 : 0.45, ease: EASE_SFLOW }}
+                >
+                  <p className="font-display text-[10px] uppercase tracking-[0.4em] text-[var(--accent-warm)]/80">
+                    0{active + 1}
+                  </p>
+                  <h3
+                    className="mt-3 font-serif text-[clamp(1.6rem,2vw+0.9rem,2.5rem)] italic leading-tight text-white"
+                    style={{ fontFamily: "var(--font-serif)" }}
+                  >
+                    {slide.title}
+                  </h3>
+                  <p
+                    className="mt-4 max-w-md text-sm font-light leading-relaxed text-white/60 sm:text-base"
+                    style={{ fontFamily: "var(--font-sans)" }}
+                  >
+                    {slide.body}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
             </div>
-          </>
-        ) : (
-          <>
-            <ShowcaseHeaderStatic />
 
             <div
-              ref={scrollRef}
-              className="showcase-scroll-track relative"
-              style={{ height: `${scrollTrackVh}vh` }}
+              className="flex flex-col gap-1 border-t border-white/8 pt-6"
+              role="tablist"
+              aria-label="Clinic experiences"
             >
-              <div className="showcase-sticky-pin">
-                <div className="showcase-stage">
-                  <ScrollImageSequence
-                    embed
-                    progress={progress}
-                    scrollTargetRef={scrollRef}
-                    images={slides.map((s) => ({ src: s.image, alt: s.alt }))}
-                    className="showcase-image-wrap w-full"
-                    stickyClassName="flex justify-center"
-                  />
-
-                  <SlideCopy progress={progress} shift={motionShift} />
-                </div>
-              </div>
+              {slides.map((item, index) => {
+                const isActive = index === active;
+                return (
+                  <button
+                    key={item.title}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    onClick={() => goTo(index)}
+                    className={`group flex w-full items-center gap-4 px-1 py-3 text-left transition-colors duration-300 ${
+                      isActive ? "text-white" : "text-white/40 hover:text-white/70"
+                    }`}
+                  >
+                    <span
+                      className={`font-display text-[10px] tracking-[0.3em] transition-colors duration-300 ${
+                        isActive ? "text-[var(--accent-warm)]" : "text-white/25 group-hover:text-white/45"
+                      }`}
+                    >
+                      0{index + 1}
+                    </span>
+                    <span
+                      className={`font-serif text-lg italic transition-colors duration-300 sm:text-xl ${
+                        isActive ? "text-white" : ""
+                      }`}
+                      style={{ fontFamily: "var(--font-serif)" }}
+                    >
+                      {item.title}
+                    </span>
+                    <span
+                      className={`ml-auto h-px flex-1 max-w-[4rem] origin-right transition-all duration-500 ${
+                        isActive
+                          ? "scale-x-100 bg-[var(--accent-warm)]"
+                          : "scale-x-50 bg-white/10 group-hover:bg-white/25"
+                      }`}
+                      aria-hidden
+                    />
+                  </button>
+                );
+              })}
             </div>
-          </>
-        )}
+
+            {/* Progress bar for auto-advance */}
+            <div className="h-px w-full overflow-hidden bg-white/10" aria-hidden>
+              {!reduced && (
+                <motion.div
+                  key={`${active}-${paused}`}
+                  className="h-full bg-[var(--accent-warm)]"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: paused ? 0 : 1 }}
+                  transition={
+                    paused
+                      ? { duration: 0.2 }
+                      : { duration: AUTO_MS / 1000, ease: "linear" }
+                  }
+                  style={{ transformOrigin: "left center" }}
+                />
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

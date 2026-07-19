@@ -18,6 +18,7 @@ export { default as BeforeAfterSlider } from "./BeforeAfterSlider";
 export { default as ScrollProgress } from "./ScrollProgress";
 export { default as FloatingAction } from "./FloatingAction";
 export { default as PageWrapper } from "./PageWrapper";
+export { default as ResponsiveFix } from "./ResponsiveFix";
 export { default as ScrollRadial } from "./ScrollRadial";
 export { default as BoxReveal, BoxRevealGrid, BoxRevealItem, BoxRevealStagger } from "./BoxReveal";
 export { default as ScrollParallax } from "./ScrollParallax";

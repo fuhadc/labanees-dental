@@ -38,10 +38,10 @@ export const BRIDGE_TRANSITION_PHOTOS = [
 ] as const;
 
 export const CLINIC_GALLERY = [
-  CLINIC_PHOTOS.exterior,
-  CLINIC_PHOTOS.lobby,
-  CLINIC_PHOTOS.reception,
-  CLINIC_PHOTOS.waitingLounge,
+  { ...CLINIC_PHOTOS.exterior, label: "Exterior" },
+  { ...CLINIC_PHOTOS.lobby, label: "Lobby" },
+  { ...CLINIC_PHOTOS.reception, label: "Reception" },
+  { ...CLINIC_PHOTOS.waitingLounge, label: "Lounge" },
 ] as const;
 
 export const HERO_CLINIC_IMAGE = CLINIC_PHOTOS.exterior.src;

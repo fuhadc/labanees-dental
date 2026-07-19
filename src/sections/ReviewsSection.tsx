@@ -10,7 +10,7 @@ export default function ReviewsSection() {
     >
       <SectionHeader title="Patient Stories" align="center" />
 
-      <div className="page-container pb-[var(--space-section-y)]">
+      <div className="page-container min-w-0 pb-[var(--space-section-y)]">
         <ReviewsBeforeAfter />
         <ElfsightGoogleReviews />
       </div>

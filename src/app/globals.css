@@ -73,13 +73,13 @@
   /* Layout */
   --content-max-width: 90rem;
   --border-radius: var(--radius-card);
-  --header-height: 5.75rem;
+  --header-height: 6.5rem;
 
   /* Showcase — fluid responsive tokens */
   --showcase-pad-x: clamp(1rem, 4vw, 2rem);
   --showcase-gap: clamp(1.5rem, 4vw, 3rem);
-  --showcase-image-max-h: clamp(220px, 48vh, 720px);
-  --showcase-image-max-w: min(100%, 56rem);
+  --showcase-image-max-h: clamp(280px, 52vh, 680px);
+  --showcase-image-max-w: 100%;
   --showcase-title-size: clamp(1.65rem, 5vw + 0.5rem, 3.5rem);
   --showcase-body-size: clamp(0.95rem, 1.5vw + 0.4rem, 1.25rem);
   --showcase-header-size: clamp(1.85rem, 4.5vw + 0.75rem, 4.25rem);
@@ -164,10 +164,46 @@
   z-index: -1;
 }
 
-/* Section zoom — GPU-friendly transform layer */
+/* Section zoom — light transform only (never fades content away) */
 .section-zoom {
   transform-origin: center top;
-  will-change: transform, opacity;
+  max-width: 100%;
+}
+
+/* Focus visibility — keyboard / assistive tech */
+:focus-visible {
+  outline: 2px solid var(--accent-warm);
+  outline-offset: 3px;
+}
+
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only:focus,
+.sr-only:focus-visible,
+.focus\:not-sr-only:focus,
+.focus\:not-sr-only:focus-visible {
+  position: fixed;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
 }
 
 .section-bridge {
@@ -275,6 +311,11 @@
   --font-playfair: var(--font-playfair);
 }
 
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
   background: var(--bg-dark);
   color: var(--text-primary);
@@ -282,6 +323,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: 0.01em;
+  overflow-x: hidden;
+  width: 100%;
+  min-width: 0;
 }
 
 /* Utility for dark content panels */
@@ -407,7 +451,7 @@ body {
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: var(--bg-dark-panel);
-  overflow: visible;
+  overflow: hidden;
 }
 
 /* Safety: content visible even if JS animation is delayed */
@@ -590,6 +634,15 @@ body {
 .box-inner-padding-compact {
   padding-inline: clamp(1.25rem, 2.5vw, 1.75rem);
   padding-block: clamp(1.5rem, 3vw, 2rem);
+}
+
+/* Before / after comparison slider */
+.before-after-slider {
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  contain: layout paint;
+  isolation: isolate;
 }
 
 [id] {
@@ -945,7 +998,7 @@ body:has(.hero-editorial) header:not([data-scrolled="true"]) {
   container-name: showcase;
   display: flex;
   width: 100%;
-  max-width: 56rem;
+  max-width: min(100%, 80rem);
   margin-inline: auto;
   flex-direction: column;
   align-items: center;
@@ -960,10 +1013,9 @@ body:has(.hero-editorial) header:not([data-scrolled="true"]) {
 
 .showcase-image-wrap .glass-liquid {
   width: var(--showcase-image-max-w);
-  max-height: var(--showcase-image-max-h);
-  min-height: clamp(220px, 38vh, 520px);
+  max-width: 100%;
+  height: var(--showcase-image-max-h);
   margin-inline: auto;
-  aspect-ratio: 16 / 10;
 }
 
 .showcase-copy-slot {
@@ -1019,28 +1071,24 @@ body:has(.hero-editorial) header:not([data-scrolled="true"]) {
 /* —— Mobile (< 640px) —— */
 @media (max-width: 639px) {
   :root {
-    --header-height: 5.5rem;
-    --showcase-image-max-h: clamp(200px, 42dvh, 380px);
+    --header-height: 6.25rem;
+    --showcase-image-max-h: clamp(220px, 48dvh, 420px);
     --showcase-gap: 1.25rem;
   }
 
   .showcase-sticky-pin {
     min-height: calc(100dvh - var(--header-height) - 1rem);
   }
-
-  .showcase-image-wrap .glass-liquid {
-    aspect-ratio: 4 / 3;
-  }
 }
 
 /* —— Tablet (640px – 1023px) —— */
 @media (min-width: 640px) and (max-width: 1023px) {
   :root {
-    --showcase-image-max-h: clamp(280px, 50dvh, 560px);
+    --showcase-image-max-h: clamp(320px, 54dvh, 560px);
   }
 
   .showcase-stage {
-    max-width: 48rem;
+    max-width: min(100%, 72rem);
   }
 }
 
@@ -1059,14 +1107,14 @@ body:has(.hero-editorial) header:not([data-scrolled="true"]) {
 /* —— Large desktop —— */
 @media (min-width: 1280px) {
   .showcase-stage {
-    max-width: 60rem;
+    max-width: min(100%, 88rem);
   }
 }
 
 /* —— Short / landscape phones —— */
 @media (max-height: 720px) {
   :root {
-    --showcase-image-max-h: clamp(160px, 38dvh, 320px);
+    --showcase-image-max-h: clamp(240px, 46dvh, 420px);
     --showcase-gap: 1rem;
     --showcase-title-size: clamp(1.4rem, 4vw, 2.25rem);
   }
@@ -1100,12 +1148,334 @@ body:has(.hero-editorial) header:not([data-scrolled="true"]) {
 }
 
 .showcase-standard[data-landscape="true"] .showcase-image-wrap .glass-liquid {
-  aspect-ratio: 2 / 1;
-  max-height: clamp(140px, 36dvh, 260px);
+  height: clamp(220px, 44dvh, 380px);
 }
 
 .showcase-standard[data-short="true"] .showcase-stage {
   gap: 1rem;
+}
+
+/* =========================================================
+   THE SANCTUARY — responsive gallery carousel
+   ========================================================= */
+
+.sanctuary-section {
+  overflow: hidden;
+}
+
+.sanctuary-stage {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+  padding-bottom: var(--space-section-y);
+  padding-inline: max(var(--space-content-x), env(safe-area-inset-left), env(safe-area-inset-right));
+}
+
+/* —— Tabs —— */
+.sanctuary-tabs-wrap {
+  width: 100%;
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.sanctuary-tabs-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.sanctuary-tabs {
+  display: inline-flex;
+  min-width: min(100%, max-content);
+  margin-inline: auto;
+  padding: 0.3rem;
+  gap: 0.25rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (min-width: 640px) {
+  .sanctuary-tabs-wrap {
+    display: flex;
+    justify-content: center;
+    overflow-x: visible;
+  }
+}
+
+.sanctuary-tab {
+  flex-shrink: 0;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: clamp(0.62rem, 1.4vw, 0.72rem);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition:
+    color var(--transition-smooth),
+    background var(--transition-smooth);
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .sanctuary-tab {
+    padding: 0.55rem 1.25rem;
+  }
+}
+
+.sanctuary-tab:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.sanctuary-tab.is-active {
+  color: var(--bg-dark);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+/* —— Carousel —— */
+.sanctuary-carousel {
+  position: relative;
+  width: 100%;
+}
+
+.sanctuary-ambient {
+  position: absolute;
+  inset: 10% 5% 20%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse 70% 55% at 50% 50%,
+    rgba(197, 160, 89, 0.12),
+    transparent 65%
+  );
+  filter: blur(48px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 3-column grid: side | main | side */
+.sanctuary-layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  width: 100%;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .sanctuary-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2.8fr) minmax(0, 1fr);
+    gap: clamp(0.75rem, 2vw, 1.25rem);
+  }
+}
+
+/* —— Side previews (desktop) —— */
+.sanctuary-side {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: transform var(--transition-smooth);
+}
+
+@media (min-width: 900px) {
+  .sanctuary-side {
+    display: flex;
+  }
+}
+
+.sanctuary-side:hover {
+  transform: translateY(-3px);
+}
+
+.sanctuary-side-frame {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-charcoal);
+  opacity: 0.55;
+  transition:
+    opacity var(--transition-smooth),
+    border-color var(--transition-smooth);
+}
+
+.sanctuary-side:hover .sanctuary-side-frame {
+  opacity: 0.8;
+  border-color: rgba(197, 160, 89, 0.25);
+}
+
+.sanctuary-side-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(0.5) brightness(0.65);
+  transition: filter var(--transition-smooth);
+}
+
+.sanctuary-side:hover .sanctuary-side-img {
+  filter: grayscale(0.2) brightness(0.85);
+}
+
+.sanctuary-side-label {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.sanctuary-side:hover .sanctuary-side-label {
+  color: rgba(197, 160, 89, 0.75);
+}
+
+/* —— Main slide —— */
+.sanctuary-main {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.sanctuary-main-frame {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid rgba(197, 160, 89, 0.2);
+  background: var(--bg-charcoal);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 639px) {
+  .sanctuary-main-frame {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+.sanctuary-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* —— Overlay arrows (mobile + desktop) —— */
+.sanctuary-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  transform: translateY(-50%);
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(5, 6, 9, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: white;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    border-color var(--transition-smooth),
+    background var(--transition-smooth);
+}
+
+.sanctuary-arrow:hover {
+  border-color: rgba(197, 160, 89, 0.45);
+  background: rgba(197, 160, 89, 0.15);
+}
+
+.sanctuary-arrow--prev {
+  left: clamp(0.5rem, 2vw, 1rem);
+}
+
+.sanctuary-arrow--next {
+  right: clamp(0.5rem, 2vw, 1rem);
+}
+
+@media (min-width: 900px) {
+  .sanctuary-arrow {
+    display: none;
+  }
+}
+
+/* —— Footer —— */
+.sanctuary-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  margin-top: clamp(1.25rem, 3vw, 2rem);
+  position: relative;
+  z-index: 1;
+}
+
+.sanctuary-counter {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  color: rgba(197, 160, 89, 0.6);
+  margin: 0;
+}
+
+.sanctuary-counter-sep {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.sanctuary-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.sanctuary-dot {
+  width: 1.75rem;
+  height: 2px;
+  padding: 0;
+  border: none;
+  border-radius: 1px;
+  background: rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  transition:
+    width var(--transition-smooth),
+    background var(--transition-smooth);
+}
+
+.sanctuary-dot.is-active {
+  width: 2.75rem;
+  background: var(--accent-warm);
+}
+
+.sanctuary-caption {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 2.5vw, 1.65rem);
+  font-style: italic;
+  color: white;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sanctuary-side:hover {
+    transform: none;
+  }
 }
 
 /* Container queries — scale inside narrow stage */
@@ -1125,14 +1495,14 @@ body:has(.hero-editorial) header:not([data-scrolled="true"]) {
 
 @container showcase (min-width: 520px) {
   .showcase-image-wrap .glass-liquid {
-    aspect-ratio: 16 / 10;
+    height: var(--showcase-image-max-h);
   }
 }
 
 /* —— Hero responsive —— */
 @media (max-width: 639px) {
   :root {
-    --header-height: 5.5rem;
+    --header-height: 6.25rem;
   }
 
   .hero-editorial__image {
@@ -1222,7 +1592,8 @@ div.min-h-screen.bg-\[var\(--bg-dark\)\],
 section.bg-\[var\(--bg-dark\)\],
 section[class*="bg-\[var\(--bg-dark\)\]"],
 .hero-editorial,
-.showcase-standard {
+.showcase-standard,
+.sanctuary-section {
   background-color: transparent !important;
 }
 

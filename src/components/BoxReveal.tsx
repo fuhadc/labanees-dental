@@ -22,6 +22,41 @@ interface BoxRevealProps {
   id?: string;
 }
 
+function useForceVisible(
+  ref: React.RefObject<HTMLElement | null>,
+  opts: { reduced: boolean | null; immediate?: boolean },
+) {
+  const [forced, setForced] = useState(!!opts.reduced || !!opts.immediate);
+
+  useEffect(() => {
+    if (opts.reduced || opts.immediate) {
+      setForced(true);
+      return;
+    }
+
+    const el = ref.current;
+    if (!el) return;
+
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setForced(true);
+      },
+      { threshold: 0.02, rootMargin: "160px" },
+    );
+    obs.observe(el);
+
+    // Safety: never leave content stuck invisible
+    const timeout = window.setTimeout(() => setForced(true), 1800);
+
+    return () => {
+      obs.disconnect();
+      window.clearTimeout(timeout);
+    };
+  }, [opts.reduced, opts.immediate, ref]);
+
+  return forced;
+}
+
 export function BoxReveal({
   children,
   origin = "bottom",
@@ -34,36 +69,17 @@ export function BoxReveal({
   id,
 }: BoxRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.06, margin: "0px 0px -40px 0px" });
+  const inView = useInView(ref, viewport);
   const reduced = useReducedMotion();
-  const [forced, setForced] = useState(!!reduced);
+  const forced = useForceVisible(ref, { reduced, immediate });
 
-  useEffect(() => {
-    if (reduced || immediate) {
-      setForced(true);
-      return;
-    }
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setForced(true);
-      },
-      { threshold: 0.04, rootMargin: "100px" },
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [reduced, immediate]);
-
-  const show = reduced || immediate || inView || forced;
+  const show = !!reduced || immediate || inView || forced;
   const classes = `box-reveal ${framed ? "box-frame" : ""} ${show ? "is-revealed" : ""} ${className}`.trim();
   const variants = boxRevealVariants(origin, delay);
 
   const motionProps = show
-    ? { initial: false, animate: "visible" as const }
-    : immediate
-      ? { initial: "hidden" as const, animate: "visible" as const }
-      : { initial: "hidden" as const, whileInView: "visible" as const, viewport };
+    ? { initial: false as const, animate: "visible" as const }
+    : { initial: "hidden" as const, whileInView: "visible" as const, viewport };
 
   const inner = (
     <>
@@ -93,12 +109,13 @@ export function BoxReveal({
   );
 }
 
-interface BoxRevealGridProps {
+export function BoxRevealGrid({
+  children,
+  className = "",
+}: {
   children: React.ReactNode;
   className?: string;
-}
-
-export function BoxRevealGrid({ children, className = "" }: BoxRevealGridProps) {
+}) {
   return <div className={className}>{children}</div>;
 }
 
@@ -113,16 +130,24 @@ export function BoxRevealItem({
   className?: string;
   origin?: BoxOrigin;
   delay?: number;
-  /** Use inside BoxRevealStagger — inherits parent animation */
   stagger?: boolean;
 }) {
+  const ref = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  const inView = useInView(ref, viewport);
+  const forced = useForceVisible(ref, { reduced });
   const variants = boxRevealVariants(origin, delay);
-  const classes = `box-reveal box-frame ${className}`.trim();
+  const show = !!reduced || inView || forced;
+  const classes = `box-reveal box-frame ${show ? "is-revealed" : ""} ${className}`.trim();
 
   if (stagger) {
     return (
-      <motion.article variants={boxStaggerItem} className={classes}>
+      <motion.article
+        ref={ref}
+        variants={boxStaggerItem}
+        className={classes}
+        {...(show ? { initial: false, animate: "visible" as const } : {})}
+      >
         <span className="box-corner" aria-hidden />
         {children}
       </motion.article>
@@ -131,9 +156,11 @@ export function BoxRevealItem({
 
   return (
     <motion.article
-      initial={reduced ? false : "hidden"}
-      whileInView={reduced ? undefined : "visible"}
-      viewport={{ once: true, amount: 0.06, margin: "0px 60px 0px 60px" }}
+      ref={ref}
+      initial={show ? false : "hidden"}
+      animate={show ? "visible" : undefined}
+      whileInView={show ? undefined : "visible"}
+      viewport={viewport}
       variants={variants}
       className={classes}
     >
@@ -150,15 +177,21 @@ export function BoxRevealStagger({
   children: React.ReactNode;
   className?: string;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
+  const inView = useInView(ref, viewport);
+  const forced = useForceVisible(ref, { reduced });
+  const show = !!reduced || inView || forced;
 
   return (
     <motion.div
-      initial={reduced ? false : "hidden"}
-      whileInView={reduced ? undefined : "visible"}
+      ref={ref}
+      initial={show ? false : "hidden"}
+      animate={show ? "visible" : undefined}
+      whileInView={show ? undefined : "visible"}
       viewport={viewport}
       variants={boxStaggerContainer}
-      className={className}
+      className={`${className} ${show ? "is-revealed" : ""}`.trim()}
     >
       {children}
     </motion.div>

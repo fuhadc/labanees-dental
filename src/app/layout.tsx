@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Montserrat, Playfair_Display } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import "./globals.css";
-import { ScrollObserver, CustomCursor, SmoothScroll, BackgroundEffects, ScrollProgress, FloatingAction, PageWrapper } from "@/components";
+import { ScrollObserver, CustomCursor, SmoothScroll, BackgroundEffects, ScrollProgress, FloatingAction, PageWrapper, ResponsiveFix } from "@/components";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -22,6 +22,11 @@ export const metadata: Metadata = {
     "Labanees Dental – advanced cosmetic dentistry and dental implants in Muscat. Transforming smiles with precision, artistry, and care.",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -38,6 +43,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <MotionConfig reducedMotion="user" transition={{ ease: [0.77, 0, 0.175, 1], duration: 0.85 }}>
+          <ResponsiveFix />
           <SmoothScroll>
             <ScrollProgress />
             <CustomCursor />

@@ -84,7 +84,7 @@ function SequenceVisual({
   children?: React.ReactNode;
   embed?: boolean;
 }) {
-  const containerScale = useTransform(progress, [0, 0.5, 1], [0.94, 1, 0.98]);
+  const containerScale = useTransform(progress, [0, 0.5, 1], [1, 1.02, 1]);
   const glowOpacity = useTransform(progress, [0, 0.5, 1], [0.1, 0.35, 0.12]);
 
   const visual = (

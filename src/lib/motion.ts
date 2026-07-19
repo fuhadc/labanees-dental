@@ -27,11 +27,11 @@ export const spring = {
   tilt: { type: "spring", stiffness: 220, damping: 26, mass: 0.35 },
 } as const;
 
-/** Generous viewport — avoids content stuck off-screen */
+/** Generous viewport — expand root so near-edge content still reveals */
 export const viewport: ViewportOptions = {
   once: true,
-  amount: 0.08,
-  margin: "0px 0px -60px 0px",
+  amount: 0.02,
+  margin: "140px 0px 140px 0px",
 };
 
 export type BoxOrigin = "bottom" | "top" | "left" | "right" | "center";
@@ -53,11 +53,11 @@ export function boxRevealVariants(
       visible: { opacity: 1, y: 0, scale: 1, transition: t },
     },
     left: {
-      hidden: { opacity: 0, x: -48, scale: 0.96 },
+      hidden: { opacity: 0, x: -24, scale: 0.96 },
       visible: { opacity: 1, x: 0, scale: 1, transition: t },
     },
     right: {
-      hidden: { opacity: 0, x: 48, scale: 0.96 },
+      hidden: { opacity: 0, x: 24, scale: 0.96 },
       visible: { opacity: 1, x: 0, scale: 1, transition: t },
     },
     center: {

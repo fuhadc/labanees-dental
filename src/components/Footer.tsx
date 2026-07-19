@@ -1,25 +1,24 @@
 "use client";
 
 import { BoxReveal } from "@/components/BoxReveal";
-import Magnetic from "./Magnetic";
 
 export interface FooterProps {
   ctaText?: string;
   ctaHref?: string;
+  /** @deprecated Contact links are rendered as actionable anchors */
   contactLine?: string;
   copyright?: string;
 }
 
 export default function Footer({
-  ctaText = "Book an appointment",
+  ctaText = "Book Appointment",
   ctaHref = "#booking",
-  contactLine,
   copyright = `© ${new Date().getFullYear()} Labanees Dental. All rights reserved.`,
 }: FooterProps) {
   return (
     <footer className="relative overflow-hidden border-t border-white/5 bg-[var(--bg-dark)] section-padding-y">
-      <div className="pointer-events-none absolute inset-0 flex select-none items-center justify-center opacity-[0.02]">
-        <span className="whitespace-nowrap font-serif text-[20vw] italic leading-none tracking-tighter">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden flex select-none items-center justify-center opacity-[0.02]">
+        <span className="max-w-full truncate font-serif text-[clamp(2.5rem,18vw,10rem)] italic leading-none tracking-tighter">
           Crafting Perfection
         </span>
       </div>
@@ -27,27 +26,39 @@ export default function Footer({
       <div className="page-container relative z-10 flex flex-col items-center text-center">
         <BoxReveal origin="bottom" className="box-inner-padding w-full max-w-2xl">
           {ctaText && (
-            <Magnetic>
-              <a
-                href={ctaHref}
-                className="btn-animated inline-block border border-[var(--accent-warm)] bg-[var(--accent-warm)] px-16 py-6 text-[10px] font-bold uppercase tracking-[0.4em] text-black hover:bg-transparent hover:text-[var(--accent-warm)]"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                {ctaText}
-              </a>
-            </Magnetic>
+            <a
+              href={ctaHref}
+              className="inline-block border border-[var(--accent-warm)] bg-[var(--accent-warm)] px-12 py-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-black transition-colors hover:bg-[var(--accent-warm-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 sm:px-16 sm:py-6"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              {ctaText}
+            </a>
           )}
 
           <div className="mx-auto mt-16 h-px w-full max-w-xs bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-          {contactLine && (
-            <p
-              className="mt-12 text-sm font-light italic tracking-widest text-white/30"
-              style={{ fontFamily: "var(--font-sans)" }}
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm font-light tracking-wide text-white/45">
+            <a
+              href="https://maps.google.com/?q=Lebanese+Dental+Clinic+Muscat"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[var(--accent-warm)]"
             >
-              {contactLine}
-            </p>
-          )}
+              18th November St, Muscat
+            </a>
+            <span aria-hidden className="text-white/20">
+              |
+            </span>
+            <a href="tel:+96896700335" className="hover:text-[var(--accent-warm)]">
+              +968 9670 0335
+            </a>
+            <span aria-hidden className="text-white/20">
+              |
+            </span>
+            <a href="mailto:info@labanees.com" className="hover:text-[var(--accent-warm)]">
+              info@labanees.com
+            </a>
+          </div>
 
           <div className="mt-12 flex items-center justify-center gap-8">
             <a

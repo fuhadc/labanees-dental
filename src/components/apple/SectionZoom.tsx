@@ -11,9 +11,9 @@ interface SectionZoomProps {
   id?: string;
 }
 
-/** Seamless zoom: section scales up as it enters, eases down as it leaves */
+/** Light enter presence only — no continuous fade that hides nested content */
 export default function SectionZoom({ children, className = "", id }: SectionZoomProps) {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const viewport = useViewport();
   const [mounted, setMounted] = useState(false);
@@ -27,27 +27,23 @@ export default function SectionZoom({ children, className = "", id }: SectionZoo
     offset: SCROLL_OFFSET.sectionPass,
   });
   const progress = useSpring(scrollYProgress, {
-    stiffness: 70,
-    damping: 26,
-    mass: 0.5,
+    stiffness: 80,
+    damping: 28,
+    mass: 0.45,
   });
 
-  // Forgiving parameters: ensures sections are readable and fully opaque early, and don't shrink/fade out aggressively
-  const scale = useTransform(progress, [0, 0.15, 0.5, 0.85, 1], [0.96, 1, 1, 1, 0.98]);
-  const opacity = useTransform(progress, [0, 0.08, 0.92, 1], [0.75, 1, 1, 0.85]);
-  const y = useTransform(progress, [0, 0.15, 0.85, 1], [24, 0, 0, -12]);
+  const y = useTransform(progress, [0, 0.2, 0.8, 1], [12, 0, 0, -6]);
 
-  // Disable scroll animations on mobile, tablet, or short screens to avoid components staying hidden
   const shouldAnimate = mounted && !reduced && viewport.isDesktop && !viewport.isShort;
 
   return (
-    <motion.section
+    <motion.div
       id={id}
       ref={ref}
-      style={shouldAnimate ? { scale, opacity, y } : undefined}
+      style={shouldAnimate ? { y } : undefined}
       className={`section-zoom ${className}`.trim()}
     >
       {children}
-    </motion.section>
+    </motion.div>
   );
 }
