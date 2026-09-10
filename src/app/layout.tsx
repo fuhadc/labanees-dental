@@ -32,6 +32,13 @@ export const metadata: Metadata = {
   title: "Lebanese Dental Clinic | Advanced Cosmetic Dentistry in Muscat",
   description:
     "Lebanese Dental Clinic – advanced cosmetic dentistry and dental implants in Muscat. Transforming smiles with precision, artistry, and care.",
+  openGraph: {
+    title: "Lebanese Dental Clinic | Muscat",
+    description: "Aesthetic dentistry in Muscat — precision, comfort, and a calm clinical experience.",
+    siteName: "Lebanese Dental Clinic",
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export const viewport: Viewport = {
