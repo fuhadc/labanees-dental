@@ -8,7 +8,7 @@ export interface HeroBannerProps {
   backgroundImage?: string;
 }
 
-export default function HeroBanner({ backgroundImage }: HeroBannerProps) {
+export default function HeroBanner({ backgroundImage = "/clinic/hero-smile-bg.webp" }: HeroBannerProps) {
   const ref = useRef<HTMLElement | null>(null);
   const reduced = useReducedMotion();
 
@@ -17,95 +17,113 @@ export default function HeroBanner({ backgroundImage }: HeroBannerProps) {
     offset: ["start start", "end start"],
   });
 
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1.02, 1.1]);
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, 48]);
-  const copyY = useTransform(scrollYProgress, [0, 1], [0, -16]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1.0, 1.05]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, 30]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
     <section
       ref={ref}
       id="top"
-      className="hero-editorial relative flex min-h-[100dvh] items-center overflow-hidden bg-[#050609]"
+      className="hero-editorial relative flex min-h-[100dvh] w-full flex-col justify-between overflow-hidden bg-[#080706]"
       aria-labelledby="hero-title"
     >
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        {backgroundImage ? (
-          <motion.div
-            className="absolute inset-0 bg-cover bg-[center_right_35%] md:bg-center"
-            style={{
-              backgroundImage: `url(${backgroundImage})`,
-              y: reduced ? 0 : imageY,
-              scale: reduced ? 1.02 : imageScale,
-            }}
-          />
-        ) : (
-          <div className="absolute inset-0 bg-[#050609]" />
-        )}
-        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black via-black/80 via-40% to-transparent" />
-        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/60 via-transparent to-black/30" />
+      {/* Background Image with Crisp Smile Focal Point & Smooth Gradual Darkening */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+        <motion.div
+          className="absolute inset-0 bg-cover bg-[center_12%] sm:bg-[center_15%] md:bg-center transition-all duration-500"
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+            y: reduced ? 0 : imageY,
+            scale: reduced ? 1.0 : imageScale,
+          }}
+        />
+
+        {/* Multi-tier gradient overlay to show top smile clearly while fading smoothly to solid dark brown/black bottom */}
+        <div
+          className="absolute inset-0 z-[1]"
+          style={{
+            background: `linear-gradient(180deg, 
+              rgba(10, 8, 7, 0.22) 0%, 
+              rgba(10, 8, 7, 0.40) 25%, 
+              rgba(10, 8, 7, 0.78) 50%, 
+              rgba(8, 7, 6, 0.95) 75%, 
+              rgba(8, 7, 6, 1.0) 100%)`,
+          }}
+        />
       </div>
 
+      {/* Main Container - Full viewport layout matching reference mockup */}
       <motion.div
-        className="relative z-10 w-full pb-[clamp(2rem,6vh,4rem)] pt-[calc(var(--header-height)+env(safe-area-inset-top,0px))]"
+        className="relative z-10 flex min-h-[100dvh] w-full flex-col justify-between pb-8 pt-[calc(var(--header-height)+1.5rem)] md:pb-12 md:pt-[calc(var(--header-height)+2.5rem)]"
         style={reduced ? undefined : { opacity: contentOpacity }}
       >
-        <div className="page-container flex min-h-[calc(100dvh-var(--header-height)-env(safe-area-inset-top,0px)-4rem)] flex-col justify-center">
-          <div className="flex max-w-xl flex-col justify-center gap-5 md:max-w-2xl md:gap-6 lg:max-w-3xl">
-            <motion.div
-              className="flex flex-col gap-4 md:gap-5"
-              initial={reduced ? false : { opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.1, ease: EASE_SFLOW }}
-              style={reduced ? undefined : { y: copyY }}
-            >
-              <p
-                className="font-serif text-[clamp(2rem,4.5vw,3.5rem)] font-normal leading-none tracking-tight text-[var(--accent-warm)]"
-                style={{ fontFamily: "var(--font-serif)" }}
-              >
-                Labanees
-              </p>
+        {/* Top Flexible Spacer */}
+        <div className="flex-1 min-h-[2rem]" aria-hidden />
 
-              <h1
-                id="hero-title"
-                className="font-serif text-[clamp(2.25rem,5.5vw,4.25rem)] font-normal leading-[1.12] tracking-[-0.01em] text-balance text-[var(--hero-text-primary)]"
-                style={{ fontFamily: "var(--font-serif)" }}
-              >
-                Expert dental care.
-                <span className="mt-1 block text-[var(--accent-warm)] md:mt-2">
-                  Beautiful results.
-                </span>
-              </h1>
+        {/* Center Hero Content (Logo & Serif Headline) */}
+        <div className="page-container mx-auto flex w-full max-w-lg flex-col items-center justify-center text-center md:max-w-2xl lg:max-w-3xl">
+          
+          {/* Gold Lebanese Dental Clinic Logo Mark */}
+          <motion.div
+            initial={reduced ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: EASE_SFLOW }}
+            className="mb-5 flex w-full justify-center sm:mb-7"
+          >
+            <img
+              src="/clinic/ldc-gold-logo.webp"
+              alt="Lebanese Dental Clinic Logo"
+              className="h-auto w-[250px] max-w-[78vw] object-contain drop-shadow-[0_4px_24px_rgba(0,0,0,0.65)] sm:w-[290px] md:w-[350px] lg:w-[390px]"
+            />
+          </motion.div>
 
-              <div className="mt-1 h-px w-14 bg-[var(--accent-warm)]" />
+          {/* Headline in Luxury White Didone Serif Display Font */}
+          <motion.h1
+            id="hero-title"
+            initial={reduced ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.12, ease: EASE_SFLOW }}
+            className="font-serif text-[1.85rem] font-normal leading-[1.14] tracking-[0.05em] text-center uppercase text-[#f8f6f0] sm:text-3xl md:text-4xl lg:text-[3.25rem] drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]"
+            style={{ fontFamily: "'Bodoni Moda', Didot, var(--font-bodoni), 'Playfair Display', Georgia, serif" }}
+          >
+            EXPERT DENTAL CARE.
+          </motion.h1>
 
-              <p
-                className="mt-2 max-w-md font-sans text-sm font-light leading-[1.85] text-[var(--hero-text-muted)] sm:text-[0.9375rem] md:max-w-lg md:text-base"
-                style={{ fontFamily: "var(--font-sans)" }}
-              >
-                Aesthetic dentistry in Muscat — precision, comfort, and a calm clinical experience.
-              </p>
-
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <a
-                  href="#booking"
-                  className="inline-flex items-center gap-3 rounded-sm bg-[var(--accent-warm)] px-8 py-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-black transition-colors duration-300 hover:bg-[var(--accent-warm-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-                  style={{ fontFamily: "var(--font-sans)" }}
-                >
-                  Book Appointment
-                  <span aria-hidden>→</span>
-                </a>
-                <a
-                  href="#about"
-                  className="inline-flex items-center px-2 py-4 text-[11px] font-medium uppercase tracking-[0.18em] text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:text-white"
-                  style={{ fontFamily: "var(--font-sans)" }}
-                >
-                  Explore the clinic
-                </a>
-              </div>
-            </motion.div>
-          </div>
+          {/* Thin Horizontal Gold Line */}
+          <motion.div
+            initial={reduced ? false : { opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 0.7, delay: 0.25, ease: EASE_SFLOW }}
+            className="mt-4 h-[1px] w-12 bg-[#c5a059]/80 sm:mt-5 sm:w-16"
+          />
         </div>
+
+        {/* Bottom Flexible Spacer */}
+        <div className="flex-1 min-h-[1.5rem]" aria-hidden />
+
+        {/* SIDE-BY-SIDE BUTTONS AT THE BOTTOM */}
+        <motion.div
+          initial={reduced ? false : { opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.35, ease: EASE_SFLOW }}
+          className="page-container mx-auto flex w-full max-w-sm items-center justify-center gap-3 px-4 sm:max-w-md md:max-w-lg md:gap-4"
+        >
+          <a
+            href="#booking"
+            className="flex-1 flex items-center justify-center bg-[#c5a059] py-3.5 px-2 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.16em] text-[#14110b] transition-all duration-300 hover:bg-[#d4b06a] hover:shadow-[0_4px_20px_rgba(197,160,89,0.35)] active:translate-y-0 text-center"
+            style={{ fontFamily: "var(--font-sans)" }}
+          >
+            BOOK APPOINTMENT
+          </a>
+          <a
+            href="#about"
+            className="flex-1 flex items-center justify-center border border-[#c5a059]/80 bg-transparent py-3.5 px-2 text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.16em] text-[#c5a059] transition-all duration-300 hover:border-[#c5a059] hover:bg-[#c5a059]/10 hover:text-white active:translate-y-0 text-center"
+            style={{ fontFamily: "var(--font-sans)" }}
+          >
+            OUR CLINIC
+          </a>
+        </motion.div>
       </motion.div>
     </section>
   );

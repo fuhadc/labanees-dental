@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import "tailwindcss";
 
 /* ============================================
@@ -30,10 +31,11 @@
     rgba(0, 0, 0, 0.6) 100%
   );
 
-  /* Typography — Playfair Display headings, Montserrat UI & body */
+  /* Typography — Bodoni Moda luxury Didone headings, Montserrat UI & body */
   --font-sans: var(--font-montserrat), "Montserrat", system-ui, sans-serif;
-  --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-serif: var(--font-bodoni), "Bodoni Moda", var(--font-playfair), "Playfair Display", Didot, serif;
   --font-display: var(--font-montserrat), "Montserrat", sans-serif;
+  --font-bodoni: var(--font-bodoni), "Bodoni Moda", Didot, serif;
   --font-playfair: var(--font-playfair), "Playfair Display", Georgia, serif;
 
   /* Hero-specific text tones */
@@ -300,6 +302,11 @@ button:focus:not(:focus-visible) {
 
 .font-display {
   font-family: var(--font-display);
+}
+
+.font-bodoni,
+.font-serif {
+  font-family: "Bodoni Moda", Didot, "Bodoni MT", var(--font-bodoni), var(--font-playfair), Georgia, serif !important;
 }
 
 @theme inline {

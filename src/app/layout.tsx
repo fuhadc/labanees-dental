@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Montserrat, Playfair_Display } from "next/font/google";
+import { Montserrat, Playfair_Display, Bodoni_Moda, Cormorant_Garamond } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import "./globals.css";
 import { ScrollObserver, CustomCursor, SmoothScroll, BackgroundEffects, ScrollProgress, FloatingAction, PageWrapper, ResponsiveFix } from "@/components";
@@ -16,10 +16,22 @@ const playfair = Playfair_Display({
   weight: ["400", "500", "600", "700"],
 });
 
+const bodoni = Bodoni_Moda({
+  variable: "--font-bodoni",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
 export const metadata: Metadata = {
-  title: "Labanees Dental | Advanced Cosmetic Dentistry & Dental Implants in Muscat",
+  title: "Lebanese Dental Clinic | Advanced Cosmetic Dentistry in Muscat",
   description:
-    "Labanees Dental – advanced cosmetic dentistry and dental implants in Muscat. Transforming smiles with precision, artistry, and care.",
+    "Lebanese Dental Clinic – advanced cosmetic dentistry and dental implants in Muscat. Transforming smiles with precision, artistry, and care.",
 };
 
 export const viewport: Viewport = {
@@ -35,7 +47,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} ${playfair.variable}`}
+      className={`${montserrat.variable} ${playfair.variable} ${bodoni.variable} ${cormorant.variable}`}
       suppressHydrationWarning
     >
       <body

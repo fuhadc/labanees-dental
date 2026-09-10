@@ -26,8 +26,8 @@ export const CLINIC_PHOTOS = {
     alt: "Advanced panoramic dental imaging technology at Labanees Dental",
   },
   heroBg: {
-    src: "/clinic/hero-bg.jpg",
-    alt: "Labanees Dental luxury reception lounge",
+    src: "/clinic/hero-smile-bg.webp",
+    alt: "Lebanese Dental Clinic smile precision aesthetic dentistry",
   },
 } as const;
 
