@@ -48,28 +48,78 @@ export default function ContactSection() {
       <SectionHeader title="Visit Us" align="center" />
 
       <div className="page-container pb-[var(--space-section-y)]">
-        <div className="grid grid-cols-1 items-stretch gap-5 md:gap-6 lg:grid-cols-2 lg:grid-rows-[auto_auto_auto]">
+        <div className="grid grid-cols-1 items-stretch gap-5 md:gap-6 lg:grid-cols-2">
           <BoxReveal origin="left" className={`${panelPad} lg:col-start-1 lg:row-start-1`}>
-            <p className="font-display text-[10px] uppercase tracking-[0.45em] text-[var(--accent-warm)]">
-              Connect With Us
-            </p>
-            <h2 className="mt-5 font-serif text-[clamp(1.85rem,2vw+1.2rem,3.25rem)] font-medium italic leading-[1.15] text-white">
-              Begin Your Journey
-              <br />
-              to Excellence.
-            </h2>
-            <div className="mt-6 h-px w-16 bg-[var(--accent-warm)]" />
-            <p className="mt-6 max-w-lg text-base font-light leading-relaxed text-white/65 md:text-lg">
-              Experience dental care redefined. Reach out to our dedicated team to schedule your
-              consultation in our Muscat facility.
-            </p>
+            <dl className="grid flex-1 grid-cols-1 content-start gap-8 sm:grid-cols-2">
+              <div className="flex flex-col gap-2.5">
+                <dt className="font-display text-[9px] uppercase tracking-[0.4em] text-[var(--accent-warm)]/60">
+                  Direct Line
+                </dt>
+                <dd>
+                  <a
+                    href="tel:+96896700335"
+                    className="text-lg font-light tracking-tight text-white transition-colors hover:text-[var(--accent-warm)] md:text-xl"
+                  >
+                    +968 9670 0335
+                  </a>
+                </dd>
+              </div>
+              <div className="flex flex-col gap-2.5">
+                <dt className="font-display text-[9px] uppercase tracking-[0.4em] text-[var(--accent-warm)]/60">
+                  Email
+                </dt>
+                <dd>
+                  <a
+                    href="mailto:info@labanees.com"
+                    className="text-lg font-light tracking-tight text-white transition-colors hover:text-[var(--accent-warm)] md:text-xl"
+                  >
+                    info@labanees.com
+                  </a>
+                </dd>
+              </div>
+              <div className="flex flex-col gap-2.5 sm:col-span-2">
+                <dt className="font-display text-[9px] uppercase tracking-[0.4em] text-[var(--accent-warm)]/60">
+                  Muscat Facility
+                </dt>
+                <dd>
+                  <a
+                    href="https://maps.google.com/?q=Lebanese+Dental+Clinic+Muscat"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-light leading-relaxed text-white/90 transition-colors hover:text-[var(--accent-warm)] md:text-lg"
+                  >
+                    18th November St, Al Ghubrah South
+                    <br />
+                    Muscat, Sultanate of Oman
+                  </a>
+                </dd>
+              </div>
+              <div className="flex flex-col gap-2.5 sm:col-span-2">
+                <dt className="font-display text-[9px] uppercase tracking-[0.4em] text-[var(--accent-warm)]/60">
+                  Clinical Hours
+                </dt>
+                <dd className="space-y-1.5 text-sm font-light text-white/55">
+                  <p>
+                    <span className="inline-block min-w-[100px] font-medium text-white">Sat – Wed:</span>{" "}
+                    9:00 – 13:00 • 16:00 – 20:00
+                  </p>
+                  <p>
+                    <span className="inline-block min-w-[100px] font-medium text-white">Thursday:</span>{" "}
+                    9:00 – 14:00
+                  </p>
+                  <p>
+                    <span className="font-medium text-[var(--accent-warm)]">Friday:</span> Closed
+                  </p>
+                </dd>
+              </div>
+            </dl>
           </BoxReveal>
 
           <BoxReveal
             id="booking"
             origin="right"
             delay={0.06}
-            className={`${panelPad} lg:col-start-2 lg:row-span-2 lg:row-start-1`}
+            className={`${panelPad} lg:col-start-2 lg:row-start-1`}
           >
             <p className="font-display text-[10px] uppercase tracking-[0.4em] text-[var(--accent-warm)]">
               Appointment Inquiry
@@ -153,12 +203,11 @@ export default function ContactSection() {
                   <option value="" disabled className="bg-[var(--bg-dark)]">
                     Select treatment
                   </option>
+                  <option className="bg-[var(--bg-dark)]">Dental Implants</option>
+                  <option className="bg-[var(--bg-dark)]">Cosmetic Dentistry</option>
+                  <option className="bg-[var(--bg-dark)]">Restorative Dentistry</option>
                   <option className="bg-[var(--bg-dark)]">General Dentistry</option>
-                  <option className="bg-[var(--bg-dark)]">Cosmetic / Veneers</option>
-                  <option className="bg-[var(--bg-dark)]">Implants / Surgery</option>
-                  <option className="bg-[var(--bg-dark)]">Dermatology / Skin</option>
-                  <option className="bg-[var(--bg-dark)]">Laser Treatments</option>
-                  <option className="bg-[var(--bg-dark)]">Not sure yet</option>
+                  <option className="bg-[var(--bg-dark)]">Other / Consultation</option>
                 </select>
               </div>
 
@@ -208,76 +257,12 @@ export default function ContactSection() {
             </form>
           </BoxReveal>
 
-          <BoxReveal origin="left" delay={0.04} className={`${panelPad} lg:col-start-1 lg:row-start-2`}>
-            <dl className="grid flex-1 grid-cols-1 content-start gap-8 sm:grid-cols-2">
-              <div className="flex flex-col gap-2.5">
-                <dt className="font-display text-[9px] uppercase tracking-[0.4em] text-[var(--accent-warm)]/60">
-                  Direct Line
-                </dt>
-                <dd>
-                  <a
-                    href="tel:+96896700335"
-                    className="text-lg font-light tracking-tight text-white transition-colors hover:text-[var(--accent-warm)] md:text-xl"
-                  >
-                    +968 9670 0335
-                  </a>
-                </dd>
-              </div>
-              <div className="flex flex-col gap-2.5">
-                <dt className="font-display text-[9px] uppercase tracking-[0.4em] text-[var(--accent-warm)]/60">
-                  Email
-                </dt>
-                <dd>
-                  <a
-                    href="mailto:info@labanees.com"
-                    className="text-lg font-light tracking-tight text-white transition-colors hover:text-[var(--accent-warm)] md:text-xl"
-                  >
-                    info@labanees.com
-                  </a>
-                </dd>
-              </div>
-              <div className="flex flex-col gap-2.5 sm:col-span-2">
-                <dt className="font-display text-[9px] uppercase tracking-[0.4em] text-[var(--accent-warm)]/60">
-                  Muscat Facility
-                </dt>
-                <dd>
-                  <a
-                    href="https://maps.google.com/?q=Lebanese+Dental+Clinic+Muscat"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-base font-light leading-relaxed text-white/90 transition-colors hover:text-[var(--accent-warm)] md:text-lg"
-                  >
-                    18th November St, Al Ghubrah South
-                    <br />
-                    Muscat, Sultanate of Oman
-                  </a>
-                </dd>
-              </div>
-              <div className="flex flex-col gap-2.5 sm:col-span-2">
-                <dt className="font-display text-[9px] uppercase tracking-[0.4em] text-[var(--accent-warm)]/60">
-                  Clinical Hours
-                </dt>
-                <dd className="space-y-1.5 text-sm font-light text-white/55">
-                  <p>
-                    <span className="inline-block min-w-[100px] font-medium text-white">Sat – Wed:</span>{" "}
-                    9:00 – 13:00 • 16:00 – 20:00
-                  </p>
-                  <p>
-                    <span className="inline-block min-w-[100px] font-medium text-white">Thursday:</span>{" "}
-                    9:00 – 14:00
-                  </p>
-                  <p>
-                    <span className="font-medium text-[var(--accent-warm)]">Friday:</span> Closed
-                  </p>
-                </dd>
-              </div>
-            </dl>
-          </BoxReveal>
+
 
           <BoxReveal
             origin="bottom"
             delay={0.08}
-            className="relative aspect-[16/9] min-h-[240px] overflow-hidden p-0 sm:aspect-[21/9] sm:min-h-[280px] lg:col-span-2 lg:col-start-1 lg:row-start-3 lg:min-h-[320px]"
+            className="relative aspect-[16/9] min-h-[240px] overflow-hidden p-0 sm:aspect-[21/9] sm:min-h-[280px] lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:min-h-[320px]"
           >
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.8!2d58.3941595!3d23.5982289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e91ff500e62d40f%3A0x63a51fcb6a361947!2sLebanese%20Dental%20Clinic!5e0!3m2!1sen!2som!4v1714310000000!5m2!1sen!2som"

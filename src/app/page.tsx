@@ -9,9 +9,9 @@ import { SectionZoom } from "@/components/apple";
 import { CLINIC_PHOTOS } from "@/lib/clinic-images";
 import {
   WelcomeSection,
-  ClinicSection,
   ServicesSection,
   ReviewsSection,
+  WhyChooseSection,
   TeamSection,
   ContactSection,
 } from "@/sections";
@@ -38,11 +38,6 @@ export default function Home() {
 
         <AppleStickyShowcase />
 
-        <SectionDivider label="Our Space" />
-        <SectionZoom id="gallery">
-          <ClinicSection />
-        </SectionZoom>
-
         <SectionDivider label="Treatments" />
         <SectionZoom id="services">
           <ServicesSection />
@@ -51,6 +46,10 @@ export default function Home() {
         <SectionDivider label="Results" />
         <SectionZoom id="before-after">
           <ReviewsSection />
+        </SectionZoom>
+
+        <SectionZoom id="why-choose">
+          <WhyChooseSection />
         </SectionZoom>
 
         <SectionDivider label="Specialists" />

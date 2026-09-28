@@ -11,40 +11,40 @@ const services = [
     id: "dental-implants",
     heading: "Dental Implants",
     description:
-      "Precision-engineered restorations that restore function and natural aesthetics with permanent results.",
+      "Restoring missing teeth with carefully planned, natural-looking solutions.",
     items: [],
     imageSrc: IMG("1606811971618-4486d14f3f99"),
-    imageAlt: "Dental implant and restoration",
+    imageAlt: "Dental Implants restoration",
     imageFirst: true,
   },
   {
-    id: "hollywood-smile",
-    heading: "The Hollywood Smile",
+    id: "cosmetic-dentistry",
+    heading: "Cosmetic Dentistry",
     description:
-      "A bespoke smile makeover designed to enhance your natural features with perfection and symmetry.",
+      "Enhancing your smile while keeping it natural and harmonious.",
     items: [],
     imageSrc: IMG("1588776814546-1ffcf47267a5"),
-    imageAlt: "Hollywood smile makeover",
+    imageAlt: "Cosmetic Dentistry smile makeover",
     imageFirst: false,
   },
   {
-    id: "veneers",
-    heading: "Porcelain Veneers",
+    id: "restorative-dentistry",
+    heading: "Restorative Dentistry",
     description:
-      "Ultra-thin artisan porcelain shells crafted for a flawless, radiant, and natural-looking transformation.",
+      "Restoring damaged or weakened teeth for long-term function and aesthetics.",
     items: [],
     imageSrc: IMG("1516062423079-7ca13cdc7f5a"),
-    imageAlt: "Dental veneers for a natural smile",
+    imageAlt: "Restorative Dentistry treatment",
     imageFirst: true,
   },
   {
-    id: "root-canal",
-    heading: "Endodontic Care",
+    id: "general-dentistry",
+    heading: "General Dentistry",
     description:
-      "Advanced, pain-free treatments focused on preserving your natural teeth with clinical precision.",
+      "Comprehensive care to maintain your oral health and prevent future problems.",
     items: [],
     imageSrc: IMG("1606811841689-23dfddce3e95"),
-    imageAlt: "Root canal treatment",
+    imageAlt: "General Dentistry preventive care",
     imageFirst: false,
   },
 ];
@@ -52,7 +52,7 @@ const services = [
 export default function ServicesSection() {
   return (
     <section aria-label="Our services" className="space-y-4 md:space-y-6">
-      <SectionHeader title="What We Do" withDivider align="center" />
+      <SectionHeader title="Our Dental Services Include" eyebrow="What We Do" withDivider align="center" />
       {services.map((service, index) => (
         <ImageContentSection
           key={service.id}

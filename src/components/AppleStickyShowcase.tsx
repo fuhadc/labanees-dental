@@ -145,51 +145,7 @@ export default function AppleStickyShowcase() {
               </AnimatePresence>
             </div>
 
-            <div
-              className="flex flex-col gap-1 border-t border-white/8 pt-6"
-              role="tablist"
-              aria-label="Clinic experiences"
-            >
-              {slides.map((item, index) => {
-                const isActive = index === active;
-                return (
-                  <button
-                    key={item.title}
-                    type="button"
-                    role="tab"
-                    aria-selected={isActive}
-                    onClick={() => goTo(index)}
-                    className={`group flex w-full items-center gap-4 px-1 py-3 text-left transition-colors duration-300 ${
-                      isActive ? "text-white" : "text-white/40 hover:text-white/70"
-                    }`}
-                  >
-                    <span
-                      className={`font-display text-[10px] tracking-[0.3em] transition-colors duration-300 ${
-                        isActive ? "text-[var(--accent-warm)]" : "text-white/25 group-hover:text-white/45"
-                      }`}
-                    >
-                      0{index + 1}
-                    </span>
-                    <span
-                      className={`font-serif text-lg italic transition-colors duration-300 sm:text-xl ${
-                        isActive ? "text-white" : ""
-                      }`}
-                      style={{ fontFamily: "var(--font-serif)" }}
-                    >
-                      {item.title}
-                    </span>
-                    <span
-                      className={`ml-auto h-px flex-1 max-w-[4rem] origin-right transition-all duration-500 ${
-                        isActive
-                          ? "scale-x-100 bg-[var(--accent-warm)]"
-                          : "scale-x-50 bg-white/10 group-hover:bg-white/25"
-                      }`}
-                      aria-hidden
-                    />
-                  </button>
-                );
-              })}
-            </div>
+
 
             {/* Progress bar for auto-advance */}
             <div className="h-px w-full overflow-hidden bg-white/10" aria-hidden>

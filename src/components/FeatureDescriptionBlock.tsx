@@ -3,7 +3,9 @@
 import { BoxReveal, BoxRevealItem, BoxRevealStagger } from "@/components/BoxReveal";
 
 export interface FeatureDescriptionBlockProps {
+  tagline?: string;
   heading: string;
+  subheading?: string;
   description: string;
   items?: string[];
   id?: string;
@@ -11,7 +13,9 @@ export interface FeatureDescriptionBlockProps {
 }
 
 export default function FeatureDescriptionBlock({
+  tagline,
   heading,
+  subheading,
   description,
   items = [],
   id,
@@ -26,6 +30,15 @@ export default function FeatureDescriptionBlock({
           origin="bottom"
           className="flex flex-col items-center px-[clamp(1.25rem,3vw,2.5rem)] py-[clamp(1.5rem,4vh,2.75rem)] text-center"
         >
+          {tagline && (
+            <p
+              className="mb-3 font-display text-[10px] uppercase tracking-[0.45em] text-[var(--accent-warm)] font-semibold md:text-[11px]"
+              style={{ fontFamily: "var(--font-sans)" }}
+            >
+              {tagline}
+            </p>
+          )}
+
           <h2
             id={id ? `block-heading-${id}` : undefined}
             className="font-serif text-[clamp(1.85rem,2.2vw+1.4rem,4.25rem)] font-medium tracking-tight text-white italic leading-[1.15]"
@@ -33,7 +46,18 @@ export default function FeatureDescriptionBlock({
           >
             {heading}
           </h2>
+
+          {subheading && (
+            <p
+              className="mt-3 max-w-2xl font-serif text-[clamp(1.05rem,0.8vw+0.85rem,1.5rem)] font-light italic leading-relaxed text-[var(--accent-warm)]/90"
+              style={{ fontFamily: "var(--font-serif)" }}
+            >
+              {subheading}
+            </p>
+          )}
+
           <div className="mt-[clamp(0.85rem,2vh,1.75rem)] h-px w-[120px] bg-gradient-to-r from-transparent via-[var(--accent-warm)] to-transparent" />
+
           <p
             className="mt-[clamp(1rem,2.5vh,2rem)] max-w-3xl text-[clamp(0.95rem,0.4vw+0.85rem,1.2rem)] font-light leading-relaxed tracking-wide text-white/70 italic"
             style={{ fontFamily: "var(--font-sans)" }}
