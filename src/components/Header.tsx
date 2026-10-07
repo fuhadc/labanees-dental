@@ -126,19 +126,11 @@ export default function Header() {
             aria-label="Lebanese Dental Clinic home"
             onClick={() => setIsMenuOpen(false)}
           >
-            {/* Desktop Full Logo */}
             <img
               src="/clinic/ldc-gold-logo.webp"
               alt="Lebanese Dental Clinic Logo"
-              className="hidden h-9 md:h-10 lg:h-11 w-auto object-contain transition-transform duration-300 hover:opacity-90 md:block"
+              className="h-8 sm:h-9 md:h-10 lg:h-11 w-auto object-contain transition-transform duration-300 hover:opacity-90"
             />
-            {/* Mobile Centered Logo Text / Icon */}
-            <span
-              className="block font-sans text-xs md:hidden font-light uppercase tracking-[0.3em] text-[var(--accent-warm)]"
-              style={{ fontFamily: "var(--font-sans)" }}
-            >
-              LABANEES
-            </span>
           </a>
 
           {/* Desktop Navigation */}
