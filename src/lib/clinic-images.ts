@@ -33,6 +33,26 @@ export const CLINIC_PHOTOS = {
     src: "/clinic/hero-smile-bg-desktop.webp",
     alt: "Lebanese Dental Clinic smile precision aesthetic dentistry desktop widescreen",
   },
+  receptionMain: {
+    src: "/clinic/clinic-reception-main.webp",
+    alt: "Lebanese Dental Clinic main reception desk with LED lit logo",
+  },
+  planterLobby: {
+    src: "/clinic/clinic-planter-lobby.webp",
+    alt: "Illuminated glass planter feature wall in Lebanese Dental Clinic lobby",
+  },
+  treatmentSuite: {
+    src: "/clinic/clinic-treatment-suite.webp",
+    alt: "Advanced dental treatment room with ergonomic dental chair",
+  },
+  consultationSuite: {
+    src: "/clinic/clinic-consultation-suite.webp",
+    alt: "Clinical consultation suite with modern dental technology",
+  },
+  waitingLoungeArea: {
+    src: "/clinic/clinic-waiting-lounge.webp",
+    alt: "Serene patient lounge area with frosted glass privacy walls",
+  },
 } as const;
 
 /** Pair shown in section-bridge scroll transitions */
