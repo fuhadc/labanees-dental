@@ -104,12 +104,6 @@ export default function WhyChooseSection() {
                 <br />
                 DENTAL CLINIC
               </h2>
-              <p
-                className="mt-4 max-w-md font-serif text-sm font-light italic leading-relaxed text-[#c5a059]/90 sm:text-base md:text-lg"
-                style={{ fontFamily: "var(--font-serif)" }}
-              >
-                “Because every smile is different — your treatment should be too.”
-              </p>
             </motion.div>
 
             {/* Center Visual: Cinematic Responsive Image Frame */}
