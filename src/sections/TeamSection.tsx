@@ -11,18 +11,10 @@ const team = [
     imageSrc: "/clinic/dr-rasha-hadi.webp",
   },
   {
-    name: "Dr. Salma Al Jahdhami",
-    role: "Oral Surgeon",
-    focus: "Focused on surgical implantology and complex oral procedures.",
-    imageSrc:
-      "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400&h=500",
-  },
-  {
-    name: "Dr. May Eljaberi",
-    role: "Aesthetic Specialist",
-    focus: "Leading advanced skin health and aesthetic dermatology.",
-    imageSrc:
-      "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&h=500&fit=crop&q=80",
+    name: "Dr. Mariam Amer",
+    role: "General Dentist",
+    focus: "Focused on comprehensive oral healthcare, preventive treatments, and gentle patient-centered dentistry.",
+    imageSrc: "/clinic/dr-mariam-amer.webp",
   },
 ];
 
@@ -32,7 +24,7 @@ export default function TeamSection() {
       <SectionHeader title="Meet the Team" align="center" />
 
       <div className="page-container pb-[var(--space-section-y)]">
-        <BoxRevealGrid className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <BoxRevealGrid className="mx-auto grid max-w-3xl gap-8 sm:grid-cols-2 justify-center">
           {team.map((doctor) => (
             <BoxRevealItem
               key={doctor.name}
@@ -70,3 +62,4 @@ export default function TeamSection() {
     </section>
   );
 }
+
