@@ -6,230 +6,127 @@ import { CLINIC_PHOTOS } from "@/lib/clinic-images";
 
 const reasons = [
   {
-    number: "01",
-    title: "EXPERIENCED PROFESSIONALS",
-    description: "Experienced dental professionals delivering precise, thoughtful care.",
-    image: CLINIC_PHOTOS.receptionMain.src,
-    alt: CLINIC_PHOTOS.receptionMain.alt,
-    tag: "CLINICAL TEAM",
+    title: "EXPERIENCED DENTAL PROFESSIONALS",
+    description:
+      "Experienced dental professionals delivering precise, thoughtful and attentive care.",
   },
   {
-    number: "02",
-    title: "PERSONALIZED CARE",
-    description: "Treatment planning tailored to each patient's individual needs.",
-    image: CLINIC_PHOTOS.consultationSuite.src,
-    alt: CLINIC_PHOTOS.consultationSuite.alt,
-    tag: "PATIENT CONSULTATION",
+    title: "PERSONALIZED TREATMENT PLANNING",
+    description:
+      "Every treatment plan is tailored around your individual needs, goals and expectations.",
   },
   {
-    number: "03",
-    title: "ADVANCED TECHNOLOGY",
-    description: "Modern technology and advanced dental techniques.",
-    image: CLINIC_PHOTOS.treatmentSuite.src,
-    alt: CLINIC_PHOTOS.treatmentSuite.alt,
-    tag: "TREATMENT SUITE",
+    title: "MODERN TECHNOLOGY & ADVANCED TECHNIQUES",
+    description:
+      "Contemporary technology and refined techniques support precise and effective dental care.",
   },
   {
-    number: "04",
-    title: "NATURAL RESULTS",
-    description: "A focus on balanced, natural-looking and long-lasting results.",
-    image: CLINIC_PHOTOS.planterLobby.src,
-    alt: CLINIC_PHOTOS.planterLobby.alt,
-    tag: "AESTHETIC DENTISTRY",
+    title: "NATURAL, LONG-LASTING RESULTS",
+    description:
+      "A thoughtful approach focused on balanced, natural-looking and lasting results.",
   },
   {
-    number: "05",
-    title: "PATIENT COMFORT",
-    description: "A calm, comfortable and caring dental experience.",
-    image: CLINIC_PHOTOS.waitingLoungeArea.src,
-    alt: CLINIC_PHOTOS.waitingLoungeArea.alt,
-    tag: "PATIENT LOUNGE",
+    title: "COMFORTABLE & CARING EXPERIENCE",
+    description:
+      "A calm, welcoming environment designed around your comfort throughout your visit.",
   },
   {
-    number: "06",
-    title: "TRUSTED PRECISION",
-    description: "Precision in dentistry with a strong focus on quality and patient confidence.",
-    image: CLINIC_PHOTOS.exterior.src,
-    alt: CLINIC_PHOTOS.exterior.alt,
-    tag: "MUSCAT FACILITY",
+    title: "PRECISION IN DENTISTRY",
+    description:
+      "A commitment to detail, quality and clinical precision at every stage of your care.",
   },
 ] as const;
 
 export default function WhyChooseSection() {
-  const [activeIdx, setActiveIdx] = useState(0);
   const reduced = useReducedMotion();
-
-  const activeReason = reasons[activeIdx];
 
   return (
     <section
       aria-label="Why Choose Lebanese Dental Clinic"
-      className="relative overflow-hidden bg-[#06080b] py-16 sm:py-20 md:py-28"
+      className="relative overflow-hidden bg-[#050505] py-16 sm:py-24 md:py-32"
     >
       {/* Soft atmospheric background glow */}
       <div
-        className="pointer-events-none absolute -top-40 right-1/4 h-[550px] w-[650px] bg-[radial-gradient(ellipse_at_center,rgba(197,160,89,0.06),transparent_70%)]"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -bottom-32 left-1/3 h-[450px] w-[550px] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.025),transparent_70%)]"
+        className="pointer-events-none absolute inset-x-0 top-1/2 h-[500px] -translate-y-1/2 bg-[radial-gradient(ellipse_80%_50%_at_50%_50%,rgba(197,160,89,0.05),transparent_70%)]"
         aria-hidden
       />
 
-      <div className="page-container relative z-10">
-        {/* Asymmetric Editorial Desktop Composition */}
-        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 xl:gap-20">
-          
-          {/* Left Side: Oversized Headline + Cinematic Image Frame */}
-          <div className="flex flex-col gap-8">
-            <motion.div
-              initial={reduced ? false : { opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <p
-                className="font-display text-[10px] uppercase tracking-[0.45em] text-[#c5a059] font-semibold md:text-[11px]"
-                style={{ fontFamily: "var(--font-sans)" }}
+      <div className="page-container relative z-10 px-4 sm:px-6">
+        {/* Section Header */}
+        <header className="mx-auto max-w-3xl text-center">
+          <motion.p
+            initial={reduced ? false : { opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="font-display text-[10px] uppercase tracking-[0.45em] text-[#c5a059] font-semibold min-[380px]:text-[11px]"
+            style={{ fontFamily: "var(--font-sans)" }}
+          >
+            WHY CHOOSE US
+          </motion.p>
+
+          <motion.h2
+            initial={reduced ? false : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="mt-3 font-serif text-[clamp(2.2rem,4.2vw,4.5rem)] font-normal italic leading-[1.08] text-[#f8f6f0] text-balance"
+            style={{ fontFamily: "var(--font-serif)" }}
+          >
+            Exceptional care,
+            <br />
+            thoughtfully delivered.
+          </motion.h2>
+
+          <motion.p
+            initial={reduced ? false : { opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="mt-4 sm:mt-5 font-sans text-sm sm:text-base md:text-lg font-light leading-relaxed text-white/70 max-w-2xl mx-auto"
+            style={{ fontFamily: "var(--font-sans)" }}
+          >
+            At Lebanese Dental Clinic, every detail is considered — from diagnosis and treatment planning to your comfort and final result.
+          </motion.p>
+        </header>
+
+        {/* Editorial Reasons List */}
+        <div className="mx-auto mt-12 max-w-4xl sm:mt-16 md:mt-20">
+          <div className="border-t border-[#c5a059]/15">
+            {reasons.map((item, idx) => (
+              <motion.div
+                key={item.title}
+                initial={reduced ? false : { opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: reduced ? 0 : idx * 0.08 }}
+                className="group relative cursor-pointer block py-7 sm:py-9 md:py-11 border-b border-[#c5a059]/15 transition-transform duration-500 ease-out hover:-translate-y-1"
               >
-                WHY CHOOSE
-              </p>
-              <h2
-                className="mt-3 font-serif text-[clamp(2.4rem,4.5vw,4.8rem)] font-normal italic leading-[1.04] text-[#f8f6f0] text-balance"
-                style={{ fontFamily: "var(--font-serif)" }}
-              >
-                WHY CHOOSE
-                <br />
-                LEBANESE
-                <br />
-                DENTAL CLINIC
-              </h2>
-            </motion.div>
-
-            {/* Center Visual: Cinematic Responsive Image Frame */}
-            <motion.div
-              initial={reduced ? false : { opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.15 }}
-              className="relative overflow-hidden rounded-[22px] border border-white/10 bg-[#080b10] shadow-[0_20px_50px_rgba(0,0,0,0.6)]"
-            >
-              <div className="relative aspect-[4/3] w-full overflow-hidden sm:aspect-[16/10] lg:aspect-[4/3]">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={activeReason.image}
-                    src={activeReason.image}
-                    alt={activeReason.alt}
-                    initial={reduced ? false : { opacity: 0, scale: 1.05 }}
-                    animate={{ opacity: 1, scale: 1.01 }}
-                    exit={reduced ? undefined : { opacity: 0, scale: 0.99 }}
-                    transition={{ duration: reduced ? 0 : 0.65, ease: [0.16, 1, 0.3, 1] }}
-                    className="h-full w-full object-cover"
-                    draggable={false}
+                {/* Animated Gold Divider Highlight Line on Hover */}
+                {!reduced && (
+                  <div
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-[#c5a059] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                    aria-hidden
                   />
-                </AnimatePresence>
+                )}
 
-                {/* Dark Vignette Overlay */}
-                <div
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
-                  aria-hidden
-                />
+                <div className="flex flex-col text-left">
+                  <h3
+                    className="font-sans text-xs sm:text-sm md:text-base font-semibold uppercase tracking-[0.2em] sm:tracking-[0.22em] text-white/80 transition-all duration-500 group-hover:text-[#f8f6f0] group-hover:tracking-[0.25em]"
+                    style={{ fontFamily: "var(--font-sans)" }}
+                  >
+                    {item.title}
+                  </h3>
 
-                {/* Floating Location Badge */}
-                <div className="absolute left-5 bottom-5 flex items-center gap-2.5 rounded-full border border-white/15 bg-black/60 px-3.5 py-1.5 backdrop-blur-md">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#c5a059]" />
-                  <span className="font-display text-[9px] uppercase tracking-[0.25em] text-white/90 sm:text-[10px]">
-                    LEBANESE DENTAL CLINIC — MUSCAT
-                  </span>
+                  <p
+                    className="mt-2.5 sm:mt-3 font-sans text-xs sm:text-sm md:text-base font-light leading-relaxed text-white/60 transition-colors duration-500 group-hover:text-white/90"
+                    style={{ fontFamily: "var(--font-sans)" }}
+                  >
+                    {item.description}
+                  </p>
                 </div>
-
-                {/* Top-Right Active Feature Tag */}
-                <div className="absolute right-5 top-5 rounded-full border border-white/10 bg-black/40 px-3 py-1 backdrop-blur-md">
-                  <span className="font-display text-[9px] font-semibold uppercase tracking-[0.22em] text-[#c5a059]">
-                    {activeReason.tag}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Right Side: The 6 Vertical Interactive Editorial Items */}
-          <div className="flex flex-col gap-1 lg:pt-4" role="tablist" aria-label="Why Choose Us Features">
-            {reasons.map((item, idx) => {
-              const isActive = idx === activeIdx;
-              return (
-                <div
-                  key={item.number}
-                  role="tab"
-                  tabIndex={0}
-                  aria-selected={isActive}
-                  aria-expanded={isActive}
-                  aria-controls={`reason-panel-${idx}`}
-                  id={`reason-tab-${idx}`}
-                  onMouseEnter={() => setActiveIdx(idx)}
-                  onClick={() => setActiveIdx(idx)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setActiveIdx(idx);
-                    }
-                  }}
-                  className={`group relative cursor-pointer py-4 px-3 sm:py-5 transition-all duration-400 border-b border-white/8 ${
-                    isActive ? "bg-white/[0.025] translate-x-1" : "hover:bg-white/[0.01]"
-                  }`}
-                >
-                  {/* Gold active line indicator */}
-                  <motion.div
-                    className="absolute left-0 bottom-0 h-[2px] w-full bg-[#c5a059]"
-                    initial={false}
-                    animate={{ scaleX: isActive ? 1 : 0 }}
-                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ transformOrigin: "left center" }}
-                  />
-
-                  <div className="flex items-start gap-4 sm:gap-6">
-                    {/* Index Number */}
-                    <span
-                      className={`font-display text-sm tracking-[0.25em] transition-colors duration-300 font-semibold sm:text-base ${
-                        isActive ? "text-[#c5a059]" : "text-white/30 group-hover:text-white/60"
-                      }`}
-                      style={{ fontFamily: "var(--font-sans)" }}
-                    >
-                      {item.number}
-                    </span>
-
-                    {/* Content Block */}
-                    <div className="flex-1">
-                      <h3
-                        className={`font-sans text-xs font-semibold uppercase tracking-[0.22em] transition-colors duration-300 sm:text-sm ${
-                          isActive ? "text-white" : "text-white/60 group-hover:text-white/90"
-                        }`}
-                        style={{ fontFamily: "var(--font-sans)" }}
-                      >
-                        {item.title}
-                      </h3>
-
-                      {/* Smooth Collapsible / Fading Description */}
-                      <div
-                        id={`reason-panel-${idx}`}
-                        role="region"
-                        aria-labelledby={`reason-tab-${idx}`}
-                        className={`overflow-hidden transition-all duration-400 ${
-                          isActive ? "max-h-24 opacity-100 mt-2" : "max-h-0 opacity-0 md:max-h-20 md:opacity-40 md:mt-1.5 md:group-hover:opacity-75"
-                        }`}
-                      >
-                        <p
-                          className="font-sans text-xs font-light leading-relaxed text-white/80 sm:text-sm"
-                          style={{ fontFamily: "var(--font-sans)" }}
-                        >
-                          {item.description}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+              </motion.div>
+            ))}
           </div>
         </div>
 
@@ -242,19 +139,19 @@ export default function WhyChooseSection() {
           className="mt-16 text-center md:mt-24"
         >
           <p
-            className="font-serif text-[clamp(1.2rem,1.8vw+0.8rem,1.85rem)] font-light italic leading-relaxed text-[#f8f6f0]"
+            className="font-serif text-[clamp(1.25rem,2.2vw,1.95rem)] font-light italic leading-relaxed text-[#f8f6f0]"
             style={{ fontFamily: "var(--font-serif)" }}
           >
             “Because every smile is different —
             <br className="hidden sm:inline" /> your treatment should be too.”
           </p>
 
-          <div className="mx-auto mt-5 h-px w-14 bg-[#c5a059]/80" />
+          <div className="mx-auto mt-6 h-px w-16 bg-[#c5a059]/80" />
 
-          <div className="mt-5 font-sans text-[10px] font-medium uppercase tracking-[0.3em] text-white/70 sm:text-[11px]">
+          <div className="mt-5 font-sans text-[10px] min-[380px]:text-[11px] font-semibold uppercase tracking-[0.3em] text-white/80">
             LEBANESE DENTAL CLINIC
-            <p className="mt-1 text-[9px] tracking-[0.25em] text-white/40 font-normal sm:text-[10px]">
-              Precision in dentistry. Confidence in your smile.
+            <p className="mt-1.5 text-[9px] min-[380px]:text-[10px] tracking-[0.25em] text-white/45 font-normal">
+              PRECISION IN DENTISTRY. CONFIDENCE IN YOUR SMILE.
             </p>
           </div>
         </motion.div>
