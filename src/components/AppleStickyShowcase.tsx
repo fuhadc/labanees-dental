@@ -10,7 +10,6 @@ const clinicSlides = [
     number: "01",
     tagline: "A WARM WELCOME",
     heading: "Main Reception & Concierge Desk",
-    quote: "“An elegant backlit reception desk designed to welcome every patient with personalized care.”",
     image: CLINIC_PHOTOS.receptionMain.src,
     alt: CLINIC_PHOTOS.receptionMain.alt,
   },
@@ -18,7 +17,6 @@ const clinicSlides = [
     number: "02",
     tagline: "CLINICAL EXCELLENCE",
     heading: "Advanced Treatment Suite",
-    quote: "“Modern ergonomic chairs and sterilised clinical spaces designed for precision dental procedures.”",
     image: CLINIC_PHOTOS.treatmentSuite.src,
     alt: CLINIC_PHOTOS.treatmentSuite.alt,
   },
@@ -26,7 +24,6 @@ const clinicSlides = [
     number: "03",
     tagline: "PRECISION SURGERY",
     heading: "State-of-the-Art Operating Room",
-    quote: "“High-definition clinical lighting and digital diagnostic technology for superior patient care.”",
     image: CLINIC_PHOTOS.operatingRoom.src,
     alt: CLINIC_PHOTOS.operatingRoom.alt,
   },
@@ -34,7 +31,6 @@ const clinicSlides = [
     number: "04",
     tagline: "LUXURY AMBIANCE",
     heading: "Illuminated Lobby & Botanical Wall",
-    quote: "“Warm ambient lighting, textured architectural finishes, and calming natural greenery.”",
     image: CLINIC_PHOTOS.planterLobby.src,
     alt: CLINIC_PHOTOS.planterLobby.alt,
   },
@@ -42,7 +38,6 @@ const clinicSlides = [
     number: "05",
     tagline: "CONSULTATION SUITE",
     heading: "Private Doctor Consultation Room",
-    quote: "“Dedicated quiet suites for comprehensive treatment planning, digital smile previews, and patient discussions.”",
     image: CLINIC_PHOTOS.consultationSuite.src,
     alt: CLINIC_PHOTOS.consultationSuite.alt,
   },
@@ -50,7 +45,6 @@ const clinicSlides = [
     number: "06",
     tagline: "PATIENT LOUNGE",
     heading: "Serene Waiting Lounge",
-    quote: "“Spacious, comfortable lounge seating with privacy glass partitions for complete relaxation before care.”",
     image: CLINIC_PHOTOS.waitingLoungeArea.src,
     alt: CLINIC_PHOTOS.waitingLoungeArea.alt,
   },
@@ -133,7 +127,7 @@ export default function AppleStickyShowcase() {
         aria-hidden
       />
 
-      <div className="page-container relative z-10 px-4 sm:px-6">
+      <div className="page-container relative z-10 px-3 sm:px-6">
         {/* Section Header */}
         <header className="mx-auto max-w-3xl text-center">
           <p
@@ -175,8 +169,8 @@ export default function AppleStickyShowcase() {
             {/* Active Main Center Slide Card */}
             <div className="relative z-20 w-full max-w-4xl">
               <div className="group relative overflow-hidden rounded-[24px] border border-white/15 bg-[#080b10] shadow-[0_20px_50px_rgba(0,0,0,0.85)] transition-colors duration-500 hover:border-[#c5a059]/40">
-                {/* Mobile: 360px tall card; Desktop: aspect-[16/9.5] */}
-                <div className="relative h-[360px] w-full overflow-hidden min-[380px]:h-[385px] sm:h-[420px] md:h-[460px] lg:h-[490px]">
+                {/* Mobile: 420px-450px tall card; Desktop: 480px-520px */}
+                <div className="relative h-[420px] w-full overflow-hidden min-[380px]:h-[450px] sm:h-[480px] md:h-[500px] lg:h-[520px]">
                   <AnimatePresence mode="wait">
                     <motion.img
                       key={currentSlide.image}
@@ -193,7 +187,7 @@ export default function AppleStickyShowcase() {
 
                   {/* Deep gradient overlay for mobile caption contrast */}
                   <div
-                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-transparent"
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent"
                     aria-hidden
                   />
 
@@ -226,17 +220,11 @@ export default function AppleStickyShowcase() {
                           {currentSlide.number} — {currentSlide.tagline}
                         </p>
                         <h3
-                          className="mt-1 font-serif text-[22px] font-medium text-white leading-tight min-[380px]:text-[25px] sm:text-[28px] md:text-3xl"
+                          className="mt-1 font-serif text-[24px] font-medium text-white leading-tight min-[380px]:text-[27px] sm:text-[32px] md:text-4xl"
                           style={{ fontFamily: "var(--font-serif)" }}
                         >
                           {currentSlide.heading}
                         </h3>
-                        <p
-                          className="mt-2 text-[13px] font-light leading-relaxed text-white/85 min-[380px]:text-[14px] sm:text-base"
-                          style={{ fontFamily: "var(--font-sans)" }}
-                        >
-                          {currentSlide.quote}
-                        </p>
                       </motion.div>
                     </AnimatePresence>
                   </div>
