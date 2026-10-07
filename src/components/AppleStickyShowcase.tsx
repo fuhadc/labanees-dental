@@ -8,43 +8,31 @@ import { EASE_SFLOW } from "@/lib/apple-scroll";
 const clinicSlides = [
   {
     number: "01",
-    tagline: "A WARM WELCOME",
-    heading: "Main Reception & Concierge Desk",
     image: CLINIC_PHOTOS.receptionMain.src,
     alt: CLINIC_PHOTOS.receptionMain.alt,
   },
   {
     number: "02",
-    tagline: "CLINICAL EXCELLENCE",
-    heading: "Advanced Treatment Suite",
     image: CLINIC_PHOTOS.treatmentSuite.src,
     alt: CLINIC_PHOTOS.treatmentSuite.alt,
   },
   {
     number: "03",
-    tagline: "PRECISION SURGERY",
-    heading: "State-of-the-Art Operating Room",
     image: CLINIC_PHOTOS.operatingRoom.src,
     alt: CLINIC_PHOTOS.operatingRoom.alt,
   },
   {
     number: "04",
-    tagline: "LUXURY AMBIANCE",
-    heading: "Illuminated Lobby & Botanical Wall",
     image: CLINIC_PHOTOS.planterLobby.src,
     alt: CLINIC_PHOTOS.planterLobby.alt,
   },
   {
     number: "05",
-    tagline: "CONSULTATION SUITE",
-    heading: "Private Doctor Consultation Room",
     image: CLINIC_PHOTOS.consultationSuite.src,
     alt: CLINIC_PHOTOS.consultationSuite.alt,
   },
   {
     number: "06",
-    tagline: "PATIENT LOUNGE",
-    heading: "Serene Waiting Lounge",
     image: CLINIC_PHOTOS.waitingLoungeArea.src,
     alt: CLINIC_PHOTOS.waitingLoungeArea.alt,
   },
@@ -151,7 +139,7 @@ export default function AppleStickyShowcase() {
             <button
               type="button"
               onClick={goPrev}
-              aria-label={`Previous slide: ${clinicSlides[prevIndex].heading}`}
+              aria-label={`Previous slide ${prevIndex + 1}`}
               className="group pointer-events-auto absolute left-0 z-10 hidden w-[20%] max-w-[260px] shrink-0 cursor-pointer overflow-hidden rounded-[20px] border border-white/10 bg-[#080b10] opacity-40 transition-all duration-500 hover:opacity-80 md:block"
               style={{ transform: "translateX(-10%) scale(0.9)" }}
             >
@@ -185,12 +173,6 @@ export default function AppleStickyShowcase() {
                     />
                   </AnimatePresence>
 
-                  {/* Deep gradient overlay for mobile caption contrast */}
-                  <div
-                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent"
-                    aria-hidden
-                  />
-
                   {/* Gold Corner Accents */}
                   <span className="pointer-events-none absolute left-0 top-0 h-8 w-px bg-gradient-to-b from-[#c5a059] to-transparent" aria-hidden />
                   <span className="pointer-events-none absolute left-0 top-0 h-px w-8 bg-gradient-to-r from-[#c5a059] to-transparent" aria-hidden />
@@ -201,33 +183,6 @@ export default function AppleStickyShowcase() {
                       0{active + 1} / 0{total}
                     </span>
                   </div>
-
-                  {/* Slide Content Overlay inside Image */}
-                  <div className="absolute inset-x-0 bottom-0 z-20 p-5 min-[380px]:p-6 sm:p-8 md:p-10">
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={currentSlide.number}
-                        initial={reduced ? false : { opacity: 0, y: 12 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={reduced ? undefined : { opacity: 0, y: -8 }}
-                        transition={{ duration: reduced ? 0 : 0.35, ease: EASE_SFLOW }}
-                        className="max-w-2xl text-left"
-                      >
-                        <p
-                          className="font-display text-[10px] uppercase tracking-[0.3em] text-[#c5a059] font-medium min-[380px]:text-[11px]"
-                          style={{ fontFamily: "var(--font-sans)" }}
-                        >
-                          {currentSlide.number} — {currentSlide.tagline}
-                        </p>
-                        <h3
-                          className="mt-1 font-serif text-[24px] font-medium text-white leading-tight min-[380px]:text-[27px] sm:text-[32px] md:text-4xl"
-                          style={{ fontFamily: "var(--font-serif)" }}
-                        >
-                          {currentSlide.heading}
-                        </h3>
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
                 </div>
               </div>
             </div>
@@ -236,7 +191,7 @@ export default function AppleStickyShowcase() {
             <button
               type="button"
               onClick={goNext}
-              aria-label={`Next slide: ${clinicSlides[nextIndex].heading}`}
+              aria-label={`Next slide ${nextIndex + 1}`}
               className="group pointer-events-auto absolute right-0 z-10 hidden w-[20%] max-w-[260px] shrink-0 cursor-pointer overflow-hidden rounded-[20px] border border-white/10 bg-[#080b10] opacity-40 transition-all duration-500 hover:opacity-80 md:block"
               style={{ transform: "translateX(10%) scale(0.9)" }}
             >
@@ -285,7 +240,7 @@ export default function AppleStickyShowcase() {
                   type="button"
                   role="tab"
                   aria-selected={i === active}
-                  aria-label={`Go to slide ${i + 1}: ${slide.heading}`}
+                  aria-label={`Go to slide ${i + 1}`}
                   onClick={() => goTo(i)}
                   className={`h-1.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c5a059] ${
                     i === active
