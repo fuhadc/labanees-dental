@@ -29,6 +29,10 @@ export const CLINIC_PHOTOS = {
     src: "/clinic/hero-smile-bg.webp",
     alt: "Lebanese Dental Clinic smile precision aesthetic dentistry",
   },
+  heroBgDesktop: {
+    src: "/clinic/hero-smile-bg-desktop.webp",
+    alt: "Lebanese Dental Clinic smile precision aesthetic dentistry desktop widescreen",
+  },
 } as const;
 
 /** Pair shown in section-bridge scroll transitions */

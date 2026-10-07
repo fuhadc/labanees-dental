@@ -6,9 +6,13 @@ import { EASE_SFLOW } from "@/lib/apple-scroll";
 
 export interface HeroBannerProps {
   backgroundImage?: string;
+  desktopBackgroundImage?: string;
 }
 
-export default function HeroBanner({ backgroundImage = "/clinic/hero-smile-bg.webp" }: HeroBannerProps) {
+export default function HeroBanner({
+  backgroundImage = "/clinic/hero-smile-bg.webp",
+  desktopBackgroundImage = "/clinic/hero-smile-bg-desktop.webp",
+}: HeroBannerProps) {
   const ref = useRef<HTMLElement | null>(null);
   const reduced = useReducedMotion();
 
@@ -30,8 +34,19 @@ export default function HeroBanner({ backgroundImage = "/clinic/hero-smile-bg.we
     >
       {/* Background Image with Crisp Smile Focal Point & Smooth Gradual Darkening */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+        {/* Desktop Landscape Background Image */}
         <motion.div
-          className="absolute inset-0 bg-cover bg-[center_12%] sm:bg-[center_15%] md:bg-center transition-all duration-500"
+          className="absolute inset-0 hidden bg-cover bg-center transition-all duration-500 md:block"
+          style={{
+            backgroundImage: `url(${desktopBackgroundImage})`,
+            y: reduced ? 0 : imageY,
+            scale: reduced ? 1.0 : imageScale,
+          }}
+        />
+
+        {/* Mobile Portrait Background Image */}
+        <motion.div
+          className="absolute inset-0 block bg-cover bg-[center_12%] transition-all duration-500 sm:bg-[center_15%] md:hidden"
           style={{
             backgroundImage: `url(${backgroundImage})`,
             y: reduced ? 0 : imageY,

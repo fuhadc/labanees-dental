@@ -29,7 +29,10 @@ export default function Home() {
       <Header />
 
       <main id="main">
-        <HeroBanner backgroundImage={CLINIC_PHOTOS.heroBg.src} />
+        <HeroBanner
+          backgroundImage={CLINIC_PHOTOS.heroBg.src}
+          desktopBackgroundImage={CLINIC_PHOTOS.heroBgDesktop.src}
+        />
 
         <SectionDivider label="About" />
         <SectionZoom id="about">
