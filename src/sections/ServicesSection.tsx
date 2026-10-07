@@ -3,9 +3,6 @@
 import ImageContentSection from "@/components/ImageContentSection";
 import SectionHeader from "@/components/SectionHeader";
 
-const IMG = (id: string, w = 800, h = 600) =>
-  `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&q=80`;
-
 const services = [
   {
     id: "dental-implants",
@@ -13,8 +10,8 @@ const services = [
     description:
       "Restoring missing teeth with carefully planned, natural-looking solutions.",
     items: [],
-    imageSrc: IMG("1606811971618-4486d14f3f99"),
-    imageAlt: "Dental Implants restoration",
+    imageSrc: "/clinic/service-dental-implants.webp",
+    imageAlt: "Precision titanium dental implant restoration",
     imageFirst: true,
   },
   {
@@ -23,8 +20,8 @@ const services = [
     description:
       "Enhancing your smile while keeping it natural and harmonious.",
     items: [],
-    imageSrc: IMG("1588776814546-1ffcf47267a5"),
-    imageAlt: "Cosmetic Dentistry smile makeover",
+    imageSrc: "/clinic/service-cosmetic-dentistry.webp",
+    imageAlt: "Radiant natural white smile makeover",
     imageFirst: false,
   },
   {
@@ -33,8 +30,8 @@ const services = [
     description:
       "Restoring damaged or weakened teeth for long-term function and aesthetics.",
     items: [],
-    imageSrc: IMG("1516062423079-7ca13cdc7f5a"),
-    imageAlt: "Restorative Dentistry treatment",
+    imageSrc: "/clinic/service-restorative-dentistry.webp",
+    imageAlt: "High precision porcelain crown and veneer crafting",
     imageFirst: true,
   },
   {
@@ -43,8 +40,8 @@ const services = [
     description:
       "Comprehensive care to maintain your oral health and prevent future problems.",
     items: [],
-    imageSrc: IMG("1606811841689-23dfddce3e95"),
-    imageAlt: "General Dentistry preventive care",
+    imageSrc: "/clinic/service-general-dentistry.webp",
+    imageAlt: "Modern 3D digital scanner and general dentistry operating suite",
     imageFirst: false,
   },
 ];
