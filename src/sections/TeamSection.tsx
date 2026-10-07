@@ -5,11 +5,10 @@ import { BoxRevealGrid, BoxRevealItem } from "@/components/BoxReveal";
 
 const team = [
   {
-    name: "Dr. Sahar Albeini",
-    role: "Cosmetic Dentist",
-    focus: "Expert in bespoke smile design and high-precision veneers.",
-    imageSrc:
-      "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=500&fit=crop&q=80",
+    name: "Dr. Rasha Hadi",
+    role: "Implantology Specialist & Cosmetic Dentist",
+    focus: "MSc. Implantology | German • BDS, MFDS RCSPG Glasgow",
+    imageSrc: "/clinic/dr-rasha-hadi.webp",
   },
   {
     name: "Dr. Salma Al Jahdhami",
