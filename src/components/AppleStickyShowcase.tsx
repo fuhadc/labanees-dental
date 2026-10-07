@@ -134,13 +134,7 @@ export default function AppleStickyShowcase() {
           >
             INSIDE THE CLINIC
           </p>
-          <h2
-            className="mt-4 font-serif text-[clamp(1.75rem,2.8vw+1rem,3.25rem)] font-medium italic leading-[1.18] text-white text-balance"
-            style={{ fontFamily: "var(--font-serif)" }}
-          >
-            Step inside a space designed around precision, comfort, and exceptional care.
-          </h2>
-          <div className="mx-auto mt-6 h-px w-20 bg-gradient-to-r from-transparent via-[var(--accent-warm)]/80 to-transparent" />
+          <div className="mx-auto mt-4 h-px w-20 bg-gradient-to-r from-transparent via-[var(--accent-warm)]/80 to-transparent" />
         </header>
 
         {/* Gallery Carousel Container */}
