@@ -12,7 +12,7 @@ export interface FooterProps {
 
 export default function Footer({
   ctaText = "Book Appointment",
-  ctaHref = "#booking",
+  ctaHref = "https://wa.me/96896700335?text=Hello%20Lebanese%20Dental%20Clinic%2C%20I%20would%20like%20to%20book%20an%20appointment.",
   copyright = `© ${new Date().getFullYear()} Labanees Dental. All rights reserved.`,
 }: FooterProps) {
   return (
@@ -28,6 +28,8 @@ export default function Footer({
           {ctaText && (
             <a
               href={ctaHref}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block border border-[var(--accent-warm)] bg-[var(--accent-warm)] px-12 py-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-black transition-colors hover:bg-[var(--accent-warm-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 sm:px-16 sm:py-6"
               style={{ fontFamily: "var(--font-display)" }}
             >

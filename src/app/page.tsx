@@ -67,7 +67,7 @@ export default function Home() {
 
       <Footer
         ctaText="Book Appointment"
-        ctaHref="#booking"
+        ctaHref="https://wa.me/96896700335?text=Hello%20Lebanese%20Dental%20Clinic%2C%20I%20would%20like%20to%20book%20an%20appointment."
         contactLine="18th November St, Muscat | +968 9670 0335 | info@labanees.com"
         copyright={`© ${new Date().getFullYear()} Labanees Dental. All rights reserved.`}
       />

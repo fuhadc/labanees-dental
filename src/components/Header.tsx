@@ -158,7 +158,9 @@ export default function Header() {
               </a>
             ))}
             <a
-              href="#booking"
+              href="https://wa.me/96896700335?text=Hello%20Lebanese%20Dental%20Clinic%2C%20I%20would%20like%20to%20book%20an%20appointment."
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-none border border-[var(--accent-warm)] bg-[var(--accent-warm)] px-6 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0c0a07] transition-all duration-300 hover:bg-[var(--accent-warm-hover)] hover:shadow-[0_2px_16px_rgba(197,160,89,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
               style={{ fontFamily: "var(--font-sans)" }}
             >
@@ -226,7 +228,9 @@ export default function Header() {
 
               <div className="mb-8">
                 <a
-                  href="#booking"
+                  href="https://wa.me/96896700335?text=Hello%20Lebanese%20Dental%20Clinic%2C%20I%20would%20like%20to%20book%20an%20appointment."
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setIsMenuOpen(false)}
                   className="flex w-full items-center justify-center bg-[var(--accent-warm)] py-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#0c0a07] transition-all hover:bg-[var(--accent-warm-hover)]"
                 >

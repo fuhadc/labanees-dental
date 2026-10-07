@@ -125,7 +125,9 @@ export default function HeroBanner({
           className="page-container mx-auto flex w-full max-w-sm items-center justify-center gap-3 px-4 sm:max-w-md md:max-w-lg md:gap-4"
         >
           <a
-            href="#booking"
+            href="https://wa.me/96896700335?text=Hello%20Lebanese%20Dental%20Clinic%2C%20I%20would%20like%20to%20book%20an%20appointment."
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex-1 flex items-center justify-center bg-[#c5a059] py-3.5 px-2 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.16em] text-[#14110b] transition-all duration-300 hover:bg-[#d4b06a] hover:shadow-[0_4px_20px_rgba(197,160,89,0.35)] active:translate-y-0 text-center"
             style={{ fontFamily: "var(--font-sans)" }}
           >
