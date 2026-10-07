@@ -117,7 +117,7 @@ export default function AppleStickyShowcase() {
   return (
     <section
       aria-label="Inside the Clinic Gallery"
-      className="relative overflow-hidden bg-transparent py-14 md:py-24"
+      className="relative overflow-hidden bg-transparent py-8 sm:py-12 md:py-16"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
@@ -129,27 +129,27 @@ export default function AppleStickyShowcase() {
     >
       {/* Subtle background glow */}
       <div
-        className="pointer-events-none absolute inset-x-0 top-1/2 h-[450px] -translate-y-1/2 bg-[radial-gradient(ellipse_80%_50%_at_50%_50%,rgba(197,160,89,0.07),transparent_70%)]"
+        className="pointer-events-none absolute inset-x-0 top-1/2 h-[350px] -translate-y-1/2 bg-[radial-gradient(ellipse_80%_50%_at_50%_50%,rgba(197,160,89,0.08),transparent_70%)]"
         aria-hidden
       />
 
-      <div className="page-container relative z-10">
+      <div className="page-container relative z-10 px-4 sm:px-6">
         {/* Section Header */}
         <header className="mx-auto max-w-3xl text-center">
           <p
-            className="font-display text-[10px] uppercase tracking-[0.45em] text-[var(--accent-warm)] font-semibold md:text-[11px]"
+            className="font-display text-[11px] uppercase tracking-[0.45em] text-[var(--accent-warm)] font-semibold"
             style={{ fontFamily: "var(--font-sans)" }}
           >
             INSIDE THE CLINIC
           </p>
-          <div className="mx-auto mt-4 h-px w-20 bg-gradient-to-r from-transparent via-[var(--accent-warm)]/80 to-transparent" />
+          <div className="mx-auto mt-2.5 h-px w-16 bg-gradient-to-r from-transparent via-[var(--accent-warm)]/80 to-transparent" />
         </header>
 
         {/* Gallery Carousel Container */}
-        <div className="mt-10 md:mt-14">
+        <div className="mt-5 sm:mt-7 md:mt-8">
           {/* Main Stage: Carousel with Peek Side Cards */}
           <div
-            className="relative flex items-center justify-center overflow-hidden py-4"
+            className="relative flex items-center justify-center overflow-hidden py-1"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
@@ -158,80 +158,81 @@ export default function AppleStickyShowcase() {
               type="button"
               onClick={goPrev}
               aria-label={`Previous slide: ${clinicSlides[prevIndex].heading}`}
-              className="group pointer-events-auto absolute left-0 z-10 hidden w-[22%] max-w-[280px] shrink-0 cursor-pointer overflow-hidden rounded-[20px] border border-white/10 bg-[#080b10] opacity-45 transition-all duration-700 hover:opacity-80 md:block lg:w-[25%]"
-              style={{ transform: "translateX(-15%) scale(0.88)" }}
+              className="group pointer-events-auto absolute left-0 z-10 hidden w-[20%] max-w-[260px] shrink-0 cursor-pointer overflow-hidden rounded-[20px] border border-white/10 bg-[#080b10] opacity-40 transition-all duration-500 hover:opacity-80 md:block"
+              style={{ transform: "translateX(-10%) scale(0.9)" }}
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden">
                 <img
                   src={clinicSlides[prevIndex].image}
                   alt={clinicSlides[prevIndex].alt}
-                  className="h-full w-full object-cover grayscale transition-transform duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                  className="h-full w-full object-cover grayscale transition-transform duration-500 group-hover:scale-105 group-hover:grayscale-0"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-black/40" />
+                <div className="absolute inset-0 bg-black/50" />
               </div>
             </button>
 
             {/* Active Main Center Slide Card */}
-            <div className="relative z-20 w-full max-w-4xl px-2 sm:px-4">
-              <div className="group relative overflow-hidden rounded-[22px] border border-white/15 bg-[#080b10] shadow-[0_24px_60px_rgba(0,0,0,0.7)] transition-colors duration-500 hover:border-[#c5a059]/40">
-                <div className="relative aspect-[16/10] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[16/9.2]">
+            <div className="relative z-20 w-full max-w-4xl">
+              <div className="group relative overflow-hidden rounded-[24px] border border-white/15 bg-[#080b10] shadow-[0_20px_50px_rgba(0,0,0,0.85)] transition-colors duration-500 hover:border-[#c5a059]/40">
+                {/* Mobile: 360px tall card; Desktop: aspect-[16/9.5] */}
+                <div className="relative h-[360px] w-full overflow-hidden min-[380px]:h-[385px] sm:h-[420px] md:h-[460px] lg:h-[490px]">
                   <AnimatePresence mode="wait">
                     <motion.img
                       key={currentSlide.image}
                       src={currentSlide.image}
                       alt={currentSlide.alt}
-                      initial={reduced ? false : { opacity: 0, scale: 1.04 }}
-                      animate={{ opacity: 1, scale: 1.01 }}
+                      initial={reduced ? false : { opacity: 0, scale: 1.05 }}
+                      animate={{ opacity: 1, scale: 1 }}
                       exit={reduced ? undefined : { opacity: 0, scale: 0.98 }}
-                      transition={{ duration: reduced ? 0 : 0.85, ease: EASE_SFLOW }}
+                      transition={{ duration: reduced ? 0 : 0.45, ease: EASE_SFLOW }}
                       className="h-full w-full object-cover"
                       draggable={false}
                     />
                   </AnimatePresence>
 
-                  {/* Gradient bottom overlay for caption legibility */}
+                  {/* Deep gradient overlay for mobile caption contrast */}
                   <div
-                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-transparent"
                     aria-hidden
                   />
 
                   {/* Gold Corner Accents */}
-                  <span className="pointer-events-none absolute left-0 top-0 h-10 w-px bg-gradient-to-b from-[#c5a059] to-transparent" aria-hidden />
-                  <span className="pointer-events-none absolute left-0 top-0 h-px w-10 bg-gradient-to-r from-[#c5a059] to-transparent" aria-hidden />
+                  <span className="pointer-events-none absolute left-0 top-0 h-8 w-px bg-gradient-to-b from-[#c5a059] to-transparent" aria-hidden />
+                  <span className="pointer-events-none absolute left-0 top-0 h-px w-8 bg-gradient-to-r from-[#c5a059] to-transparent" aria-hidden />
 
-                  {/* Top-Right Badge: Number indicator */}
-                  <div className="absolute right-5 top-5 rounded-full border border-white/15 bg-black/50 px-3.5 py-1 backdrop-blur-md">
-                    <span className="font-display text-[10px] font-semibold tracking-[0.25em] text-[#c5a059]">
-                      {currentSlide.number} / 0{total}
+                  {/* Top-Right Pill Badge: Number indicator */}
+                  <div className="absolute right-4 top-4 z-20 rounded-full border border-[#c5a059]/30 bg-black/60 px-3.5 py-1 backdrop-blur-md sm:right-5 sm:top-5">
+                    <span className="font-display text-[11px] font-semibold tracking-[0.2em] text-[#c5a059]">
+                      0{active + 1} / 0{total}
                     </span>
                   </div>
 
-                  {/* Slide Content Caption Overlay inside Image */}
-                  <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 md:p-10">
+                  {/* Slide Content Overlay inside Image */}
+                  <div className="absolute inset-x-0 bottom-0 z-20 p-5 min-[380px]:p-6 sm:p-8 md:p-10">
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={currentSlide.number}
-                        initial={reduced ? false : { opacity: 0, y: 14 }}
+                        initial={reduced ? false : { opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={reduced ? undefined : { opacity: 0, y: -10 }}
-                        transition={{ duration: reduced ? 0 : 0.5, ease: EASE_SFLOW }}
+                        exit={reduced ? undefined : { opacity: 0, y: -8 }}
+                        transition={{ duration: reduced ? 0 : 0.35, ease: EASE_SFLOW }}
                         className="max-w-2xl text-left"
                       >
                         <p
-                          className="font-display text-[10px] uppercase tracking-[0.35em] text-[#c5a059] font-medium sm:text-[11px]"
+                          className="font-display text-[10px] uppercase tracking-[0.3em] text-[#c5a059] font-medium min-[380px]:text-[11px]"
                           style={{ fontFamily: "var(--font-sans)" }}
                         >
                           {currentSlide.number} — {currentSlide.tagline}
                         </p>
                         <h3
-                          className="mt-2 font-serif text-xl font-medium italic text-white sm:text-2xl md:text-3xl"
+                          className="mt-1 font-serif text-[22px] font-medium text-white leading-tight min-[380px]:text-[25px] sm:text-[28px] md:text-3xl"
                           style={{ fontFamily: "var(--font-serif)" }}
                         >
                           {currentSlide.heading}
                         </h3>
                         <p
-                          className="mt-2.5 text-xs font-light italic leading-relaxed text-white/80 sm:text-sm md:text-base"
+                          className="mt-2 text-[13px] font-light leading-relaxed text-white/85 min-[380px]:text-[14px] sm:text-base"
                           style={{ fontFamily: "var(--font-sans)" }}
                         >
                           {currentSlide.quote}
@@ -248,33 +249,33 @@ export default function AppleStickyShowcase() {
               type="button"
               onClick={goNext}
               aria-label={`Next slide: ${clinicSlides[nextIndex].heading}`}
-              className="group pointer-events-auto absolute right-0 z-10 hidden w-[22%] max-w-[280px] shrink-0 cursor-pointer overflow-hidden rounded-[20px] border border-white/10 bg-[#080b10] opacity-45 transition-all duration-700 hover:opacity-80 md:block lg:w-[25%]"
-              style={{ transform: "translateX(15%) scale(0.88)" }}
+              className="group pointer-events-auto absolute right-0 z-10 hidden w-[20%] max-w-[260px] shrink-0 cursor-pointer overflow-hidden rounded-[20px] border border-white/10 bg-[#080b10] opacity-40 transition-all duration-500 hover:opacity-80 md:block"
+              style={{ transform: "translateX(10%) scale(0.9)" }}
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden">
                 <img
                   src={clinicSlides[nextIndex].image}
                   alt={clinicSlides[nextIndex].alt}
-                  className="h-full w-full object-cover grayscale transition-transform duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                  className="h-full w-full object-cover grayscale transition-transform duration-500 group-hover:scale-105 group-hover:grayscale-0"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-black/40" />
+                <div className="absolute inset-0 bg-black/50" />
               </div>
             </button>
           </div>
 
-          {/* Navigation Controls & Progress Indicator */}
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6">
+          {/* Navigation Controls & Progress Bar */}
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 pt-2 sm:mt-6">
             {/* Left: Counter & Autoplay Progress Bar */}
-            <div className="flex items-center gap-4">
-              <span className="font-display text-xs tracking-[0.25em] text-white/70">
+            <div className="flex items-center gap-3">
+              <span className="font-display text-[11px] tracking-[0.2em] text-white/70 sm:text-xs">
                 0{active + 1} <span className="text-white/30">/</span> 0{total}
               </span>
-              <div className="h-[2px] w-28 overflow-hidden bg-white/10 sm:w-36" aria-hidden>
+              <div className="h-[2px] w-20 overflow-hidden bg-white/10 min-[380px]:w-28 sm:w-36" aria-hidden>
                 {!reduced && (
                   <motion.div
                     key={`${active}-${paused}-${isTabVisible}`}
-                    className="h-full bg-[var(--accent-warm)]"
+                    className="h-full bg-[#c5a059]"
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: paused || !isTabVisible ? 0 : 1 }}
                     transition={
@@ -289,7 +290,7 @@ export default function AppleStickyShowcase() {
             </div>
 
             {/* Center: Slide Dot Bullet Indicators */}
-            <div className="flex items-center gap-2" role="tablist" aria-label="Gallery slide selection">
+            <div className="flex items-center gap-1.5" role="tablist" aria-label="Gallery slide selection">
               {clinicSlides.map((slide, i) => (
                 <button
                   key={slide.number}
@@ -298,22 +299,22 @@ export default function AppleStickyShowcase() {
                   aria-selected={i === active}
                   aria-label={`Go to slide ${i + 1}: ${slide.heading}`}
                   onClick={() => goTo(i)}
-                  className={`h-2 rounded-full transition-all duration-400 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c5a059] ${
+                  className={`h-1.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c5a059] ${
                     i === active
-                      ? "w-8 bg-[#c5a059]"
-                      : "w-2 bg-white/20 hover:bg-white/45"
+                      ? "w-6 bg-[#c5a059]"
+                      : "w-1.5 bg-white/25 hover:bg-white/50"
                   }`}
                 />
               ))}
             </div>
 
             {/* Right: Prev / Next Navigation Arrow Buttons */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={goPrev}
                 aria-label="Previous image"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white/80 transition-all duration-300 hover:border-[#c5a059] hover:bg-[#c5a059]/15 hover:text-[#c5a059] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059]"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/50 text-white transition-all duration-300 hover:border-[#c5a059] hover:bg-[#c5a059]/15 hover:text-[#c5a059] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059]"
               >
                 ‹
               </button>
@@ -321,7 +322,7 @@ export default function AppleStickyShowcase() {
                 type="button"
                 onClick={goNext}
                 aria-label="Next image"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white/80 transition-all duration-300 hover:border-[#c5a059] hover:bg-[#c5a059]/15 hover:text-[#c5a059] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059]"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/50 text-white transition-all duration-300 hover:border-[#c5a059] hover:bg-[#c5a059]/15 hover:text-[#c5a059] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059]"
               >
                 ›
               </button>
