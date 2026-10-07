@@ -49,6 +49,10 @@ export const CLINIC_PHOTOS = {
     src: "/clinic/clinic-consultation-suite.webp",
     alt: "Clinical consultation suite with modern dental technology",
   },
+  operatingRoom: {
+    src: "/clinic/clinic-operating-room.webp",
+    alt: "State of the art dental operating suite with precision equipment",
+  },
   waitingLoungeArea: {
     src: "/clinic/clinic-waiting-lounge.webp",
     alt: "Serene patient lounge area with frosted glass privacy walls",
