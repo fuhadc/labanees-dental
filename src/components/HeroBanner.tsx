@@ -73,8 +73,8 @@ export default function HeroBanner({
         className="relative z-10 flex min-h-[100dvh] w-full flex-col justify-between pb-8 pt-[calc(var(--header-height)+1.5rem)] md:pb-12 md:pt-[calc(var(--header-height)+2.5rem)]"
         style={reduced ? undefined : { opacity: contentOpacity }}
       >
-        {/* Top Flexible Spacer */}
-        <div className="flex-1 min-h-[2rem]" aria-hidden />
+        {/* Top Flexible Spacer to push logo & headline lower */}
+        <div className="flex-[1.8] min-h-[5rem] sm:min-h-[7rem] md:min-h-[9rem]" aria-hidden />
 
         {/* Center Hero Content (Logo & Serif Headline) */}
         <div className="page-container mx-auto flex w-full max-w-lg flex-col items-center justify-center text-center md:max-w-2xl lg:max-w-3xl">
@@ -115,7 +115,7 @@ export default function HeroBanner({
         </div>
 
         {/* Bottom Flexible Spacer */}
-        <div className="flex-1 min-h-[1.5rem]" aria-hidden />
+        <div className="flex-[0.7] min-h-[1.5rem]" aria-hidden />
 
         {/* SIDE-BY-SIDE BUTTONS AT THE BOTTOM */}
         <motion.div

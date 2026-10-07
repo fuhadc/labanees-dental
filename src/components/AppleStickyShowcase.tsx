@@ -8,28 +8,33 @@ import { EASE_SFLOW } from "@/lib/apple-scroll";
 const clinicSlides = [
   {
     number: "01",
-    image: CLINIC_PHOTOS.receptionNew.src,
-    alt: CLINIC_PHOTOS.receptionNew.alt,
+    image: CLINIC_PHOTOS.receptionMain.src,
+    alt: CLINIC_PHOTOS.receptionMain.alt,
   },
   {
     number: "02",
-    image: CLINIC_PHOTOS.featureWallNew.src,
-    alt: CLINIC_PHOTOS.featureWallNew.alt,
+    image: CLINIC_PHOTOS.treatmentSuite.src,
+    alt: CLINIC_PHOTOS.treatmentSuite.alt,
   },
   {
     number: "03",
-    image: CLINIC_PHOTOS.refreshmentLoungeNew.src,
-    alt: CLINIC_PHOTOS.refreshmentLoungeNew.alt,
+    image: CLINIC_PHOTOS.operatingRoom.src,
+    alt: CLINIC_PHOTOS.operatingRoom.alt,
   },
   {
     number: "04",
-    image: CLINIC_PHOTOS.treatmentGreenNew.src,
-    alt: CLINIC_PHOTOS.treatmentGreenNew.alt,
+    image: CLINIC_PHOTOS.planterLobby.src,
+    alt: CLINIC_PHOTOS.planterLobby.alt,
   },
   {
     number: "05",
-    image: CLINIC_PHOTOS.treatmentBlueNew.src,
-    alt: CLINIC_PHOTOS.treatmentBlueNew.alt,
+    image: CLINIC_PHOTOS.consultationSuite.src,
+    alt: CLINIC_PHOTOS.consultationSuite.alt,
+  },
+  {
+    number: "06",
+    image: CLINIC_PHOTOS.waitingLoungeArea.src,
+    alt: CLINIC_PHOTOS.waitingLoungeArea.alt,
   },
 ] as const;
 

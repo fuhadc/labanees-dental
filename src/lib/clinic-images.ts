@@ -57,26 +57,6 @@ export const CLINIC_PHOTOS = {
     src: "/clinic/clinic-waiting-lounge.webp",
     alt: "Serene patient lounge area with frosted glass privacy walls",
   },
-  receptionNew: {
-    src: "/clinic/clinic-reception.webp",
-    alt: "Lebanese Dental Clinic reception desk",
-  },
-  featureWallNew: {
-    src: "/clinic/clinic-feature-wall.webp",
-    alt: "Lebanese Dental Clinic botanical feature wall and lobby",
-  },
-  refreshmentLoungeNew: {
-    src: "/clinic/clinic-refreshment-lounge.webp",
-    alt: "Lebanese Dental Clinic patient refreshment lounge",
-  },
-  treatmentGreenNew: {
-    src: "/clinic/clinic-treatment-green.webp",
-    alt: "Lebanese Dental Clinic modern treatment room with greenery view",
-  },
-  treatmentBlueNew: {
-    src: "/clinic/clinic-treatment-blue.webp",
-    alt: "Lebanese Dental Clinic advanced treatment suite",
-  },
 } as const;
 
 /** Pair shown in section-bridge scroll transitions */
